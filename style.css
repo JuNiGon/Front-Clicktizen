@@ -1,0 +1,513 @@
+/*--------------------------------------------------------------------------INICIAL---------------------------------------------------------------------------*/
+.pagina-inicial {
+    background: linear-gradient(to right, #DA251D, #FFFFFF, #0A76B8);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}  
+
+.LogoDoJogo {
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+    min-width: 200px;
+    max-width: 500px;
+    margin: auto;          
+
+}
+.LogoDoJogo img {
+    max-width: 100%;
+    height: auto;
+}
+
+.BotaoInicial {
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+}
+.BotaoInicial button {
+    background-color: #FFCC00; 
+    color: #FFFFFF;            
+    border: none;
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+.BotaoInicial button:hover {
+    background-color: #c29803cc; 
+}
+
+.LogoDosApoiadoresRodape {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 1%;
+    background: linear-gradient(to top, white, transparent);
+}
+.LogoDosApoiadoresRodape img {
+    width: 15%;              
+    max-width: 120px;        
+    min-width: 60px;        
+    height: auto;           
+    object-fit: contain;
+}
+.LinhaEsquerdaRodape {
+  width: 30%;
+  min-width: 1%;
+  height: 30px;
+  background: linear-gradient(to top, #DA251D 0%,#DA251D 33%,transparent 33%,transparent 66%, #0A76B8 66%, #0A76B8 99%);
+}
+.LinhaDireitaRodape {
+    width: 30%;
+    min-width: 1%;
+    height: 30px;
+    background: linear-gradient(to top, #DA251D 0%,#DA251D 33%,transparent 33%,transparent 66%, #0A76B8 66%, #0A76B8 99%);
+}
+
+/*--------------------------------------------------------------------------CRIAR SALA---------------------------------------------------------------------------*/
+
+.pagina-criar-sala {
+    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    margin: 0;
+}
+
+.DegradeSuperior {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 3%;
+    background: linear-gradient(to bottom, white, transparent);
+}
+
+.BalaoDeCriarSala {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    width: clamp(300px, 70%, 600px);
+    height: clamp(200px, 70%, 350px);
+    box-shadow: inset 0 0px 50px rgba(0.3, 0.3, 0.3, 0.3);
+    border-radius: 50px;
+}
+
+.TextoTituloDoBalao {
+    font-family: 'Chau Philomene One', sans-serif;
+    color: #052c44;
+    font-size: 20px;
+    font-size: clamp(0.7rem, 2.5vw, 1.25rem);
+}
+.TextoSimplesDoBalao {
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    color: #0A76B8;
+    font-size: 13px;  
+}
+.CaixaDeTextoDoBalao {
+    background-color: #0A76B8;
+    border-radius: 15px;
+    color: black;
+    height: 7%;
+    width: 40%;
+    border: none;
+    text-align: center;
+}
+
+.CaixaDeTextoDoBalao::placeholder {
+  color: black;
+}
+
+.BotaoCriarSala-CriarSala {
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+}
+.BotaoCriarSala-CriarSala button {
+    background-color: #0fe54c; 
+    color: #FFFFFF;            
+    border: none;
+    border-radius: 18px;
+    padding: 10px 20px;
+    font-size: 25px;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+.BotaoCriarSala-CriarSala button:hover {
+    background-color: #279547; 
+}
+
+.RodapeComLogoCentral {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+    padding-left:20px;
+    position: fixed;
+    bottom: 0;
+}
+
+.RodapeComLogoCentral img[alt="Logo do menu"],
+.RodapeComLogoCentral img[alt="Logo de ajuda"] {
+    width: clamp(40px, 70%, 50px);
+}
+
+.RodapeComLogoCentral img[alt="Logo do jogo"] {
+    width: clamp(40px, 70%, 150px);
+    margin-left: 37%;
+}
+
+/*------------------------------------------------------------------------ENTRAR EM UMA SALA--------------------------------------------------*/
+
+.pagina-entrar-em-uma-sala {
+    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    margin: 0;
+}
+
+.DegradeSuperior {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 3%;
+    background: linear-gradient(to bottom, white, transparent);
+}
+
+.BalaoDeEntrarEmUmaSala {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    width: clamp(300px, 70%, 600px);
+    height: clamp(200px, 70%, 350px);
+    box-shadow: inset 0 0px 50px rgba(0.3, 0.3, 0.3, 0.3);
+    border-radius: 50px;
+}
+
+.TextoTituloDoBalao {
+    font-family: 'Chau Philomene One', sans-serif;
+    color: #052c44;
+    font-size: 20px;
+    font-size: clamp(0.7rem, 2.5vw, 1.25rem);
+}
+.TextoSimplesDoBalao {
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    color: #0A76B8;
+    font-size: 13px;  
+}
+.CaixaDeTextoDoBalao {
+    background-color: #0A76B8;
+    border-radius: 15px;
+    color: black;
+    height: 7%;
+    width: 40%;
+    border: none;
+    text-align: center;
+}
+
+.CaixaDeTextoDoBalao::placeholder {
+  color: black;
+}
+
+.BotaoEntrarEmUmaSala-EntrarEmUmaSala {
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+}
+.BotaoEntrarEmUmaSala-EntrarEmUmaSala button {
+    background-color: #0fe54c; 
+    color: #FFFFFF;            
+    border: none;
+    border-radius: 18px;
+    padding: 10px 20px;
+    font-size: 25px;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+.BotaoEntrarEmUmaSala-EntrarEmUmaSala button:hover {
+    background-color: #279547; 
+}
+
+.RodapeComLogoCentral {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+    padding-left:20px;
+    position: fixed;
+    bottom: 0;
+}
+
+.RodapeComLogoCentral img[alt="Logo do menu"],
+.RodapeComLogoCentral img[alt="Logo de ajuda"] {
+    width: clamp(40px, 70%, 50px);
+}
+
+.RodapeComLogoCentral img[alt="Logo do jogo"] {
+    width: clamp(40px, 70%, 150px);
+    margin-left: 37%;
+}
+
+
+/*--------------------------------------------------------------------MODO DA SALA---------------------------------------------------------------*/
+
+.pagina-modo-da-sala {
+    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    margin: 0;
+}
+
+.DegradeSuperior {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 3%;
+    background: linear-gradient(to bottom, white, transparent);
+}
+
+.BalaoDeModoDaSala {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    width: clamp(300px, 70%, 600px);
+    height: clamp(200px, 70%, 350px);
+    box-shadow: inset 0 0px 50px rgba(0.3, 0.3, 0.3, 0.3);
+    border-radius: 50px;
+}
+
+.TextoTituloDoBalao {
+    font-family: 'Chau Philomene One', sans-serif;
+    color: #052c44;
+    font-size: 20px;
+    font-size: clamp(0.7rem, 2.5vw, 1.25rem);
+}
+
+.CaixaDeTextoDoBalao {
+    background-color: #0A76B8;
+    border-radius: 15px;
+    color: black;
+    height: 7%;
+    width: 40%;
+    border: none;
+    text-align: center;
+}
+
+.CaixaDeTextoDoBalao::placeholder {
+  color: black;
+}
+
+.BotaoDeModoDaSala-ModoDaSala {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: center;
+    gap: 16px;
+}
+
+.BotaoDeModoDaSala-ModoDaSala button {
+    background-color: #0fe54c; 
+    color: #FFFFFF;            
+    border: none;
+    border-radius: 18px;
+    padding: 10px 20px;
+    font-size: 25px;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+.BotaoDeModoDaSala-ModoDaSala button:hover {
+    background-color: #279547; 
+}
+
+.RodapeComLogoCentral {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+    padding-left:20px;
+    position: fixed;
+    bottom: 0;
+}
+
+.RodapeComLogoCentral img[alt="Logo do menu"],
+.RodapeComLogoCentral img[alt="Logo de ajuda"] {
+    width: clamp(40px, 70%, 50px);
+}
+
+.RodapeComLogoCentral img[alt="Logo do jogo"] {
+    width: clamp(40px, 70%, 150px);
+    margin-left: 37%;
+}
+
+
+/*--------------------------------------------------------------------APRESENTAÇÃO---------------------------------------------------------------*/
+.pagina-apresentacao {
+    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}  
+.LogoDoJogo-apresentacao {
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+    min-width: 100px;
+    max-width: 200px;
+    margin: auto;      
+    top: 100px;    
+
+}
+.LogoDoJogo-apresentacao img {
+    max-width: 100%;
+    height: auto;
+}
+.BotaoJogar {
+    display: flex;
+    justify-content: center; 
+    align-items: center;  
+}
+.BotaoJogar button {
+    background-color: #FFCC00; 
+    color: #FFFFFF;            
+    border: none;
+    border-radius: 20px;
+    padding: 8px 25px;
+    font-size: 25px;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+.BotaoJogar button:hover {
+    background-color: #c29803cc; 
+}
+.BarraSuperiorPrincipal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.BarraSuperiorPrincipal button {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+    border: none;     
+    border-radius: 0  0 10px 10px;
+    font-size: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+.BarraSuperiorPrincipal button[data-nome=BotaoInicio] {
+    background-color: #da251d; 
+    color: #FFFFFF;
+}
+.BarraSuperiorPrincipal button[data-nome=BotaoRank] {
+    background-color: #ffffff;
+    color: white; 
+}
+.BarraSuperiorPrincipal button[data-nome=BotaoAjuda] {
+    background-color: #0a76b8; 
+    color: #FFFFFF;
+}
+.BarraSuperiorPrincipal button[data-nome=BotaoSobre] {
+    background-color: #ffcc00; 
+    color: white; 
+}
+.GradeSuperior {
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.DegradeSuperior {
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to top, transparent, white);
+    z-index: -1;
+}
