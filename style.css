@@ -11,17 +11,18 @@ html {
     margin: 0;
     padding: 0;
     overflow: hidden;
-}  
+}
 
 .LogoDoJogo {
     display: flex;
-    justify-content: center; 
-    align-items: center;   
+    justify-content: center;
+    align-items: center;
     min-width: 200px;
     max-width: 500px;
-    margin: auto;          
+    margin: auto;
 
 }
+
 .LogoDoJogo img {
     max-width: 100%;
     height: auto;
@@ -29,12 +30,13 @@ html {
 
 .BotaoInicial {
     display: flex;
-    justify-content: center; 
-    align-items: center;   
+    justify-content: center;
+    align-items: center;
 }
+
 .BotaoInicial button {
-    background-color: #FFCC00; 
-    color: #FFFFFF;            
+    background-color: #FFCC00;
+    color: #FFFFFF;
     border: none;
     border-radius: 20px;
     padding: 15px 30px;
@@ -44,12 +46,13 @@ html {
     transition: background-color 0.3s ease;
     text-shadow:
         -1px -1px 0 #000,
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
+
 .BotaoInicial button:hover {
-    background-color: #c29803cc; 
+    background-color: #c29803cc;
 }
 
 .LogoDosApoiadoresRodape {
@@ -65,24 +68,27 @@ html {
     padding: 1%;
     background: linear-gradient(to top, white, transparent);
 }
+
 .LogoDosApoiadoresRodape img {
-    width: 15%;              
-    max-width: 120px;        
-    min-width: 60px;        
-    height: auto;           
+    width: 15%;
+    max-width: 120px;
+    min-width: 60px;
+    height: auto;
     object-fit: contain;
 }
+
 .LinhaEsquerdaRodape {
-  width: 30%;
-  min-width: 1%;
-  height: 30px;
-  background: linear-gradient(to top, #DA251D 0%,#DA251D 33%,transparent 33%,transparent 66%, #0A76B8 66%, #0A76B8 99%);
+    width: 30%;
+    min-width: 1%;
+    height: 30px;
+    background: linear-gradient(to top, #DA251D 0%, #DA251D 33%, transparent 33%, transparent 66%, #0A76B8 66%, #0A76B8 99%);
 }
+
 .LinhaDireitaRodape {
     width: 30%;
     min-width: 1%;
     height: 30px;
-    background: linear-gradient(to top, #DA251D 0%,#DA251D 33%,transparent 33%,transparent 66%, #0A76B8 66%, #0A76B8 99%);
+    background: linear-gradient(to top, #DA251D 0%, #DA251D 33%, transparent 33%, transparent 66%, #0A76B8 66%, #0A76B8 99%);
 }
 
 /*--------------------------------------------------------------------------CRIAR SALA---------------------------------------------------------------------------*/
@@ -128,11 +134,13 @@ html {
     font-size: 20px;
     font-size: clamp(0.7rem, 2.5vw, 1.25rem);
 }
+
 .TextoSimplesDoBalao {
     font-family: Arial, Arial, Helvetica, sans-serif;
     color: #0A76B8;
-    font-size: 13px;  
+    font-size: 13px;
 }
+
 .CaixaDeTextoDoBalao {
     background-color: #0A76B8;
     border-radius: 15px;
@@ -144,17 +152,18 @@ html {
 }
 
 .CaixaDeTextoDoBalao::placeholder {
-  color: black;
+    color: black;
 }
 
 .BotaoCriarSala-CriarSala {
     display: flex;
-    justify-content: center; 
-    align-items: center;   
+    justify-content: center;
+    align-items: center;
 }
+
 .BotaoCriarSala-CriarSala button {
-    background-color: #0fe54c; 
-    color: #FFFFFF;            
+    background-color: #0fe54c;
+    color: #FFFFFF;
     border: none;
     border-radius: 18px;
     padding: 10px 20px;
@@ -164,12 +173,13 @@ html {
     transition: background-color 0.3s ease;
     text-shadow:
         -1px -1px 0 #000,
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
+
 .BotaoCriarSala-CriarSala button:hover {
-    background-color: #279547; 
+    background-color: #279547;
 }
 
 .RodapeComLogoCentral {
@@ -177,7 +187,7 @@ html {
     align-items: center;
     width: 100%;
     padding-top: 20px;
-    padding-left:20px;
+    padding-left: 20px;
     position: fixed;
     bottom: 0;
 }
@@ -235,11 +245,13 @@ html {
     font-size: 20px;
     font-size: clamp(0.7rem, 2.5vw, 1.25rem);
 }
+
 .TextoSimplesDoBalao {
     font-family: Arial, Arial, Helvetica, sans-serif;
     color: #0A76B8;
-    font-size: 13px;  
+    font-size: 13px;
 }
+
 .CaixaDeTextoDoBalao {
     background-color: #0A76B8;
     border-radius: 15px;
@@ -251,17 +263,18 @@ html {
 }
 
 .CaixaDeTextoDoBalao::placeholder {
-  color: black;
+    color: black;
 }
 
 .BotaoEntrarEmUmaSala-EntrarEmUmaSala {
     display: flex;
-    justify-content: center; 
-    align-items: center;   
+    justify-content: center;
+    align-items: center;
 }
+
 .BotaoEntrarEmUmaSala-EntrarEmUmaSala button {
-    background-color: #0fe54c; 
-    color: #FFFFFF;            
+    background-color: #0fe54c;
+    color: #FFFFFF;
     border: none;
     border-radius: 18px;
     padding: 10px 20px;
@@ -271,12 +284,13 @@ html {
     transition: background-color 0.3s ease;
     text-shadow:
         -1px -1px 0 #000,
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
+
 .BotaoEntrarEmUmaSala-EntrarEmUmaSala button:hover {
-    background-color: #279547; 
+    background-color: #279547;
 }
 
 .RodapeComLogoCentral {
@@ -284,7 +298,7 @@ html {
     align-items: center;
     width: 100%;
     padding-top: 20px;
-    padding-left:20px;
+    padding-left: 20px;
     position: fixed;
     bottom: 0;
 }
@@ -355,20 +369,20 @@ html {
 }
 
 .CaixaDeTextoDoBalao::placeholder {
-  color: black;
+    color: black;
 }
 
 .BotaoDeModoDaSala-ModoDaSala {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     gap: 16px;
 }
 
 .BotaoDeModoDaSala-ModoDaSala button {
-    background-color: #0fe54c; 
-    color: #FFFFFF;            
+    background-color: #0fe54c;
+    color: #FFFFFF;
     border: none;
     border-radius: 18px;
     padding: 10px 20px;
@@ -378,12 +392,13 @@ html {
     transition: background-color 0.3s ease;
     text-shadow:
         -1px -1px 0 #000,
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
+
 .BotaoDeModoDaSala-ModoDaSala button:hover {
-    background-color: #279547; 
+    background-color: #279547;
 }
 
 .RodapeComLogoCentral {
@@ -391,7 +406,7 @@ html {
     align-items: center;
     width: 100%;
     padding-top: 20px;
-    padding-left:20px;
+    padding-left: 20px;
     position: fixed;
     bottom: 0;
 }
@@ -420,29 +435,36 @@ html {
     margin: 0;
     padding: 0;
     overflow: hidden;
-}  
+}
+
 .LogoDoJogo-apresentacao {
     display: flex;
-    justify-content: center; 
-    align-items: center;   
+    justify-content: center;
+    align-items: center;
     min-width: 100px;
     max-width: 200px;
-    margin: auto;      
-    top: 100px;    
-
+    margin: auto;
+    position: relative;
+    top: 20%;
 }
+
+
 .LogoDoJogo-apresentacao img {
     max-width: 100%;
     height: auto;
 }
+
 .BotaoJogar {
+    position: relative;
+    top: 20%;
     display: flex;
-    justify-content: center; 
-    align-items: center;  
+    justify-content: center;
+    align-items: center;
 }
+
 .BotaoJogar button {
-    background-color: #FFCC00; 
-    color: #FFFFFF;            
+    background-color: #FFCC00;
+    color: #FFFFFF;
     border: none;
     border-radius: 20px;
     padding: 8px 25px;
@@ -452,52 +474,61 @@ html {
     transition: background-color 0.3s ease;
     text-shadow:
         -1px -1px 0 #000,
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
+
 .BotaoJogar button:hover {
-    background-color: #c29803cc; 
+    background-color: #c29803cc;
 }
+
 .BarraSuperiorPrincipal {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .BarraSuperiorPrincipal button {
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
-    border: none;     
-    border-radius: 0  0 10px 10px;
-    font-size: 25px;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 5px;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    font-size: clamp(20px, 2.5vw, 25px);
+    padding-left: clamp(10px, 5vw, 50px);
+    padding-right: clamp(10px, 5vw, 50px);
+    padding-top: clamp(5px, 1.5vh, 10px);
+    padding-bottom: clamp(5px, 1.5vh, 10px);
     padding-top: 5px;
     font-family: 'Chau Philomene One', sans-serif;
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-shadow:
         -1px -1px 0 #000,
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
+
 .BarraSuperiorPrincipal button[data-nome=BotaoInicio] {
-    background-color: #da251d; 
+    background-color: #da251d;
     color: #FFFFFF;
 }
+
 .BarraSuperiorPrincipal button[data-nome=BotaoRank] {
     background-color: #ffffff;
-    color: white; 
+    color: white;
 }
+
 .BarraSuperiorPrincipal button[data-nome=BotaoAjuda] {
-    background-color: #0a76b8; 
+    background-color: #0a76b8;
     color: #FFFFFF;
 }
+
 .BarraSuperiorPrincipal button[data-nome=BotaoSobre] {
-    background-color: #ffcc00; 
-    color: white; 
+    background-color: #ffcc00;
+    color: white;
 }
+
 .GradeSuperior {
     top: 0;
     width: 100%;
@@ -505,9 +536,188 @@ html {
     justify-content: center;
     align-items: center;
 }
+
 .DegradeSuperior {
     justify-content: center;
     align-items: center;
     background: linear-gradient(to top, transparent, white);
     z-index: -1;
+}
+
+.PersonagemDoJogo-apresentacao {
+    position: absolute;
+    bottom: 0px;
+    left: 33%;
+    transform: translateX(-50%);
+    width: clamp(100px, 20vw, 300px);
+    z-index: -2;
+}
+
+.PersonagemDoJogo-apresentacao img {
+    width: 100%;
+    height: auto;
+}
+
+.BalaoDeFala {
+    position: absolute;
+    top: -20px;
+    left: -220px;
+    width: 200px;
+    background-color: #ffffff;
+    border: 2px solid #0A76B8;
+    border-radius: 20px;
+    padding: 10px;
+    font-family: 'Chau Philomene One', sans-serif;
+    font-size: 14px;
+    color: #da251d;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+}
+
+.BalaoDeFala::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    right: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #ffffff;
+}
+
+@media (max-width: 768px) {
+    .BalaoDeFala {
+        left: auto;
+        right: -220px;
+    }
+
+    .BalaoDeFala::after {
+        right: auto;
+        left: -10px;
+        border-color: transparent #ffffff transparent transparent;
+    }
+}
+
+/*--------------------------------------------------------------------REGRAS DO JOGO---------------------------------------------------------------*/
+.pagina-regras-do-jogo {
+    background: linear-gradient(to bottom, #0a76b8, #FFFFFF);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.BalaoDeAjuda {
+    position: relative;
+    width: clamp(280px, 80vw, 700px);
+    margin: 5% auto;
+    background-color: #ffffff;
+    border-radius: 4%;
+    padding: 2%;
+    font-family: 'Chau Philomene One', sans-serif;
+    box-shadow: 0 2% 5% rgba(0, 0, 0, 0.2);
+    color: #0A76B8;
+    box-sizing: border-box;
+}
+
+
+.BalaoDeAjuda .conteudo h2 {
+    font-size: 100%;
+    color: #DA251D;
+    margin-bottom: 1%;
+}
+
+.BalaoDeAjuda .conteudo p {
+    font-size: 80%;
+    margin-bottom: 2%;
+    line-height: 140%;
+}
+
+.BalaoDeAjuda .conteudo ul {
+    list-style-type: disc;
+    padding-left: 5%;
+    margin-bottom: 3%;
+}
+
+.BalaoDeAjuda .conteudo ul li {
+    font-size: 80%;
+    margin-bottom: 2%;
+    line-height: 140%;
+}
+
+.PersonagemRegrasDoJogo {
+    position: absolute;
+}
+
+.PersonagemRegrasDoJogo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: clamp(200px, 15vw, 300px);
+
+    z-index: 1;
+}
+
+.PersonagemRegrasDoJogo img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 600px) {
+    .PersonagemRegrasDoJogo {
+        z-index: -1;
+    }
+}
+
+/*--------------------------------------------------------------------CRÉDITOS---------------------------------------------------------------*/
+.pagina-creditos {
+    background: linear-gradient(to bottom, #ffcc00, #FFFFFF);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.BalaoDeCredito {
+    position: relative;
+    width: clamp(280px, 80%, 750px);
+    margin: 5% auto;
+    background-color: #ffffff;
+    border-radius: 4%;
+    padding: 2%;
+    font-family: 'Chau Philomene One', sans-serif;
+    box-shadow: 0 2% 5% rgba(0, 0, 0, 0.2);
+    color: #0A76B8;
+    box-sizing: border-box;
+    text-align: justify;
+    z-index: -2;
+}
+
+.BalaoDeCredito .conteudo p {
+    font-size: 70%;
+    margin-bottom: 2%;
+    line-height: 140%;
+}
+
+
+@media (min-width: 768px) {
+    .BalaoDeCredito .conteudo p {
+        font-size: 80%;
+        margin-bottom: 2%;
+        line-height: 140%;
+    }
+}
+
+.PersonagemCreditos {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(300px, 80vw, 500px);
+    z-index: -1;
+}
+
+.PersonagemCreditos img {
+    width: 100%;
+    height: auto;
 }
