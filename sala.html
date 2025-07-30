@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar sala</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="corpo">
@@ -15,52 +17,49 @@
     <div style="justify-content: space-between; 
         flex-direction: column; 
         display: flex; 
-        height: 100%; 
-        border-style: solid; 
-        border-color: #000;">
+        height: 100%;">
         <header>
             <div class="containerDadoLider">Lider da sala: <span id="liderNome"></span></div>
-            <div class="containerDadoID">ID da sala: <span id="salaID"></span> </div>
+            <div class="containerDadoID">ID da sala: <span id="salaID"></span></div>
             <div class="containerDadoTemas">Temas</div>
         </header>
 
-        <div>
+        <div style="margin-bottom: 60px;">
             <div class="containerJogadores">
                 <div class="containerGrupo">
-                    <p>1° grupo</p>
-                    <div id="grupo-1" class="containerGrupo-membros">
-                    </div>
+                    <p>1° GRUPO</p>
+                    <div id="grupo-1" class="containerGrupo-membros"></div>
+                    <button class="btn btn-primary btn-sm adicionarAlunoBtn" data-grupo="1">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <p>2° grupo</p>
-                    <div id="grupo-2" class="containerGrupo-membros">
-                    </div>
+                    <p>2° GRUPO</p>
+                    <div id="grupo-2" class="containerGrupo-membros"></div>
+                    <button class="btn btn-primary btn-sm adicionarAlunoBtn" data-grupo="2">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <p>3° grupo</p>
-                    <div id="grupo-3" class="containerGrupo-membros">
-                    </div>
+                    <p>3° GRUPO</p>
+                    <div id="grupo-3" class="containerGrupo-membros"></div>
+                    <button class="btn btn-primary btn-sm adicionarAlunoBtn" data-grupo="3">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <p>4° grupo</p>
-                    <div id="grupo-4" class="containerGrupo-membros">
-                    </div>
+                    <p>4° GRUPO</p>
+                    <div id="grupo-4" class="containerGrupo-membros"></div>
+                    <button class="btn btn-primary btn-sm adicionarAlunoBtn" data-grupo="4">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <p>5° grupo</p>
-                    <div id="grupo-5" class="containerGrupo-membros">
-                    </div>
+                    <p>5° GRUPO</p>
+                    <div id="grupo-5" class="containerGrupo-membros"></div>
+                    <button class="btn btn-primary btn-sm adicionarAlunoBtn" data-grupo="5">Adicionar aluno</button>
                 </div>
             </div>
 
             <div style="text-align: center; margin-top: 20px;">
-                <button id="btnIniciar" style="padding: 10px 20px; font-size: 16px;">Iniciar Partida</button>
+                <div class="BotaoDeModoDaSala-ModoDaSala">
+                    <button id="btnIniciar">Iniciar Partida</button>
+                </div>
             </div>
         </div>
     </div>
-
-
-
 
     <!-- <footer class="RodapeComLogoCentral">
         <img src="Imagens/LogoMenu.png" alt="Logo do menu">
@@ -68,9 +67,30 @@
         <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
     </footer> -->
 
+    <!-- Modal de adicionar aluno -->
+    <div class="modal fade" id="modalAdicionarAluno" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar Aluno</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="inputNomeAluno" class="form-control" placeholder="Digite o nome do aluno" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnSalvarAluno" class="btn btn-success">Salvar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"
         integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous">
         </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <script>
         const socket = io('http://localhost:3000/rooms');
@@ -98,15 +118,12 @@
         });
 
         socket.on('user-joined', ({ users }) => {
-            // Limpa todos os grupos
             for (let i = 1; i <= 5; i++) {
                 document.getElementById(`grupo-${i}`).innerHTML = '';
             }
 
-            // Remove o líder da lista de usuários (não deve estar nos grupos)
             const participantes = users.filter(nome => nome !== nomeUsuarioAtual);
 
-            // Adiciona cada participante em um grupo
             participantes.forEach((nome, i) => {
                 const grupo = document.getElementById(`grupo-${(i % 5) + 1}`);
                 if (grupo) {
@@ -122,8 +139,39 @@
         btnIniciar.addEventListener('click', () => {
             socket.emit('start-game', { codigo: codigoSalaGlobal });
         });
-    </script>
 
+        let grupoSelecionadoId = null;
+        const modal = new bootstrap.Modal(document.getElementById('modalAdicionarAluno'));
+
+        document.querySelectorAll('.adicionarAlunoBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                grupoSelecionadoId = btn.getAttribute('data-grupo');
+                document.getElementById('inputNomeAluno').value = '';
+                modal.show();
+            });
+        });
+
+        document.getElementById('btnSalvarAluno').addEventListener('click', () => {
+            const nome = document.getElementById('inputNomeAluno').value.trim();
+            if (nome && grupoSelecionadoId) {
+                const grupo = document.getElementById(`grupo-${grupoSelecionadoId}`);
+                const membrosAtuais = grupo.querySelectorAll('p').length;
+
+                if (membrosAtuais >= 5) {
+                    alert("Este grupo já atingiu o limite de 5 participantes.");
+                    return;
+                }
+
+                const p = document.createElement('p');
+                p.innerText = nome;
+                grupo.appendChild(p);
+                modal.hide();
+            } else {
+                alert("Digite um nome válido.");
+            }
+        });
+
+    </script>
 </body>
 
 </html>
