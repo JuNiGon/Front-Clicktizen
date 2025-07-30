@@ -1,30 +1,43 @@
 /*--------------------------------------------------------------------------INICIAL---------------------------------------------------------------------------*/
-.pagina-inicial {
-    background: linear-gradient(to right, #DA251D, #FFFFFF, #0A76B8);
+body,
+html {
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-html {
-    height: 100%;
+.pagina-inicial {
+    background: linear-gradient(to right, #DA251D, #FFFFFF, #0A76B8);
+    min-height: 100vh;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.containerPrincipal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
 }
 
 .LogoDoJogo {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 200px;
-    max-width: 500px;
-    margin: auto;
-
+    margin-bottom: 20px;
 }
 
 .LogoDoJogo img {
-    max-width: 100%;
+    width: 100%;
+    max-width: 300px;
     height: auto;
 }
 
@@ -44,8 +57,7 @@ html {
     font-family: 'Chau Philomene One', sans-serif;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    text-shadow:
-        -1px -1px 0 #000,
+    text-shadow: -1px -1px 0 #000,
         1px -1px 0 #000,
         -1px 1px 0 #000,
         1px 1px 0 #000;
@@ -60,36 +72,58 @@ html {
     bottom: 0;
     left: 0;
     width: 100%;
-
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 16px;
-    padding: 1%;
+    padding: 10px;
     background: linear-gradient(to top, white, transparent);
+    flex-wrap: nowrap;
+    z-index: 10;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.LogoDosApoiadoresRodape .containerLogos {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .LogoDosApoiadoresRodape img {
-    width: 15%;
-    max-width: 120px;
-    min-width: 60px;
     height: auto;
+    max-width: 100px;
+    min-width: 40px;
+    width: 15vw;
     object-fit: contain;
 }
 
-.LinhaEsquerdaRodape {
-    width: 30%;
-    min-width: 1%;
+.LinhaEsquerdaRodape,
+.LinhaDireitaRodape {
     height: 30px;
+    flex: 1;
+    min-width: 20px;
     background: linear-gradient(to top, #DA251D 0%, #DA251D 33%, transparent 33%, transparent 66%, #0A76B8 66%, #0A76B8 99%);
 }
 
-.LinhaDireitaRodape {
-    width: 30%;
-    min-width: 1%;
-    height: 30px;
-    background: linear-gradient(to top, #DA251D 0%, #DA251D 33%, transparent 33%, transparent 66%, #0A76B8 66%, #0A76B8 99%);
+@media (max-width: 600px) {
+
+    .LinhaEsquerdaRodape,
+    .LinhaDireitaRodape {
+        display: none;
+    }
+
+    .LogoDosApoiadoresRodape img {
+        max-width: 70px;
+    }
+
+    .BotaoInicial button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
 }
+
 
 /*--------------------------------------------------------------------------CRIAR SALA---------------------------------------------------------------------------*/
 

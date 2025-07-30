@@ -12,10 +12,13 @@
 <body class="pagina-apresentacao">
     <div class="GradeSuperior">
         <div class="BarraSuperiorPrincipal">
-            <button data-nome="BotaoInicio">INICIO</button>
-            <button data-nome="BotaoRank">RANK</button>
-            <button data-nome="BotaoAjuda">AJUDA</button>
-            <button data-nome="BotaoSobre">SOBRE</button>
+            <button data-nome="BotaoInicio"><a href="/Apresentacao.html"
+                    style="text-decoration: none; color: #fff;">INICIO</a></button>
+            <button data-nome="BotaoRank"><a href="" style="text-decoration: none; color: #fff;">RANK</a></button>
+            <button data-nome="BotaoAjuda"><a href="/Regras-do-jogo.html"
+                    style="text-decoration: none; color: #fff;">AJUDA</a></button>
+            <button data-nome="BotaoSobre"><a href="/Creditos.html"
+                    style="text-decoration: none; color: #fff;">SOBRE</a></button>
         </div>
         <div class="DegradeSuperior"></div>
     </div>
@@ -36,15 +39,15 @@
     <div class="BotaoJogar">
         <button>JOGAR</button>
     </div>
-    <footer class="LogoDosApoiadoresRodape">
-        <div class="LinhaEsquerdaRodape"></div>
-        <img src="Imagens/LogoDaUfal.png" alt="Logo da UFAL">
-        <img src="Imagens/LogoOds.png" alt="Logo ODS">
-        <img src="Imagens/Logo FDA.png" alt="Logo da FDA">
-        <img src="Imagens/CidadaniaDigital.png" alt="Cidadania digital">
-        <img src="Imagens/BandeiraAlagoas.png" alt="Bandeira de Alagoas">
-        <div class="LinhaDireitaRodape"></div>
-    </footer>
+    <div id="footer-container"></div>
+
+    <script>
+        fetch('components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
 </body>
 
 </html>
