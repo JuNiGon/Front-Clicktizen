@@ -2,7 +2,6 @@
 
 
 /*---------------INICIAL--------------------*/
-/* Reset básico */
 * {
     box-sizing: border-box;
 }
@@ -57,11 +56,14 @@ body {
         -1px 1px 0 #000, 1px 1px 0 #000;
     text-decoration: none;
     color: #FFFFFF;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
 }
 
 .BotaoInicial:hover {
     background-color: #c29803cc;
     color: #073a6a;
+    transform: scale(1.05);
 }
 
 .LogoDosApoiadoresRodape {
@@ -251,7 +253,6 @@ body {
 }
 
 .GradeSuperior {
-    /* top: 0; */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -261,8 +262,15 @@ body {
 .DegradeSuperior {
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to top, transparent, white);
     z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    padding: 3%;
+    background: linear-gradient(to bottom, white, transparent);
 }
 
 .PersonagemDoJogo-apresentacao {
@@ -341,6 +349,103 @@ body {
     }
 }
 
+/*---------MODO DA SALA------------*/
+
+.pagina-modo-da-sala {
+    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Chau Philomene One', sans-serif;
+    flex-direction: column;
+}
+
+.BalaoDeModoDaSala {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    width: clamp(300px, 80%, 600px);
+    padding: 30px 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    border-radius: 40px;
+    text-align: center;
+    gap: 16px;
+}
+
+.TextoTituloDoBalao {
+    color: #052c44;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+.BotaoDeModoDaSala-ModoDaSala {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.botao-verde {
+    background-color: #0fe54c;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px 1px 0 #000, 1px 1px 0 #000;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botao-verde:hover {
+    background-color: #279547;
+    transform: scale(1.05);
+}
+
+.RodapeComLogoCentral {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.grupo-esquerdo {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    left: 20px;
+    align-items: baseline;
+}
+
+.grupo-esquerdo img {
+    width: clamp(30px, 6vw, 50px);
+}
+
+.logo-central {
+    width: clamp(100px, 20vw, 150px);
+    height: auto;
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .RodapeComLogoCentral {
+        padding: 6px 12px;
+    }
+
+    .logo-central {
+        width: 80px;
+    }
+}
 
 /*---------CRIAR SALA-------------------*/
 
@@ -352,19 +457,6 @@ body {
     height: 100%;
     flex-direction: column;
     margin: 0;
-}
-
-.DegradeSuperior {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    padding: 3%;
-    background: linear-gradient(to bottom, white, transparent);
 }
 
 .BalaoDeCriarSala {
@@ -465,19 +557,6 @@ body {
     margin: 0;
 }
 
-.DegradeSuperior {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    padding: 3%;
-    background: linear-gradient(to bottom, white, transparent);
-}
-
 .BalaoDeEntrarEmUmaSala {
     flex-direction: column;
     display: flex;
@@ -541,114 +620,6 @@ body {
 }
 
 .BotaoEntrarEmUmaSala-EntrarEmUmaSala button:hover {
-    background-color: #279547;
-}
-
-.RodapeComLogoCentral {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding-top: 20px;
-    padding-left: 20px;
-    position: fixed;
-    bottom: 0;
-}
-
-.RodapeComLogoCentral img[alt="Logo do menu"],
-.RodapeComLogoCentral img[alt="Logo de ajuda"] {
-    width: clamp(40px, 70%, 50px);
-}
-
-.RodapeComLogoCentral img[alt="Logo do jogo"] {
-    width: clamp(40px, 70%, 150px);
-    margin-left: 37%;
-} */
-
-
-/*---------MODO DA SALA------------*/
-
-/* .pagina-modo-da-sala {
-    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    flex-direction: column;
-    margin: 0;
-}
-
-.DegradeSuperior {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    padding: 3%;
-    background: linear-gradient(to bottom, white, transparent);
-}
-
-.BalaoDeModoDaSala {
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    width: clamp(300px, 70%, 600px);
-    height: clamp(200px, 70%, 350px);
-    box-shadow: inset 0 0px 50px rgba(0.3, 0.3, 0.3, 0.3);
-    border-radius: 50px;
-}
-
-.TextoTituloDoBalao {
-    font-family: 'Chau Philomene One', sans-serif;
-    color: #052c44;
-    font-size: 20px;
-    font-size: clamp(0.7rem, 2.5vw, 1.25rem);
-}
-
-.CaixaDeTextoDoBalao {
-    background-color: #0A76B8;
-    border-radius: 15px;
-    color: black;
-    height: 7%;
-    width: 40%;
-    border: none;
-    text-align: center;
-}
-
-.CaixaDeTextoDoBalao::placeholder {
-    color: black;
-}
-
-.BotaoDeModoDaSala-ModoDaSala {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-}
-
-.BotaoDeModoDaSala-ModoDaSala button {
-    background-color: #0fe54c;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 18px;
-    padding: 10px 20px;
-    font-size: 25px;
-    font-family: 'Chau Philomene One', sans-serif;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
-}
-
-.BotaoDeModoDaSala-ModoDaSala button:hover {
     background-color: #279547;
 }
 
