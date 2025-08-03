@@ -14,64 +14,62 @@
 <body class="corpo">
     <div class="DegradeSuperior"></div>
 
-    <div style="justify-content: space-between; 
-        flex-direction: column; 
-        display: flex; 
-        height: 100%;">
-        <header>
-            <div class="containerDadoLider">Lider da sala: <span id="liderNome"></span></div>
+    <div class="containerPagina">
+        <header class="cabecalho">
+            <div class="containerDadoLider">Líder da sala: <span id="liderNome"></span></div>
             <div class="containerDadoID">ID da sala: <span id="salaID"></span></div>
             <div class="containerDadoTemas">
                 <label for="selectTemas">Temas:</label>
-                <select id="selectTemas" style="background-color: transparent; width: 250px;">
+                <select id="selectTemas">
                     <option selected disabled>Selecione um tema</option>
                 </select>
             </div>
-
         </header>
 
-        <div style="margin-bottom: 60px;">
-            <div class="containerJogadores">
-                <div class="containerGrupo">
-                    <p>1° GRUPO</p>
-                    <div id="grupo-1" class="containerGrupo-membros"></div>
-                    <button class="btn btn-primary btn-sm adicionarAlunoBtn" data-grupo="1">Adicionar aluno</button>
-                </div>
-                <div class="containerGrupo">
-                    <p>2° GRUPO</p>
-                    <div id="grupo-2" class="containerGrupo-membros"></div>
-                    <button class="btn btn-primary btn-sm adicionarAlunoBtn" data-grupo="2">Adicionar aluno</button>
-                </div>
-                <div class="containerGrupo">
-                    <p>3° GRUPO</p>
-                    <div id="grupo-3" class="containerGrupo-membros"></div>
-                    <button class="btn btn-primary btn-sm adicionarAlunoBtn" data-grupo="3">Adicionar aluno</button>
-                </div>
-                <div class="containerGrupo">
-                    <p>4° GRUPO</p>
-                    <div id="grupo-4" class="containerGrupo-membros"></div>
-                    <button class="btn btn-primary btn-sm adicionarAlunoBtn" data-grupo="4">Adicionar aluno</button>
-                </div>
-                <div class="containerGrupo">
-                    <p>5° GRUPO</p>
-                    <div id="grupo-5" class="containerGrupo-membros"></div>
-                    <button class="btn btn-primary btn-sm adicionarAlunoBtn" data-grupo="5">Adicionar aluno</button>
-                </div>
+        <section class="containerJogadores">
+            <div class="containerGrupo">
+                <p>1° GRUPO</p>
+                <div id="grupo-1" class="containerGrupo-membros"></div>
+                <button class="adicionarAlunoBtn" data-grupo="1">Adicionar aluno</button>
             </div>
+            <div class="containerGrupo">
+                <p>2° GRUPO</p>
+                <div id="grupo-2" class="containerGrupo-membros"></div>
+                <button class="adicionarAlunoBtn" data-grupo="2">Adicionar aluno</button>
+            </div>
+            <div class="containerGrupo">
+                <p>3° GRUPO</p>
+                <div id="grupo-3" class="containerGrupo-membros"></div>
+                <button class="adicionarAlunoBtn" data-grupo="3">Adicionar aluno</button>
+            </div>
+            <div class="containerGrupo">
+                <p>4° GRUPO</p>
+                <div id="grupo-4" class="containerGrupo-membros"></div>
+                <button class="adicionarAlunoBtn" data-grupo="4">Adicionar aluno</button>
+            </div>
+            <div class="containerGrupo">
+                <p>5° GRUPO</p>
+                <div id="grupo-5" class="containerGrupo-membros"></div>
+                <button class="adicionarAlunoBtn" data-grupo="5">Adicionar aluno</button>
+            </div>
+        </section>
 
-            <div style="text-align: center; margin-top: 20px;">
-                <div class="BotaoDeModoDaSala-ModoDaSala">
-                    <button id="btnIniciar">Iniciar Partida</button>
-                </div>
-            </div>
+        <div class="botoesIniciar">
+            <button id="btnIniciar" class="BotaoInicial">Iniciar Partida</button>
         </div>
     </div>
 
-    <!-- <footer class="RodapeComLogoCentral">
-        <img src="Imagens/LogoMenu.png" alt="Logo do menu">
-        <img src="Imagens/LogoAjuda.png" alt="Logo de ajuda">
-        <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
-    </footer> -->
+    <footer class="RodapeComLogoCentral without-logo">
+        <div class="grupo-esquerdo">
+            <a class="containerLogoMenu" href="/Apresentacao.html">
+                <img src="Imagens/LogoMenu.png" alt="Logo do menu">
+            </a>
+            <a class="containerAjuda" href="/404.html">
+                <img src="Imagens/LogoAjuda.png" alt="Logo de ajuda">
+            </a>
+        </div>
+        <!-- <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo" class="logo-central"> -->
+    </footer>
 
     <!-- Modal de adicionar aluno -->
     <div class="modal fade" id="modalAdicionarAluno" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
@@ -145,7 +143,6 @@
                             jogadores.push(...nomes);
                         }
 
-                        // Adiciona o líder como jogador do grupo 0
                         jogadores.push({
                             nome: nomeUsuarioAtual,
                             grupo: 0
@@ -166,8 +163,6 @@
             }
         });
 
-
-
         socket.on('user-joined', ({ users }) => {
             for (let i = 1; i <= 5; i++) {
                 document.getElementById(`grupo-${i}`).innerHTML = '';
@@ -186,7 +181,6 @@
             });
         });
 
-        // Todos os usuários escutam esses eventos
         socket.on('game-start', (data) => {
             localStorage.setItem('temaSelecionado', data.tema);
             localStorage.setItem('grupo', data.grupo);
@@ -246,11 +240,7 @@
                 console.error('Erro ao buscar temas:', error);
             }
         }
-
-
         buscarTemas();
-
-
     </script>
 </body>
 
