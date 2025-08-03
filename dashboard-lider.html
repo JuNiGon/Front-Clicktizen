@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Monitor da Partida</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background: white;
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+
+        .grupo {
+            color: #2e86de;
+        }
+
+        .jogador {
+            color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Pontuação dos Grupos</h2>
+    <ul id="pontuacaoPorGrupo"></ul>
+
+    <h2>Jogadores</h2>
+    <ul id="jogadores"></ul>
+
+    <script src="orientation-check.js"></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <script>
+        const socket = io('http://localhost:3000');
+        const codigoSala = localStorage.getItem('codigoSala');
+        const nomeUsuario = localStorage.getItem('nomeUsuario') || 'monitor';
+
+        if (codigoSala) {
+            socket.emit('join-room', { codigo: Number(codigoSala), nome: nomeUsuario });
+        }
+
+        const pontuacao = JSON.parse(localStorage.getItem('pontuacaoPorGrupo') || '{}');
+        const jogadores = JSON.parse(localStorage.getItem('jogadores') || '[]');
+
+        const ulGrupos = document.getElementById('pontuacaoPorGrupo');
+        for (const grupo in pontuacao) {
+            if (grupo !== "0") {
+                const li = document.createElement('li');
+                li.classList.add('grupo');
+                li.textContent = `Grupo ${grupo}: ${pontuacao[grupo]} pontos`;
+                ulGrupos.appendChild(li);
+            }
+        }
+
+        const ulJogadores = document.getElementById('jogadores');
+        jogadores
+            .filter(j => j.grupo !== 0) // ignora líder
+            .forEach(j => {
+                const li = document.createElement('li');
+                li.classList.add('jogador');
+                li.textContent = `${j.nome} (Grupo ${j.grupo}) - ${j.pontuacao || 0} pts`;
+                ulJogadores.appendChild(li);
+            });
+
+        // Atualizar pontuação em tempo real
+        socket.on('atualizar-pontuacao', (data) => {
+            // Atualiza pontuação dos grupos
+            const ul = document.getElementById('pontuacaoPorGrupo');
+            ul.innerHTML = '';
+            for (const grupo in data.pontuacao) {
+                if (grupo !== "0") {
+                    const li = document.createElement('li');
+                    li.classList.add('grupo');
+                    li.textContent = `Grupo ${grupo}: ${data.pontuacao[grupo]} pontos`;
+                    ul.appendChild(li);
+                }
+            }
+
+            // Atualiza pontuação individual dos jogadores
+            if (data.jogadores) {
+                localStorage.setItem('jogadores', JSON.stringify(data.jogadores));
+                const ulJogadores = document.getElementById('jogadores');
+                ulJogadores.innerHTML = '';
+                data.jogadores
+                    .filter(j => j.grupo !== 0)
+                    .forEach(j => {
+                        const li = document.createElement('li');
+                        li.classList.add('jogador');
+                        li.textContent = `${j.nome} (Grupo ${j.grupo}) - ${j.pontuacao || 0} pts`;
+                        ulJogadores.appendChild(li);
+                    });
+            }
+        });
+
+        socket.on('fim-do-jogo', data => {
+            alert('O jogo acabou! Obrigado por jogar 🎉');
+            window.location.href = '/finalistas.html';
+        });
+    </script>
+</body>
+
+</html>

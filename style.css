@@ -48,9 +48,6 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.BotaoInicial button {
     background-color: #FFCC00;
     color: #FFFFFF;
     border: none;
@@ -551,8 +548,18 @@ html {
     color: #FFFFFF;
 }
 
+.BarraSuperiorPrincipal button[data-nome=BotaoInicio]:hover {
+    background-color: #951813;
+    color: #FFFFFF;
+}
+
 .BarraSuperiorPrincipal button[data-nome=BotaoRank] {
     background-color: #ffffff;
+    color: white;
+}
+
+.BarraSuperiorPrincipal button[data-nome=BotaoRank]:hover {
+    background-color: #b6b6b6;
     color: white;
 }
 
@@ -561,8 +568,18 @@ html {
     color: #FFFFFF;
 }
 
+.BarraSuperiorPrincipal button[data-nome=BotaoAjuda]:hover {
+    background-color: #073a6a;
+    color: white;
+}
+
 .BarraSuperiorPrincipal button[data-nome=BotaoSobre] {
     background-color: #ffcc00;
+    color: white;
+}
+
+.BarraSuperiorPrincipal button[data-nome=BotaoSobre]:hover {
+    background-color: #ac8a02;
     color: white;
 }
 
@@ -868,14 +885,245 @@ header {
     text-align: center;
 }
 
-/* .buttonAdicionarAluno {
-    background-color: #ffcc00;
-    border: none;
+.containerJogo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    /* padding-bottom: 50px; */
+    margin: 0;
+}
+
+.containerTempo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    height: 50px;
+    background-color: #ffffff;
+    font-size: 24px;
+}
+
+.containerPergunta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 720px;
+    min-height: 108px;
+    /* tamanho mínimo */
+    padding: 20px;
+    /* dá espaço interno */
+    border-radius: 50px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    /* garante que padding não ultrapasse o tamanho */
+}
+
+
+#perguntaTexto {
+    text-transform: uppercase;
     color: #073a6a;
-    font-weight: bold;
-    padding: 4px;
-    margin-top: auto;
-    margin-bottom: 4px;
-    border-radius: 4px;
+    font-family: 'Chau Philomene One', sans-serif;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow: -1px -1px 0 #073a6a,
+        1px -1px 0 #073a6a,
+        -1px 1px 0 #073a6a,
+        1px 1px 0 #073a6a;
+}
+
+/* .containerImagem {
+    width: 500px;
+    height: 25%;
+    border-radius: 50px;
+    background-color: #ffffff;
 } */
+
+.containerBotaoFeedBack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    width: 100%;
+    height: 100%;
+}
+
+.BotaoInicialNew {
+    background-color: #FFCC00;
+    color: #FFFFFF;
+    border: none;
+    height: 108px;
+    width: 356px;
+    border-radius: 40px;
+    padding: 15px 30px;
+    font-size: 60px;
+    color: #073a6a;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow: -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.BotaoInicial:hover {
+    background-color: #c29803cc;
+}
+
+#botoesResposta {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#botoesResposta.oculto {
+    display: none;
+}
+
+#feedback.oculto {
+    display: none;
+}
+
+#feedback {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    width: 922px;
+    min-height: 132px;
+    /* tamanho mínimo */
+    padding: 20px;
+    /* espaço interno */
+    border-radius: 40px;
+    font-size: 20px;
+    font-family: 'Chau Philomene One', sans-serif;
+    transition: background-color 0.3s ease;
+    text-shadow: -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    /* mantém quebras de linha no texto */
+}
+
+
+.RodapeComLogo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 20px;
+    /* position: fixed; */
+    bottom: 0;
+}
+
+.RodapeComLogo img[alt="Logo do menu"],
+.RodapeComLogo img[alt="Logo de ajuda"] {
+    width: clamp(40px, 70%, 50px);
+}
+
+.RodapeComLogo img[alt="Logo do jogo"] {
+    width: clamp(40px, 70%, 150px);
+    margin-left: 37%;
+}
+
+.containerFinalistas {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+.faixaFinalistas {
+    background: #da251d;
+    padding: 10px 40px;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 320px;
+    height: 150px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.faixaFinalistas h1 {
+    font-family: 'Chau Philomene One', sans-serif;
+    font-size: 80px;
+    margin: 0;
+    color: #ffcc00;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+}
+
+.podio {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 20px;
+}
+
+.caixaGrupo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.nomeGrupo {
+    font-size: 28px;
+    font-family: 'Chau Philomene One', sans-serif;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0 #000;
+    text-align: center;
+}
+
+/* Cores específicas para destaque */
+.ouro {
+    color: #ffcc00;
+}
+
+.prata {
+    color: #ffffff;
+}
+
+.bronze {
+    color: #b87333;
+}
+
+.primeiroLugar,
+.segundoLugar,
+.terceiroLugar {
+    width: 220px;
+    border-radius: 5px;
+}
+
+.primeiroLugar {
+    height: 279px;
+    background-color: #ffffff;
+}
+
+.segundoLugar {
+    height: 200px;
+    background-color: #da251d;
+}
+
+.terceiroLugar {
+    height: 121px;
+    background-color: #0a76b8;
+}

@@ -14,13 +14,15 @@
         <div class="LogoDoJogo">
             <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
         </div>
-        <div class="BotaoInicial">
-            <button><a style="text-decoration: none; color: #fff;" href="/Apresentacao.html">COMEÇAR</a></button>
+        <div class="">
+            <button class="BotaoInicial"><a style="text-decoration: none; color: #fff;"
+                    href="/Apresentacao.html">COMEÇAR</a></button>
         </div>
     </div>
 
     <div id="footer-container"></div>
 
+    <script src="orientation-check.js"></script>
     <script>
         fetch('components/footer.html')
             .then(response => response.text())

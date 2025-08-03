@@ -33,12 +33,13 @@
         <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
     </footer>
 
+    <script src="orientation-check.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"
         integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous">
         </script>
 
     <script>
-        const socket = io('http://localhost:3000/rooms');
+        const socket = io('http://localhost:3000');
 
         document.querySelector('.BotaoCriarSala-CriarSala button').addEventListener('click', () => {
             const instituicao = document.querySelectorAll('.CaixaDeTextoDoBalao')[0].value;
@@ -62,7 +63,8 @@
                 });
 
                 localStorage.setItem('codigoSala', String(codigo));
-                localStorage.setItem('nomeUsuario', room.roomOwner);
+                localStorage.setItem('nomeUsuario', room.roomOwner); // ← Aqui é o próprio líder
+                localStorage.setItem('roomOwner', room.roomOwner);   // ← Guardar o nome do líder também
             }
         });
 

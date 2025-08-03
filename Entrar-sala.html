@@ -34,12 +34,13 @@
         <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
     </footer>
 
+    <script src="orientation-check.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"
         integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous">
         </script>
 
     <script>
-        const socket = io('http://localhost:3000/rooms');
+        const socket = io('http://localhost:3000');
 
         document.querySelector('.BotaoEntrarEmUmaSala-EntrarEmUmaSala button').addEventListener('click', () => {
             const inputs = document.querySelectorAll('.CaixaDeTextoDoBalao');
@@ -50,6 +51,10 @@
                 alert("Preencha todos os campos.");
                 return;
             }
+
+            // Salvando aqui ANTES do evento de resposta
+            localStorage.setItem('codigoSala', codigoSala);
+            localStorage.setItem('nomeUsuario', apelido);
 
             // Envia para o servidor
             socket.emit('join-room', {
@@ -62,14 +67,14 @@
             if (data.success) {
                 console.log(`Entrou na sala com sucesso: ${data.room.codigo}`);
 
-                localStorage.setItem('codigoSala', data.room.codigo);
-                localStorage.setItem('nomeUsuario', data.room.roomOwner);
+                localStorage.setItem('roomOwner', data.room.roomOwner); // líder
 
                 window.location.href = 'sala.html';
             } else {
                 alert("Erro ao entrar na sala: " + data.message);
             }
         });
+
     </script>
 
 
