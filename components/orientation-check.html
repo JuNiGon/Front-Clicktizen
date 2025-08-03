@@ -1,0 +1,39 @@
+<!-- orientation-check.html (copie e use em qualquer tela) -->
+<div id="orientation-warning" style="
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  background: red;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+">
+    <p>📱 Para jogar no celular,<br>por favor, vire a tela horizontalmente.</p>
+</div>
+
+<script>
+    function verificarOrientacao() {
+        const ehCelular = /Mobi|Android/i.test(navigator.userAgent);
+        const estaEmRetrato = window.innerHeight > window.innerWidth;
+        const aviso = document.getElementById('orientation-warning');
+
+        if (ehCelular && estaEmRetrato) {
+            aviso.style.display = 'flex';
+        } else {
+            aviso.style.display = 'none';
+        }
+    }
+
+    window.addEventListener('load', verificarOrientacao);
+    window.addEventListener('resize', verificarOrientacao);
+    window.addEventListener('orientationchange', verificarOrientacao);
+</script>

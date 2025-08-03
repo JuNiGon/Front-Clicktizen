@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
@@ -7,21 +8,28 @@
     <title>Início</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="pagina-inicial">
-    <div class="LogoDoJogo">
-        <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
+    <div class="containerPrincipal">
+        <div class="LogoDoJogo">
+            <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
+        </div>
+        <div class="">
+            <button class="BotaoInicial"><a style="text-decoration: none; color: #fff;"
+                    href="/Apresentacao.html">COMEÇAR</a></button>
+        </div>
     </div>
-    <div class="BotaoInicial">
-        <button>COMEÇAR</button>
-    </div>
-    <footer class="LogoDosApoiadoresRodape">
-        <div class="LinhaEsquerdaRodape"></div>
-        <img src="Imagens/LogoDaUfal.png" alt="Logo da UFAL">
-        <img src="Imagens/LogoOds.png" alt="Logo ODS">
-        <img src="Imagens/Logo FDA.png" alt="Logo da FDA">
-        <img src="Imagens/CidadaniaDigital.png" alt="Cidadania digital">
-        <img src="Imagens/BandeiraAlagoas.png" alt="Bandeira de Alagoas">
-        <div class="LinhaDireitaRodape"></div>
-    </footer>
+
+    <div id="footer-container"></div>
+
+    <script src="orientation-check.js"></script>
+    <script>
+        fetch('components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
 </body>
+
 </html>

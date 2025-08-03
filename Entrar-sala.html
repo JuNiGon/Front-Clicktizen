@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
@@ -7,6 +8,7 @@
     <title>Entrar em uma sala</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="pagina-entrar-em-uma-sala">
     <div class="DegradeSuperior"></div>
     <div class="BalaoDeEntrarEmUmaSala">
@@ -32,5 +34,50 @@
         <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
     </footer>
 
+    <script src="orientation-check.js"></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"
+        integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous">
+        </script>
+
+    <script>
+        const socket = io('http://localhost:3000');
+
+        document.querySelector('.BotaoEntrarEmUmaSala-EntrarEmUmaSala button').addEventListener('click', () => {
+            const inputs = document.querySelectorAll('.CaixaDeTextoDoBalao');
+            const codigoSala = inputs[0].value.trim();
+            const apelido = inputs[1].value.trim();
+
+            if (!codigoSala || !apelido) {
+                alert("Preencha todos os campos.");
+                return;
+            }
+
+            // Salvando aqui ANTES do evento de resposta
+            localStorage.setItem('codigoSala', codigoSala);
+            localStorage.setItem('nomeUsuario', apelido);
+
+            // Envia para o servidor
+            socket.emit('join-room', {
+                codigo: Number(codigoSala),
+                nome: apelido
+            });
+        });
+
+        socket.on('room-joined', (data) => {
+            if (data.success) {
+                console.log(`Entrou na sala com sucesso: ${data.room.codigo}`);
+
+                localStorage.setItem('roomOwner', data.room.roomOwner); // líder
+
+                window.location.href = 'sala.html';
+            } else {
+                alert("Erro ao entrar na sala: " + data.message);
+            }
+        });
+
+    </script>
+
+
 </body>
+
 </html>

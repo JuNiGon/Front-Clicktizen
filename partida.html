@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Partida</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body class="corpo">
+    <div class="containerJogo">
+        <div class="containerTempo">
+            <span id="tempoRestante">Tempo: 10s</span>
+        </div>
+        <div class="containerPergunta">
+            <h3 id="perguntaTexto">Carregando pergunta...</h3>
+        </div>
+
+        <!-- <div class="containerImagem">
+
+        </div> -->
+
+    </div>
+    <div class="containerBotaoFeedBack">
+        <div id="botoesResposta">
+            <button class="BotaoInicialNew" id="btnFato">FATO</button>
+            <button class="BotaoInicialNew" id="btnFake">FAKE</button>
+        </div>
+
+        <div id="feedback" class="oculto" style="font-weight: bold;"></div>
+    </div>
+
+    <footer class="RodapeComLogo">
+        <div>
+            <img src="Imagens/LogoMenu.png" alt="Logo do menu">
+            <img src="Imagens/LogoAjuda.png" alt="Logo de ajuda">
+        </div>
+        <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
+    </footer>
+
+    <script src="orientation-check.js"></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        const socket = io('http://localhost:3000');
+
+        const temaSelecionado = localStorage.getItem('temaSelecionado');
+        const nomeUsuarioAtual = localStorage.getItem('nomeUsuario');
+        const codigoSala = localStorage.getItem('codigoSala');
+
+        let respostaCorretaAtual = null;
+        let justificativaAtual = null;
+        let podeResponder = true;
+        let timerInterval;
+        let aguardandoOutros = false;
+
+        document.getElementById('btnFato').addEventListener('click', () => responder('Verdade'));
+        document.getElementById('btnFake').addEventListener('click', () => responder('Fake'));
+
+        socket.on('connect', () => {
+            console.log('🔁 Reconectado com ID:', socket.id);
+
+            socket.emit('join-room', {
+                codigo: Number(codigoSala),
+                nome: nomeUsuarioAtual
+            });
+        });
+
+        function initSocketListeners() {
+            socket.on('nova-pergunta', data => {
+                console.log('🧠 Nova pergunta recebida:', data.texto);
+                clearInterval(timerInterval);
+                document.getElementById('perguntaTexto').innerText = data.texto;
+
+                const feedbackDiv = document.getElementById('feedback');
+                const botoes = document.getElementById('botoesResposta');
+
+                feedbackDiv.classList.add('oculto');
+                botoes.classList.remove('oculto');
+                feedbackDiv.style.backgroundColor = 'transparent';
+
+                feedbackDiv.innerText = '';
+                podeResponder = true;
+                startTimer(10);
+            });
+
+            socket.on('feedback', data => {
+                let segundos = 5;
+                const feedbackDiv = document.getElementById('feedback');
+                const botoes = document.getElementById('botoesResposta');
+
+                botoes.classList.add('oculto');
+                feedbackDiv.classList.remove('oculto');
+
+                if (!data.aguardandoOutros) {
+                    feedbackDiv.style.backgroundColor = data.correta ? '#276523' : '#da251d';
+                } else {
+                    feedbackDiv.style.backgroundColor = 'transparent';
+                }
+
+
+                feedbackDiv.innerText = data.correta
+                    ? `✅ Resposta correta! ${data.justificativa}\nPróxima em ${segundos}s`
+                    : `❌ Resposta incorreta. ${data.justificativa}\nPróxima em ${segundos}s`;
+
+                clearInterval(timerInterval);
+                timerInterval = setInterval(() => {
+                    segundos--;
+                    if (segundos <= 0) {
+                        clearInterval(timerInterval);
+                    } else {
+                        feedbackDiv.innerText = data.correta
+                            ? `✅ Resposta correta! ${data.justificativa}\nPróxima em ${segundos}s`
+                            : `❌ Resposta incorreta. ${data.justificativa}\nPróxima em ${segundos}s`;
+                    }
+                }, 1000);
+            });
+
+            socket.on('fim-do-jogo', data => {
+                console.log('🎉 Jogo encerrado! Salvando ranking...');
+                localStorage.setItem('rankingFinal', JSON.stringify(data.ranking));
+                window.location.href = '/finalistas.html';
+            });
+
+            socket.on('aguardando-outros', () => {
+                aguardandoOutros = true;
+            });
+        }
+
+        initSocketListeners();
+
+
+        function responder(resposta) {
+            if (!podeResponder) return;
+
+            podeResponder = false;
+
+            const botoes = document.getElementById('botoesResposta');
+            const feedbackDiv = document.getElementById('feedback');
+
+            botoes.classList.add('oculto');
+            feedbackDiv.classList.remove('oculto');
+
+            socket.emit('responder', {
+                codigo: codigoSala,
+                nome: nomeUsuarioAtual,
+                resposta
+            });
+        }
+
+
+        function startTimer(segundos) {
+            let tempo = segundos;
+            aguardandoOutros = false;
+
+            const feedbackDiv = document.getElementById('feedback');
+            const tempoDiv = document.getElementById('tempoRestante');
+
+            feedbackDiv.innerText = `Tempo restante: ${tempo}s`;
+            tempoDiv.innerText = `Tempo: ${tempo}s`;
+
+            clearInterval(timerInterval);
+
+            timerInterval = setInterval(() => {
+                tempo--;
+
+                tempoDiv.innerText = `Tempo: ${tempo}s`;
+
+                if (tempo <= 0) {
+                    clearInterval(timerInterval);
+
+                    if (podeResponder) {
+                        podeResponder = false;
+                        socket.emit('responder', {
+                            codigo: codigoSala,
+                            nome: nomeUsuarioAtual,
+                            resposta: ''
+                        });
+                        feedbackDiv.innerText = 'Tempo esgotado!';
+                    }
+
+                } else {
+                    if (aguardandoOutros) {
+                        feedbackDiv.innerText = `⏳ Esperando outros jogadores responderem...`;
+                    } else {
+                        feedbackDiv.innerText = `Tempo restante: ${tempo}s`;
+                    }
+                }
+            }, 1000);
+        }
+
+    </script>
+</body>
+
+</html>
