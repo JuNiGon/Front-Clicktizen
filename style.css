@@ -57,7 +57,6 @@ body {
     text-decoration: none;
     color: #FFFFFF;
     transition: background-color 0.3s ease, transform 0.2s ease;
-
 }
 
 .BotaoInicial:hover {
@@ -983,6 +982,13 @@ body {
 .botoesIniciar {
     display: flex;
     justify-content: center;
+    z-index: 10;
+    position: relative;
+}
+
+footer {
+    position: relative;
+    z-index: 1;
 }
 
 @media screen and (orientation: landscape) and (max-height: 500px) {
@@ -1014,7 +1020,7 @@ body {
     }
 }
 
-/* ------------ */
+/* ------------------------------- */
 
 .containerJogo {
     display: flex;
