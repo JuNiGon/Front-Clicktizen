@@ -10,45 +10,46 @@
 </head>
 
 <body class="pagina-apresentacao">
-    <div class="GradeSuperior">
-        <div class="BarraSuperiorPrincipal">
-            <button data-nome="BotaoInicio"><a href="/Apresentacao.html"
-                    style="text-decoration: none; color: #fff;">INICIO</a></button>
-            <button data-nome="BotaoRank"><a href="" style="text-decoration: none; color: #fff;">RANK</a></button>
-            <button data-nome="BotaoAjuda"><a href="/Regras-do-jogo.html"
-                    style="text-decoration: none; color: #fff;">AJUDA</a></button>
-            <button data-nome="BotaoSobre"><a href="/Creditos.html"
-                    style="text-decoration: none; color: #fff;">SOBRE</a></button>
+    <div class="containerPrincipal">
+        <div class="GradeSuperior">
+            <div class="DegradeSuperior"></div>
+            <div class="BarraSuperiorPrincipal">
+                <a href="/Apresentacao.html" class="botao-link" data-nome="BotaoInicio">INICIO</a>
+                <a href="/404.html" class="botao-link" data-nome="BotaoRank">RANK</a>
+                <a href="/404.html" class="botao-link" data-nome="BotaoAjuda">AJUDA</a>
+                <a href="/404.html" class="botao-link" data-nome="BotaoSobre">SOBRE</a>
+            </div>
         </div>
-        <div class="DegradeSuperior"></div>
-    </div>
 
-    <div class="LogoDoJogo-apresentacao">
-        <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo-apresentacao">
-    </div>
-
-    <div class="PersonagemDoJogo-apresentacao">
-        <div class="BalaoDeFala">
-            Olá! Que alegria ter você aqui no Clicktizen! Prepare-se para aprender, se divertir e transformar o mundo
-            com a sua participação. Vamos juntos?
+        <div class="LogoDoJogo-apresentacao">
+            <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo-apresentacao">
         </div>
-        <img src="Imagens/personagem_apresentacao.png" alt="Personagem do jogo-apresentacao">
-    </div>
 
+        <div class="PersonagemDoJogo-apresentacao">
+            <div class="BalaoDeFala">
+                Olá! Que alegria ter você aqui no Clicktizen! Prepare-se para aprender, se divertir e transformar o
+                mundo
+                com a sua participação. Vamos juntos?
+            </div>
+            <img src="Imagens/personagem_apresentacao.png" alt="Personagem do jogo-apresentacao">
+        </div>
 
-    <div class="BotaoJogar">
-        <button><a style="text-decoration: none; color: #fff;" href="/Modo-da-sala.html">JOGAR</a></button>
+        <a href="/Modo-da-sala.html" class="BotaoInicial">JOGAR</a>
+
+        <footer class="LogoDosApoiadoresRodape">
+            <div class="LinhaEsquerdaRodape"></div>
+            <div class="containerLogos">
+                <img src="Imagens/LogoDaUfal.png" alt="Logo da UFAL">
+                <img src="Imagens/LogoOds.png" alt="Logo ODS">
+                <img src="Imagens/Logo FDA.png" alt="Logo da FDA">
+                <img src="Imagens/CidadaniaDigital.png" alt="Cidadania digital">
+                <img src="Imagens/BandeiraAlagoas.png" alt="Bandeira de Alagoas">
+            </div>
+            <div class="LinhaDireitaRodape"></div>
+        </footer>
     </div>
-    <div id="footer-container"></div>
+    <!-- <div id="footer-container"></div> -->
     <script src="orientation-check.js"></script>
-
-    <script>
-        fetch('components/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            });
-    </script>
 </body>
 
 </html>

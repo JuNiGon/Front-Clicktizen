@@ -13,12 +13,14 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Chau Philomene One', sans-serif;
+    overflow: hidden;
 }
 
 .pagina-inicial {
     background: linear-gradient(to right, #DA251D, #FFFFFF, #0A76B8);
     min-height: 100vh;
     min-height: 100dvh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -130,6 +132,212 @@ body {
         width: 8vw;
         max-width: 80px;
         min-width: 30px;
+    }
+}
+
+/*---------APRESENTAÇÃO--------------*/
+.pagina-apresentacao {
+    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.LogoDoJogo-apresentacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    max-width: 300px;
+    margin: auto;
+    position: relative;
+}
+
+.LogoDoJogo-apresentacao img {
+    max-width: 100%;
+    height: auto;
+}
+
+.BotaoJogar {
+    position: relative;
+    top: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BotaoJogar button {
+    background-color: #FFCC00;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 25px;
+    font-size: 25px;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.BotaoJogar button:hover {
+    background-color: #c29803cc;
+}
+
+.BarraSuperiorPrincipal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao-link {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    font-size: clamp(20px, 2.5vw, 25px);
+    padding: clamp(5px, 1.5vh, 10px) clamp(10px, 5vw, 50px);
+    font-family: 'Chau Philomene One', sans-serif;
+    color: white;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.botao-link[data-nome="BotaoInicio"] {
+    background-color: #da251d;
+}
+
+.botao-link[data-nome="BotaoInicio"]:hover {
+    background-color: #951813;
+}
+
+.botao-link[data-nome="BotaoRank"] {
+    background-color: #ffffff;
+    color: white;
+}
+
+.botao-link[data-nome="BotaoRank"]:hover {
+    background-color: #b6b6b6;
+}
+
+.botao-link[data-nome="BotaoAjuda"] {
+    background-color: #0a76b8;
+}
+
+.botao-link[data-nome="BotaoAjuda"]:hover {
+    background-color: #073a6a;
+}
+
+.botao-link[data-nome="BotaoSobre"] {
+    background-color: #ffcc00;
+}
+
+.botao-link[data-nome="BotaoSobre"]:hover {
+    background-color: #ac8a02;
+}
+
+.GradeSuperior {
+    /* top: 0; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.DegradeSuperior {
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to top, transparent, white);
+    z-index: -1;
+}
+
+.PersonagemDoJogo-apresentacao {
+    position: absolute;
+    bottom: 0px;
+    left: 33%;
+    transform: translateX(-50%);
+    width: clamp(100px, 20vw, 300px);
+    z-index: -2;
+}
+
+.PersonagemDoJogo-apresentacao img {
+    width: 100%;
+    height: auto;
+}
+
+.BalaoDeFala {
+    position: absolute;
+    top: -20px;
+    left: -220px;
+    width: 200px;
+    background-color: #ffffff;
+    border: 2px solid #0A76B8;
+    border-radius: 20px;
+    padding: 10px;
+    font-family: 'Chau Philomene One', sans-serif;
+    font-size: 14px;
+    color: #da251d;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+}
+
+.BalaoDeFala::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    right: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #ffffff;
+}
+
+@media (max-width: 600px) {
+    .PersonagemDoJogo-apresentacao {
+        display: none;
+        /* left: 10%;
+        bottom: 10px;
+        transform: none;
+        width: 150px; */
+        /* z-index: 1; */
+    }
+
+    .BalaoDeFala {
+        display: none;
+        /* position: absolute;
+        top: -20px;
+        left: 100%;
+        width: 180px;
+        font-size: 12px;
+        padding: 8px; */
+    }
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .LogoDoJogo-apresentacao img {
+        max-width: 200px;
+    }
+
+    .PersonagemDoJogo-apresentacao {
+        position: absolute;
+        bottom: 0px;
+        left: 33%;
+        transform: translateX(-50%);
+        width: clamp(80px, 16vw, 300px);
+        z-index: -2;
     }
 }
 
@@ -245,7 +453,7 @@ body {
     margin-left: 37%;
 } */
 
-/*------------------------------------------------------------------------ENTRAR EM UMA SALA--------------------------------------------------*/
+/*------------ENTRAR EM UMA SALA----------------*/
 
 /* .pagina-entrar-em-uma-sala {
     background: linear-gradient(to bottom, #DA251D, #FFFFFF);
@@ -357,7 +565,7 @@ body {
 } */
 
 
-/*--------------------------------------------------------------------MODO DA SALA---------------------------------------------------------------*/
+/*---------MODO DA SALA------------*/
 
 /* .pagina-modo-da-sala {
     background: linear-gradient(to bottom, #DA251D, #FFFFFF);
@@ -462,202 +670,6 @@ body {
 .RodapeComLogoCentral img[alt="Logo do jogo"] {
     width: clamp(40px, 70%, 150px);
     margin-left: 37%;
-} */
-
-
-/*--------------------------------------------------------------------APRESENTAÇÃO---------------------------------------------------------------*/
-/* .pagina-apresentacao {
-    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-.LogoDoJogo-apresentacao {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 100px;
-    max-width: 200px;
-    margin: auto;
-    position: relative;
-    top: 20%;
-}
-
-
-.LogoDoJogo-apresentacao img {
-    max-width: 100%;
-    height: auto;
-}
-
-.BotaoJogar {
-    position: relative;
-    top: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.BotaoJogar button {
-    background-color: #FFCC00;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 25px;
-    font-size: 25px;
-    font-family: 'Chau Philomene One', sans-serif;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
-}
-
-.BotaoJogar button:hover {
-    background-color: #c29803cc;
-}
-
-.BarraSuperiorPrincipal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.BarraSuperiorPrincipal button {
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
-    border: none;
-    border-radius: 0 0 10px 10px;
-    font-size: clamp(20px, 2.5vw, 25px);
-    padding-left: clamp(10px, 5vw, 50px);
-    padding-right: clamp(10px, 5vw, 50px);
-    padding-top: clamp(5px, 1.5vh, 10px);
-    padding-bottom: clamp(5px, 1.5vh, 10px);
-    padding-top: 5px;
-    font-family: 'Chau Philomene One', sans-serif;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
-}
-
-.BarraSuperiorPrincipal button[data-nome=BotaoInicio] {
-    background-color: #da251d;
-    color: #FFFFFF;
-}
-
-.BarraSuperiorPrincipal button[data-nome=BotaoInicio]:hover {
-    background-color: #951813;
-    color: #FFFFFF;
-}
-
-.BarraSuperiorPrincipal button[data-nome=BotaoRank] {
-    background-color: #ffffff;
-    color: white;
-}
-
-.BarraSuperiorPrincipal button[data-nome=BotaoRank]:hover {
-    background-color: #b6b6b6;
-    color: white;
-}
-
-.BarraSuperiorPrincipal button[data-nome=BotaoAjuda] {
-    background-color: #0a76b8;
-    color: #FFFFFF;
-}
-
-.BarraSuperiorPrincipal button[data-nome=BotaoAjuda]:hover {
-    background-color: #073a6a;
-    color: white;
-}
-
-.BarraSuperiorPrincipal button[data-nome=BotaoSobre] {
-    background-color: #ffcc00;
-    color: white;
-}
-
-.BarraSuperiorPrincipal button[data-nome=BotaoSobre]:hover {
-    background-color: #ac8a02;
-    color: white;
-}
-
-.GradeSuperior {
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.DegradeSuperior {
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to top, transparent, white);
-    z-index: -1;
-}
-
-.PersonagemDoJogo-apresentacao {
-    position: absolute;
-    bottom: 0px;
-    left: 33%;
-    transform: translateX(-50%);
-    width: clamp(100px, 20vw, 300px);
-    z-index: -2;
-}
-
-.PersonagemDoJogo-apresentacao img {
-    width: 100%;
-    height: auto;
-}
-
-.BalaoDeFala {
-    position: absolute;
-    top: -20px;
-    left: -220px;
-    width: 200px;
-    background-color: #ffffff;
-    border: 2px solid #0A76B8;
-    border-radius: 20px;
-    padding: 10px;
-    font-family: 'Chau Philomene One', sans-serif;
-    font-size: 14px;
-    color: #da251d;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 20;
-}
-
-.BalaoDeFala::after {
-    content: '';
-    position: absolute;
-    top: 30px;
-    right: -10px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent transparent #ffffff;
-}
-
-@media (max-width: 768px) {
-    .BalaoDeFala {
-        left: auto;
-        right: -220px;
-    }
-
-    .BalaoDeFala::after {
-        right: auto;
-        left: -10px;
-        border-color: transparent #ffffff transparent transparent;
-    }
 } */
 
 /*--------------------------------------------------------------------REGRAS DO JOGO---------------------------------------------------------------*/
