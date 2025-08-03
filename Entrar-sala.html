@@ -11,27 +11,40 @@
 
 <body class="pagina-entrar-em-uma-sala">
     <div class="DegradeSuperior"></div>
-    <div class="BalaoDeEntrarEmUmaSala">
-        <div class="TextoTituloDoBalao">VOCÊ ESTÁ A POUCOS PASSOS DE SE DIVERTIR COM A GENTE</div>
-        <div class="TextoTituloDoBalao">PRIMEIRO SE CADASTRE EM UMA SALA PARA JOGAR COM</div>
-        <div class="TextoTituloDoBalao">OUTROS JOGADORES</div>
-        <div><br></div>
-        <div class="TextoSimplesDoBalao">Para entrar em uma sala insira abaixo o código.</div>
-        <div><br></div>
-        <input type="text" class="CaixaDeTextoDoBalao" placeholder="Insira aqui o código da sala">
-        <div><br></div>
-        <div class="TextoSimplesDoBalao">Para entrar em uma sala, escolha o seu apelido.</div>
-        <div><br></div>
-        <input type="text" class="CaixaDeTextoDoBalao" placeholder="    Insira aqui o seu apelido ">
-        <div><br></div>
+
+    <main class="BalaoDeEntrarEmUmaSala">
+        <div>
+            <h1 class="TextoTituloDoBalao">VOCÊ ESTÁ A POUCOS PASSOS DE SE DIVERTIR COM A GENTE</h1>
+            <h2 class="TextoTituloDoBalao">PRIMEIRO SE CADASTRE EM UMA SALA PARA JOGAR COM OUTROS JOGADORES</h2>
+        </div>
+
+        <div class="CaixaDeTextoDoBalao-CriarSala">
+            <div>
+                <p class="TextoSimplesDoBalao">Para entrar em uma sala insira abaixo o código.</p>
+                <input id="inCodigo" type="text" class="CaixaDeTextoDoBalao" placeholder="Código da sala">
+            </div>
+
+            <div>
+                <p class="TextoSimplesDoBalao">Agora escolha seu apelido.</p>
+                <input id="inApelido" type="text" class="CaixaDeTextoDoBalao" placeholder="Seu apelido">
+            </div>
+        </div>
+
         <div class="BotaoEntrarEmUmaSala-EntrarEmUmaSala">
             <button>ENTRAR EM UMA SALA</button>
         </div>
-    </div>
+    </main>
+
     <footer class="RodapeComLogoCentral">
-        <img src="Imagens/LogoMenu.png" alt="Logo do menu">
-        <img src="Imagens/LogoAjuda.png" alt="Logo de ajuda">
-        <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
+        <div class="grupo-esquerdo">
+            <a class="containerLogoMenu" href="/Apresentacao.html">
+                <img src="Imagens/LogoMenu.png" alt="Logo do menu">
+            </a>
+            <a class="containerAjuda" href="/404.html">
+                <img src="Imagens/LogoAjuda.png" alt="Logo de ajuda">
+            </a>
+        </div>
+        <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo" class="logo-central">
     </footer>
 
     <script src="orientation-check.js"></script>
@@ -40,44 +53,55 @@
         </script>
 
     <script>
+        const codigoSala = document.getElementById('inCodigo');
+        const apelido = document.getElementById('inApelido');
+        const botaoEntrarSala = document.querySelector('.BotaoEntrarEmUmaSala-EntrarEmUmaSala button');
+
+        function entrarSala(event) {
+            if (event.key === 'Enter') {
+                if (codigoSala.value.trim() === '' || apelido.value.trim() === '') {
+                    alert("Por favor, preencha todos os campos.");
+                    return false;
+                } else {
+                    const codigoSala = instituicao.value.trim();
+                    const apelido = nome.value.trim();
+
+                    botaoEntrarSala.click();
+                }
+            }
+        }
+
+        codigoSala.addEventListener('keydown', entrarSala);
+        apelido.addEventListener('keydown', entrarSala);
+    </script>
+
+    <script>
         const socket = io('http://localhost:3000');
 
         document.querySelector('.BotaoEntrarEmUmaSala-EntrarEmUmaSala button').addEventListener('click', () => {
-            const inputs = document.querySelectorAll('.CaixaDeTextoDoBalao');
-            const codigoSala = inputs[0].value.trim();
-            const apelido = inputs[1].value.trim();
+            const codigoSala = document.getElementById('inCodigo').value.trim();
+            const apelido = document.getElementById('inApelido').value.trim();
 
             if (!codigoSala || !apelido) {
                 alert("Preencha todos os campos.");
                 return;
             }
 
-            // Salvando aqui ANTES do evento de resposta
             localStorage.setItem('codigoSala', codigoSala);
             localStorage.setItem('nomeUsuario', apelido);
 
-            // Envia para o servidor
-            socket.emit('join-room', {
-                codigo: Number(codigoSala),
-                nome: apelido
-            });
+            socket.emit('join-room', { codigo: codigoSala, nome: apelido });
         });
 
         socket.on('room-joined', (data) => {
             if (data.success) {
-                console.log(`Entrou na sala com sucesso: ${data.room.codigo}`);
-
-                localStorage.setItem('roomOwner', data.room.roomOwner); // líder
-
+                localStorage.setItem('roomOwner', data.room.roomOwner);
                 window.location.href = 'sala.html';
             } else {
                 alert("Erro ao entrar na sala: " + data.message);
             }
         });
-
     </script>
-
-
 </body>
 
 </html>

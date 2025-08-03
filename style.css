@@ -580,49 +580,52 @@ body {
 
 /*------------ENTRAR EM UMA SALA----------------*/
 
-/* .pagina-entrar-em-uma-sala {
+.pagina-entrar-em-uma-sala {
     background: linear-gradient(to bottom, #DA251D, #FFFFFF);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    flex-direction: column;
-    margin: 0;
+    height: 100dvh;
+    padding: 20px;
+    font-family: 'Chau Philomene One', sans-serif;
 }
 
 .BalaoDeEntrarEmUmaSala {
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: white;
-    width: clamp(300px, 70%, 600px);
-    height: clamp(200px, 70%, 350px);
-    box-shadow: inset 0 0px 50px rgba(0.3, 0.3, 0.3, 0.3);
-    border-radius: 50px;
+    width: clamp(300px, 90%, 600px);
+    padding: 30px 20px;
+    border-radius: 40px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
 }
 
 .TextoTituloDoBalao {
-    font-family: 'Chau Philomene One', sans-serif;
     color: #052c44;
-    font-size: 20px;
-    font-size: clamp(0.7rem, 2.5vw, 1.25rem);
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    margin: 0;
 }
 
 .TextoSimplesDoBalao {
-    font-family: Arial, Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
     color: #0A76B8;
     font-size: 13px;
+    margin-bottom: 4px;
 }
 
 .CaixaDeTextoDoBalao {
     background-color: #0A76B8;
-    border-radius: 15px;
     color: black;
-    height: 7%;
-    width: 40%;
     border: none;
+    border-radius: 15px;
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
     text-align: center;
+    font-size: 14px;
+    margin: 0 auto;
 }
 
 .CaixaDeTextoDoBalao::placeholder {
@@ -632,7 +635,6 @@ body {
 .BotaoEntrarEmUmaSala-EntrarEmUmaSala {
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .BotaoEntrarEmUmaSala-EntrarEmUmaSala button {
@@ -640,43 +642,40 @@ body {
     color: #FFFFFF;
     border: none;
     border-radius: 18px;
-    padding: 10px 20px;
-    font-size: 25px;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: bold;
     font-family: 'Chau Philomene One', sans-serif;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px 1px 0 #000, 1px 1px 0 #000;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
 }
 
 .BotaoEntrarEmUmaSala-EntrarEmUmaSala button:hover {
     background-color: #279547;
+    transform: scale(1.05);
 }
 
-.RodapeComLogoCentral {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding-top: 20px;
-    padding-left: 20px;
-    position: fixed;
-    bottom: 0;
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .BalaoDeEntrarEmUmaSala {
+        padding: 20px 15px;
+        gap: 12px;
+        border-radius: 30px;
+    }
+
+    .TextoTituloDoBalao {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+
+    .BotaoEntrarEmUmaSala-EntrarEmUmaSala button {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
 }
 
-.RodapeComLogoCentral img[alt="Logo do menu"],
-.RodapeComLogoCentral img[alt="Logo de ajuda"] {
-    width: clamp(40px, 70%, 50px);
-}
 
-.RodapeComLogoCentral img[alt="Logo do jogo"] {
-    width: clamp(40px, 70%, 150px);
-    margin-left: 37%;
-} */
-
-/*--------------------------------------------------------------------REGRAS DO JOGO---------------------------------------------------------------*/
+/*--------REGRAS DO JOGO--------*/
 /* .pagina-regras-do-jogo {
     background: linear-gradient(to bottom, #0a76b8, #FFFFFF);
     height: 100%;
