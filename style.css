@@ -1,86 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-/*--------------------------------------------------------------------------INICIAL---------------------------------------------------------------------------*/
-body,
-html {
+/*---------------INICIAL--------------------*/
+/* Reset básico */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Chau Philomene One', sans-serif;
 }
 
 .pagina-inicial {
     background: linear-gradient(to right, #DA251D, #FFFFFF, #0A76B8);
     min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    overflow: hidden;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
 }
 
 .containerPrincipal {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 40px 20px;
-    max-height: calc(100vh - 120px);
-    overflow-y: auto;
-}
-
-.LogoDoJogo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+    overflow-y: hidden;
 }
 
 .LogoDoJogo img {
+    padding-top: 10%;
     width: 100%;
-    max-width: 300px;
+    max-width: 350px;
     height: auto;
+    margin-bottom: 30px;
 }
 
 .BotaoInicial {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: #FFCC00;
     color: #FFFFFF;
     border: none;
     border-radius: 20px;
     padding: 15px 30px;
-    font-size: 20px;
-    font-family: 'Chau Philomene One', sans-serif;
+    font-size: 28px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    text-shadow: -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px 1px 0 #000, 1px 1px 0 #000;
+    text-decoration: none;
+    color: #FFFFFF;
 }
 
-.BotaoInicial button:hover {
+.BotaoInicial:hover {
     background-color: #c29803cc;
+    color: #073a6a;
 }
 
 .LogoDosApoiadoresRodape {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 16px;
     padding: 10px;
     background: linear-gradient(to top, white, transparent);
     flex-wrap: nowrap;
-    z-index: 10;
-    box-sizing: border-box;
-    justify-content: space-between;
+    z-index: 1;
+    width: 100%;
 }
 
 .LogoDosApoiadoresRodape .containerLogos {
@@ -92,18 +83,18 @@ html {
 }
 
 .LogoDosApoiadoresRodape img {
-    height: auto;
+    width: 15vw;
     max-width: 100px;
     min-width: 40px;
-    width: 15vw;
+    height: auto;
     object-fit: contain;
 }
 
 .LinhaEsquerdaRodape,
 .LinhaDireitaRodape {
-    height: 30px;
     flex: 1;
     min-width: 20px;
+    height: 30px;
     background: linear-gradient(to top, #DA251D 0%, #DA251D 33%, transparent 33%, transparent 66%, #0A76B8 66%, #0A76B8 99%);
 }
 
@@ -117,17 +108,35 @@ html {
     .LogoDosApoiadoresRodape img {
         max-width: 70px;
     }
+}
 
-    .BotaoInicial button {
-        font-size: 16px;
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .containerPrincipal {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .LogoDoJogo img {
+        max-width: 200px;
+    }
+
+    .BotaoInicial {
         padding: 10px 20px;
+        font-size: 18px;
+    }
+
+    .LogoDosApoiadoresRodape img {
+        width: 8vw;
+        max-width: 80px;
+        min-width: 30px;
     }
 }
 
 
-/*--------------------------------------------------------------------------CRIAR SALA---------------------------------------------------------------------------*/
+/*---------CRIAR SALA-------------------*/
 
-.pagina-criar-sala {
+/* .pagina-criar-sala {
     background: linear-gradient(to bottom, #DA251D, #FFFFFF);
     display: flex;
     justify-content: center;
@@ -234,11 +243,11 @@ html {
 .RodapeComLogoCentral img[alt="Logo do jogo"] {
     width: clamp(40px, 70%, 150px);
     margin-left: 37%;
-}
+} */
 
 /*------------------------------------------------------------------------ENTRAR EM UMA SALA--------------------------------------------------*/
 
-.pagina-entrar-em-uma-sala {
+/* .pagina-entrar-em-uma-sala {
     background: linear-gradient(to bottom, #DA251D, #FFFFFF);
     display: flex;
     justify-content: center;
@@ -345,12 +354,12 @@ html {
 .RodapeComLogoCentral img[alt="Logo do jogo"] {
     width: clamp(40px, 70%, 150px);
     margin-left: 37%;
-}
+} */
 
 
 /*--------------------------------------------------------------------MODO DA SALA---------------------------------------------------------------*/
 
-.pagina-modo-da-sala {
+/* .pagina-modo-da-sala {
     background: linear-gradient(to bottom, #DA251D, #FFFFFF);
     display: flex;
     justify-content: center;
@@ -453,11 +462,11 @@ html {
 .RodapeComLogoCentral img[alt="Logo do jogo"] {
     width: clamp(40px, 70%, 150px);
     margin-left: 37%;
-}
+} */
 
 
 /*--------------------------------------------------------------------APRESENTAÇÃO---------------------------------------------------------------*/
-.pagina-apresentacao {
+/* .pagina-apresentacao {
     background: linear-gradient(to bottom, #DA251D, #FFFFFF);
     height: 100%;
     margin: 0;
@@ -649,10 +658,10 @@ html {
         left: -10px;
         border-color: transparent #ffffff transparent transparent;
     }
-}
+} */
 
 /*--------------------------------------------------------------------REGRAS DO JOGO---------------------------------------------------------------*/
-.pagina-regras-do-jogo {
+/* .pagina-regras-do-jogo {
     background: linear-gradient(to bottom, #0a76b8, #FFFFFF);
     height: 100%;
     margin: 0;
@@ -719,10 +728,10 @@ html {
     .PersonagemRegrasDoJogo {
         z-index: -1;
     }
-}
+} */
 
 /*--------------------------------------------------------------------CRÉDITOS---------------------------------------------------------------*/
-.pagina-creditos {
+/* .pagina-creditos {
     background: linear-gradient(to bottom, #ffcc00, #FFFFFF);
     height: 100%;
     margin: 0;
@@ -774,7 +783,7 @@ html {
 .PersonagemCreditos img {
     width: 100%;
     height: auto;
-}
+} */
 
 
 
