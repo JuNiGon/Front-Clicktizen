@@ -428,6 +428,22 @@ body {
     align-items: baseline;
 }
 
+.containerLogoMenu {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.containerLogoMenu:hover {
+    transform: scale(1.05);
+}
+
+.containerAjuda {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.containerAjuda:hover {
+    transform: scale(1.05);
+}
+
 .grupo-esquerdo img {
     width: clamp(30px, 6vw, 50px);
 }
