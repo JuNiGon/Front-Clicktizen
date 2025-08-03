@@ -543,6 +543,41 @@ body {
 }
 
 
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .BalaoDeCriarSala {
+        padding: 20px 15px;
+        gap: 12px;
+        border-radius: 30px;
+    }
+
+    .TextoTituloDoBalao {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+
+    .CaixaDeTextoDoBalao {
+        font-size: 13px;
+    }
+
+    .BotaoCriarSala-CriarSala button {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
+
+    .CaixaDeTextoDoBalao-CriarSala {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .CaixaDeTextoDoBalao-CriarSala div {
+        flex: 1;
+        min-width: 180px;
+    }
+}
+
+
+
 /*------------ENTRAR EM UMA SALA----------------*/
 
 /* .pagina-entrar-em-uma-sala {
