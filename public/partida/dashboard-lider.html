@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Monitor da Partida</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/public/style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -117,7 +117,7 @@
 
         socket.on('fim-do-jogo', data => {
             alert('O jogo acabou! Obrigado por jogar 🎉');
-            window.location.href = '/finalistas.html';
+            window.location.href = '/public/partida/finalists.html';
         });
     </script>
 </body>

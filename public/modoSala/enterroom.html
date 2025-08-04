@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar em uma sala</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/public/style.css">
 </head>
 
 <body class="pagina-entrar-em-uma-sala">
@@ -37,14 +37,14 @@
 
     <footer class="RodapeComLogoCentral">
         <div class="grupo-esquerdo">
-            <a class="containerLogoMenu" href="/Apresentacao.html">
-                <img src="Imagens/LogoMenu.png" alt="Logo do menu">
+            <a class="containerLogoMenu" href="/public/inicio/presentation.html">
+                <img src="/public/imagens/LogoMenu.png" alt="Logo do menu">
             </a>
-            <a class="containerAjuda" href="/404.html">
-                <img src="Imagens/LogoAjuda.png" alt="Logo de ajuda">
+            <a class="containerAjuda" href="/public/404.html">
+                <img src="/public/imagens/LogoAjuda.png" alt="Logo de ajuda">
             </a>
         </div>
-        <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo" class="logo-central">
+        <img src="/public/imagens/LogoDoJogo.png" alt="Logo do jogo" class="logo-central">
     </footer>
 
     <script src="orientation-check.js"></script>
@@ -96,7 +96,7 @@
         socket.on('room-joined', (data) => {
             if (data.success) {
                 localStorage.setItem('roomOwner', data.room.roomOwner);
-                window.location.href = 'sala.html';
+                window.location.href = '/public/partida/lobby.html';
             } else {
                 alert("Erro ao entrar na sala: " + data.message);
             }

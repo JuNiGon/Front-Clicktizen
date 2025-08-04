@@ -5,31 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Início</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/public/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One&display=swap" rel="stylesheet">
 </head>
 
 <body class="pagina-inicial">
     <div class="containerPrincipal">
         <div class="LogoDoJogo">
-            <img src="Imagens/LogoDoJogo.png" alt="Logo do jogo">
+            <img src="/public/imagens/LogoDoJogo.png" alt="Logo do jogo">
         </div>
 
-        <a class="BotaoInicial" href="/Apresentacao.html">COMEÇAR</a>
+        <a class="BotaoInicial" href="/public/inicio/presentation.html">COMEÇAR</a>
 
         <footer class="LogoDosApoiadoresRodape">
             <div class="LinhaEsquerdaRodape"></div>
             <div class="containerLogos">
-                <img src="Imagens/LogoDaUfal.png" alt="Logo da UFAL">
-                <img src="Imagens/LogoOds.png" alt="Logo ODS">
-                <img src="Imagens/Logo FDA.png" alt="Logo da FDA">
-                <img src="Imagens/CidadaniaDigital.png" alt="Cidadania digital">
-                <img src="Imagens/BandeiraAlagoas.png" alt="Bandeira de Alagoas">
+                <img src="/public/imagens/LogoDaUfal.png" alt="Logo da UFAL">
+                <img src="/public/imagens/LogoOds.png" alt="Logo ODS">
+                <img src="/public/imagens/Logo FDA.png" alt="Logo da FDA">
+                <img src="/public/imagens/CidadaniaDigital.png" alt="Cidadania digital">
+                <img src="/public/imagens/BandeiraAlagoas.png" alt="Bandeira de Alagoas">
             </div>
             <div class="LinhaDireitaRodape"></div>
         </footer>
     </div>
     <script src="orientation-check.js"></script>
+    <script src="/env.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log(window.ENV.API_URL);
+            console.log(window.ENV.APP_NAME);
+        });
+    </script>
+
+
 </body>
 
 </html>
