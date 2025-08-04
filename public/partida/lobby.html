@@ -98,7 +98,7 @@
 
 
     <script>
-        const socket = io('https://clicktizen.onrender.com');
+        const socket = io('https://nest-core-4sif.onrender.com');
 
         const codigoSalaGlobal = localStorage.getItem('codigoSala');
         const nomeUsuarioAtual = localStorage.getItem('nomeUsuario');
@@ -226,7 +226,7 @@
 
         async function buscarTemas() {
             try {
-                const response = await fetch('https://clicktizen.onrender.com/themes'); // Endpoint que retorna os temas
+                const response = await fetch('https://nest-core-4sif.onrender.com/themes'); // Endpoint que retorna os temas
                 const temas = await response.json();
 
                 const select = document.getElementById('selectTemas');
