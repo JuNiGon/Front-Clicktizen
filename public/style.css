@@ -1,0 +1,1284 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+/*---------------INICIAL--------------------*/
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Chau Philomene One', sans-serif;
+    overflow: hidden;
+}
+
+.pagina-inicial {
+    background: linear-gradient(to right, #DA251D, #FFFFFF, #0A76B8);
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.containerPrincipal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: hidden;
+}
+
+.LogoDoJogo img {
+    padding-top: 10%;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.BotaoInicial {
+    background-color: #FFCC00;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 28px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px 1px 0 #000, 1px 1px 0 #000;
+    text-decoration: none;
+    color: #FFFFFF;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.BotaoInicial:hover {
+    background-color: #c29803cc;
+    color: #073a6a;
+    transform: scale(1.05);
+}
+
+.LogoDosApoiadoresRodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px;
+    background: linear-gradient(to top, white, transparent);
+    flex-wrap: nowrap;
+    z-index: 1;
+    width: 100%;
+}
+
+.LogoDosApoiadoresRodape .containerLogos {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.LogoDosApoiadoresRodape img {
+    width: 15vw;
+    max-width: 100px;
+    min-width: 40px;
+    height: auto;
+    object-fit: contain;
+}
+
+.LinhaEsquerdaRodape,
+.LinhaDireitaRodape {
+    flex: 1;
+    min-width: 20px;
+    height: 30px;
+    background: linear-gradient(to top, #DA251D 0%, #DA251D 33%, transparent 33%, transparent 66%, #0A76B8 66%, #0A76B8 99%);
+}
+
+@media (max-width: 600px) {
+
+    .LinhaEsquerdaRodape,
+    .LinhaDireitaRodape {
+        display: none;
+    }
+
+    .LogoDosApoiadoresRodape img {
+        max-width: 70px;
+    }
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .containerPrincipal {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .LogoDoJogo img {
+        max-width: 200px;
+    }
+
+    .BotaoInicial {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+
+    .LogoDosApoiadoresRodape img {
+        width: 8vw;
+        max-width: 80px;
+        min-width: 30px;
+    }
+}
+
+/*---------APRESENTAÇÃO--------------*/
+.pagina-apresentacao {
+    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.LogoDoJogo-apresentacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    max-width: 300px;
+    margin: auto;
+    position: relative;
+}
+
+.LogoDoJogo-apresentacao img {
+    max-width: 100%;
+    height: auto;
+}
+
+.BotaoJogar {
+    position: relative;
+    top: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BotaoJogar button {
+    background-color: #FFCC00;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 25px;
+    font-size: 25px;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.BotaoJogar button:hover {
+    background-color: #c29803cc;
+}
+
+.BarraSuperiorPrincipal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao-link {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    font-size: clamp(20px, 2.5vw, 25px);
+    padding: clamp(5px, 1.5vh, 10px) clamp(10px, 5vw, 50px);
+    font-family: 'Chau Philomene One', sans-serif;
+    color: white;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.botao-link[data-nome="BotaoInicio"] {
+    background-color: #da251d;
+}
+
+.botao-link[data-nome="BotaoInicio"]:hover {
+    background-color: #951813;
+}
+
+.botao-link[data-nome="BotaoRank"] {
+    background-color: #ffffff;
+    color: white;
+}
+
+.botao-link[data-nome="BotaoRank"]:hover {
+    background-color: #b6b6b6;
+}
+
+.botao-link[data-nome="BotaoAjuda"] {
+    background-color: #0a76b8;
+}
+
+.botao-link[data-nome="BotaoAjuda"]:hover {
+    background-color: #073a6a;
+}
+
+.botao-link[data-nome="BotaoSobre"] {
+    background-color: #ffcc00;
+}
+
+.botao-link[data-nome="BotaoSobre"]:hover {
+    background-color: #ac8a02;
+}
+
+.GradeSuperior {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.DegradeSuperior {
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    padding: 3%;
+    background: linear-gradient(to bottom, white, transparent);
+}
+
+.PersonagemDoJogo-apresentacao {
+    position: absolute;
+    bottom: 0px;
+    left: 33%;
+    transform: translateX(-50%);
+    width: clamp(100px, 20vw, 300px);
+    z-index: -2;
+}
+
+.PersonagemDoJogo-apresentacao img {
+    width: 100%;
+    height: auto;
+}
+
+.BalaoDeFala {
+    position: absolute;
+    top: -20px;
+    left: -220px;
+    width: 200px;
+    background-color: #ffffff;
+    border: 2px solid #0A76B8;
+    border-radius: 20px;
+    padding: 10px;
+    font-family: 'Chau Philomene One', sans-serif;
+    font-size: 14px;
+    color: #da251d;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+}
+
+.BalaoDeFala::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    right: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #ffffff;
+}
+
+@media (max-width: 600px) {
+    .PersonagemDoJogo-apresentacao {
+        display: none;
+        /* left: 10%;
+        bottom: 10px;
+        transform: none;
+        width: 150px; */
+        /* z-index: 1; */
+    }
+
+    .BalaoDeFala {
+        display: none;
+        /* position: absolute;
+        top: -20px;
+        left: 100%;
+        width: 180px;
+        font-size: 12px;
+        padding: 8px; */
+    }
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .LogoDoJogo-apresentacao img {
+        max-width: 200px;
+    }
+
+    .PersonagemDoJogo-apresentacao {
+        position: absolute;
+        bottom: 0px;
+        left: 33%;
+        transform: translateX(-50%);
+        width: clamp(80px, 16vw, 300px);
+        z-index: -2;
+    }
+}
+
+/*---------MODO DA SALA------------*/
+
+.pagina-modo-da-sala {
+    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Chau Philomene One', sans-serif;
+    flex-direction: column;
+}
+
+.BalaoDeModoDaSala {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    width: clamp(300px, 80%, 600px);
+    padding: 30px 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    border-radius: 40px;
+    text-align: center;
+    gap: 16px;
+}
+
+.TextoTituloDoBalao {
+    color: #052c44;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+.BotaoDeModoDaSala-ModoDaSala {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.botao-verde {
+    background-color: #0fe54c;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px 1px 0 #000, 1px 1px 0 #000;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botao-verde:hover {
+    background-color: #279547;
+    transform: scale(1.05);
+}
+
+.RodapeComLogoCentral {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.grupo-esquerdo {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    left: 20px;
+    align-items: baseline;
+}
+
+
+.containerLogoMenu {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.containerLogoMenu:hover {
+    transform: scale(1.05);
+}
+
+.containerAjuda {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.containerAjuda:hover {
+    transform: scale(1.05);
+}
+
+.grupo-esquerdo img {
+    width: clamp(30px, 6vw, 50px);
+}
+
+.logo-central {
+    width: clamp(100px, 20vw, 120px);
+    height: auto;
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .RodapeComLogoCentral {
+        padding: 6px 12px;
+    }
+
+    .logo-central {
+        width: 80px;
+    }
+}
+
+/*---------CRIAR SALA-------------------*/
+
+.pagina-criar-sala {
+    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    flex-direction: column;
+    font-family: 'Chau Philomene One', sans-serif;
+    padding: 20px;
+}
+
+.BalaoDeCriarSala {
+    background: white;
+    width: clamp(300px, 80%, 600px);
+    padding: 30px 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+}
+
+.TextoTituloDoBalao {
+    color: #052c44;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    margin: 0;
+}
+
+.TextoSimplesDoBalao {
+    color: #0A76B8;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    margin-bottom: 12px;
+}
+
+.CaixaDeTextoDoBalao {
+    background-color: #0A76B8;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.CaixaDeTextoDoBalao::placeholder {
+    color: black;
+}
+
+.BotaoCriarSala-CriarSala {
+    display: flex;
+    justify-content: center;
+}
+
+.BotaoCriarSala-CriarSala button {
+    background-color: #0fe54c;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 18px;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Chau Philomene One', sans-serif;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px 1px 0 #000, 1px 1px 0 #000;
+    transition: background-color 0.3s ease;
+}
+
+.BotaoCriarSala-CriarSala button:hover {
+    background-color: #279547;
+    transform: scale(1.05);
+}
+
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .BalaoDeCriarSala {
+        padding: 20px 15px;
+        gap: 12px;
+        border-radius: 30px;
+    }
+
+    .TextoTituloDoBalao {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+
+    .CaixaDeTextoDoBalao {
+        font-size: 13px;
+    }
+
+    .BotaoCriarSala-CriarSala button {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
+
+    .CaixaDeTextoDoBalao-CriarSala {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .CaixaDeTextoDoBalao-CriarSala div {
+        flex: 1;
+        min-width: 180px;
+    }
+}
+
+
+
+/*------------ENTRAR EM UMA SALA----------------*/
+
+.pagina-entrar-em-uma-sala {
+    background: linear-gradient(to bottom, #DA251D, #FFFFFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    padding: 20px;
+    font-family: 'Chau Philomene One', sans-serif;
+}
+
+.BalaoDeEntrarEmUmaSala {
+    background: white;
+    width: clamp(300px, 90%, 600px);
+    padding: 30px 20px;
+    border-radius: 40px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+}
+
+.TextoTituloDoBalao {
+    color: #052c44;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    margin: 0;
+}
+
+.TextoSimplesDoBalao {
+    font-family: Arial, sans-serif;
+    color: #0A76B8;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.CaixaDeTextoDoBalao {
+    background-color: #0A76B8;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    font-size: 14px;
+    margin: 0 auto;
+}
+
+.CaixaDeTextoDoBalao::placeholder {
+    color: black;
+}
+
+.BotaoEntrarEmUmaSala-EntrarEmUmaSala {
+    display: flex;
+    justify-content: center;
+}
+
+.BotaoEntrarEmUmaSala-EntrarEmUmaSala button {
+    background-color: #0fe54c;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 18px;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Chau Philomene One', sans-serif;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px 1px 0 #000, 1px 1px 0 #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.BotaoEntrarEmUmaSala-EntrarEmUmaSala button:hover {
+    background-color: #279547;
+    transform: scale(1.05);
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .BalaoDeEntrarEmUmaSala {
+        padding: 20px 15px;
+        gap: 12px;
+        border-radius: 30px;
+    }
+
+    .TextoTituloDoBalao {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+
+    .BotaoEntrarEmUmaSala-EntrarEmUmaSala button {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
+}
+
+
+/*--------REGRAS DO JOGO--------*/
+/* .pagina-regras-do-jogo {
+    background: linear-gradient(to bottom, #0a76b8, #FFFFFF);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.BalaoDeAjuda {
+    position: relative;
+    width: clamp(280px, 80vw, 700px);
+    margin: 5% auto;
+    background-color: #ffffff;
+    border-radius: 4%;
+    padding: 2%;
+    font-family: 'Chau Philomene One', sans-serif;
+    box-shadow: 0 2% 5% rgba(0, 0, 0, 0.2);
+    color: #0A76B8;
+    box-sizing: border-box;
+}
+
+
+.BalaoDeAjuda .conteudo h2 {
+    font-size: 100%;
+    color: #DA251D;
+    margin-bottom: 1%;
+}
+
+.BalaoDeAjuda .conteudo p {
+    font-size: 80%;
+    margin-bottom: 2%;
+    line-height: 140%;
+}
+
+.BalaoDeAjuda .conteudo ul {
+    list-style-type: disc;
+    padding-left: 5%;
+    margin-bottom: 3%;
+}
+
+.BalaoDeAjuda .conteudo ul li {
+    font-size: 80%;
+    margin-bottom: 2%;
+    line-height: 140%;
+}
+
+.PersonagemRegrasDoJogo {
+    position: absolute;
+}
+
+.PersonagemRegrasDoJogo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: clamp(200px, 15vw, 300px);
+
+    z-index: 1;
+}
+
+.PersonagemRegrasDoJogo img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 600px) {
+    .PersonagemRegrasDoJogo {
+        z-index: -1;
+    }
+} */
+
+/*------CRÉDITOS---------*/
+/* .pagina-creditos {
+    background: linear-gradient(to bottom, #ffcc00, #FFFFFF);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.BalaoDeCredito {
+    position: relative;
+    width: clamp(280px, 80%, 750px);
+    margin: 5% auto;
+    background-color: #ffffff;
+    border-radius: 4%;
+    padding: 2%;
+    font-family: 'Chau Philomene One', sans-serif;
+    box-shadow: 0 2% 5% rgba(0, 0, 0, 0.2);
+    color: #0A76B8;
+    box-sizing: border-box;
+    text-align: justify;
+    z-index: -2;
+}
+
+.BalaoDeCredito .conteudo p {
+    font-size: 70%;
+    margin-bottom: 2%;
+    line-height: 140%;
+}
+
+
+@media (min-width: 768px) {
+    .BalaoDeCredito .conteudo p {
+        font-size: 80%;
+        margin-bottom: 2%;
+        line-height: 140%;
+    }
+}
+
+.PersonagemCreditos {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(300px, 80vw, 500px);
+    z-index: -1;
+}
+
+.PersonagemCreditos img {
+    width: 100%;
+    height: auto;
+} */
+
+
+
+/* ------------ NOVO CSS --------- */
+
+/* ------SALA---------- */
+.without-logo {
+    display: flex;
+    height: 120px;
+    width: 100%;
+}
+
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+
+
+
+
+
+.corpo {
+    background: linear-gradient(to bottom, #DA251D, #ffffff, #0A76B8);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    justify-content: space-between;
+    overflow: hidden;
+    /* padding-bottom: 60px; */
+}
+
+.containerPagina {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 16px; */
+}
+
+.cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* gap: 10px; */
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.containerDadoLider,
+.containerDadoID,
+.containerDadoTemas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 320px;
+    padding: 10px;
+    border: 1px solid;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+
+    /* Truncar texto longo */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.containerDadoLider span,
+.containerDadoID span {
+    max-width: 160px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.containerDadoTemas select {
+    margin-left: 10px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    color: #073a6a;
+
+    /* Truncar texto */
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.containerDadoLider {
+    background-color: #da251d;
+    border-color: #da251d;
+}
+
+.containerDadoID {
+    background-color: #0a76b8;
+    border-color: #0a76b8;
+}
+
+.containerDadoTemas {
+    background-color: #ffcc00;
+    border-color: #ffcc00;
+    color: #073a6a;
+}
+
+.containerDadoTemas select {
+    margin-left: 10px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    color: #073a6a;
+}
+
+.containerJogadores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.containerGrupo {
+    background-color: #ffdb3a;
+    width: 200px;
+    max-width: 90vw;
+    height: 350px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+}
+
+.containerGrupo>p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #073a6a;
+    margin: 0 0 8px;
+}
+
+.containerGrupo-membros {
+    background-color: #073a6a;
+    flex: 1;
+    padding: 6px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 4px;
+}
+
+.containerGrupo-membros>p {
+    font-size: 14px;
+    color: #ffdb3a;
+    text-align: center;
+    margin: 0;
+}
+
+.adicionarAlunoBtn {
+    margin-top: 8px;
+    padding: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #0a76b8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.adicionarAlunoBtn:hover {
+    background-color: #095a90;
+}
+
+.botoesIniciar {
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+    position: relative;
+    margin-bottom: 60px;
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+
+    .containerDadoLider,
+    .containerDadoID,
+    .containerDadoTemas {
+        min-width: 280px;
+        padding: 10px;
+    }
+
+    .containerGrupo {
+        width: 150px;
+        height: 200px;
+        font-size: 12px;
+    }
+
+    .containerGrupo>p {
+        font-size: 16px;
+    }
+
+    .containerGrupo-membros>p {
+        font-size: 12px;
+    }
+
+    .adicionarAlunoBtn {
+        font-size: 12px;
+        padding: 4px;
+    }
+}
+
+/* ------------------------------- */
+/* --------PARTIDA---------------- */
+
+.containerJogo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    /* padding-bottom: 50px; */
+    margin: 0;
+}
+
+.containerTempo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    height: 50px;
+    background-color: #ffffff;
+    font-size: 24px;
+}
+
+.containerPergunta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 720px;
+    min-height: 108px;
+    /* tamanho mínimo */
+    padding: 20px;
+    /* dá espaço interno */
+    border-radius: 50px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    /* garante que padding não ultrapasse o tamanho */
+}
+
+
+#perguntaTexto {
+    text-transform: uppercase;
+    color: #073a6a;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow: -1px -1px 0 #073a6a,
+        1px -1px 0 #073a6a,
+        -1px 1px 0 #073a6a,
+        1px 1px 0 #073a6a;
+}
+
+/* .containerImagem {
+    width: 500px;
+    height: 25%;
+    border-radius: 50px;
+    background-color: #ffffff;
+} */
+
+.containerBotaoFeedBack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    width: 100%;
+    height: 100%;
+}
+
+.BotaoInicialNew {
+    background-color: #FFCC00;
+    color: #FFFFFF;
+    border: none;
+    height: 108px;
+    width: 356px;
+    border-radius: 40px;
+    padding: 15px 30px;
+    font-size: 60px;
+    color: #073a6a;
+    font-family: 'Chau Philomene One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-shadow: -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.BotaoInicial:hover {
+    background-color: #c29803cc;
+}
+
+#botoesResposta {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#botoesResposta.oculto {
+    display: none;
+}
+
+#feedback.oculto {
+    display: none;
+}
+
+#feedback {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    width: 922px;
+    min-height: 132px;
+    /* tamanho mínimo */
+    padding: 20px;
+    /* espaço interno */
+    border-radius: 40px;
+    font-size: 20px;
+    font-family: 'Chau Philomene One', sans-serif;
+    transition: background-color 0.3s ease;
+    text-shadow: -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    /* mantém quebras de linha no texto */
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .containerTempo {
+        width: 15%;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .containerPergunta {
+        /* width: 90%; */
+        min-height: 100px;
+        padding: 10px;
+        border-radius: 30px;
+    }
+
+    #perguntaTexto {
+        font-size: 16px;
+    }
+
+    .BotaoInicialNew {
+        height: 70px;
+        width: 160px;
+        font-size: 28px;
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+
+    #feedback {
+        width: 90%;
+        min-height: 100px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 20px;
+    }
+}
+
+/* ---------------------------------- */
+/* ------------Finalistas------------- */
+
+.containerFinalistas {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+.faixaFinalistas {
+    background: #da251d;
+    padding: 10px 40px;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 320px;
+    height: 150px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.faixaFinalistas h1 {
+    font-family: 'Chau Philomene One', sans-serif;
+    font-size: 80px;
+    margin: 0;
+    color: #ffcc00;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+}
+
+.podio {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 20px;
+}
+
+.caixaGrupo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.nomeGrupo {
+    font-size: 28px;
+    font-family: 'Chau Philomene One', sans-serif;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0 #000;
+    text-align: center;
+}
+
+/* Cores específicas para destaque */
+.ouro {
+    color: #ffcc00;
+}
+
+.prata {
+    color: #ffffff;
+}
+
+.bronze {
+    color: #b87333;
+}
+
+.primeiroLugar,
+.segundoLugar,
+.terceiroLugar {
+    width: 220px;
+    border-radius: 5px;
+}
+
+.primeiroLugar {
+    height: 279px;
+    background-color: #ffffff;
+}
+
+.segundoLugar {
+    height: 200px;
+    background-color: #da251d;
+}
+
+.terceiroLugar {
+    height: 121px;
+    background-color: #0a76b8;
+}

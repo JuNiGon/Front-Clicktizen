@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página não encontrada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #da251d, #ffffff);
+            font-family: 'Chau Philomene One', sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+        }
+
+        .erro-titulo {
+            font-size: 8rem;
+            font-weight: bold;
+            color: #da251d;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .erro-mensagem {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        .botao-voltar {
+            background-color: #FFCC00;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+                -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+
+        .botao-voltar:hover {
+            background-color: #c29803cc;
+        }
+
+        @media (max-width: 500px) {
+            .erro-titulo {
+                font-size: 5rem;
+            }
+
+            .erro-mensagem {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="erro-titulo">404</div>
+        <div class="erro-mensagem">Oops! A página que você procura não existe ou está em manutenção.</div>
+        <a href="/" class="botao-voltar">Voltar para o início</a>
+    </div>
+</body>
+
+</html>

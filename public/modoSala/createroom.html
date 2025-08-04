@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar sala</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+
+<body class="pagina-criar-sala">
+    <div class="DegradeSuperior"></div>
+
+    <main class="BalaoDeCriarSala">
+        <div>
+            <h1 class="TextoTituloDoBalao">VOCÊ ESTÁ A POUCOS PASSOS DE SE DIVERTIR COM A GENTE</h1>
+            <h2 class="TextoTituloDoBalao">PRIMEIRO CRIE UMA SALA PARA CONVIDAR OUTROS JOGADORES</h2>
+        </div>
+
+        <div class="CaixaDeTextoDoBalao-CriarSala">
+            <div>
+                <p class="TextoSimplesDoBalao">Para criar uma sala, informe a instituição.</p>
+                <input id="inInstituicao" type="text" class="CaixaDeTextoDoBalao"
+                    placeholder="Insira o nome da instituição aqui">
+            </div>
+
+            <div>
+                <p class="TextoSimplesDoBalao">Para criar uma sala, informe o nome do docente.</p>
+                <input id="inNome" type="text" class="CaixaDeTextoDoBalao" placeholder="Insira o nome do docente aqui">
+            </div>
+        </div>
+
+        <div class="BotaoCriarSala-CriarSala">
+            <button>CRIAR SALA</button>
+        </div>
+    </main>
+
+    <footer class="RodapeComLogoCentral">
+        <div class="grupo-esquerdo">
+            <a class="containerLogoMenu" href="/public/inicio/presentation.html">
+                <img src="/public/imagens/LogoMenu.png" alt="Logo do menu">
+            </a>
+            <a class="containerAjuda" href="/public/404.html">
+                <img src="/public/imagens/LogoAjuda.png" alt="Logo de ajuda">
+            </a>
+        </div>
+        <img src="/public/imagens/LogoDoJogo.png" alt="Logo do jogo" class="logo-central">
+    </footer>
+
+    <script src="orientation-check.js"></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"
+        integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+"
+        crossorigin="anonymous"></script>
+
+    <script>
+        const instituicao = document.getElementById('inInstituicao');
+        const nome = document.getElementById('inNome');
+        const botaoCriarSala = document.querySelector('.BotaoCriarSala-CriarSala button');
+
+        function criarSalaComTecla(event) {
+            if (event.key === 'Enter') {
+                if (instituicao.value.trim() === '' || nome.value.trim() === '') {
+                    alert("Por favor, preencha todos os campos.");
+                    return false;
+                } else {
+                    const instituicaoValue = instituicao.value.trim();
+                    const nomeValue = nome.value.trim();
+
+                    botaoCriarSala.click();
+                }
+            }
+        }
+
+        instituicao.addEventListener('keydown', criarSalaComTecla);
+        nome.addEventListener('keydown', criarSalaComTecla);
+    </script>
+
+    <script>
+        const socket = io('https://clicktizen.onrender.com');
+
+        document.querySelector('.BotaoCriarSala-CriarSala button').addEventListener('click', () => {
+            const inputs = document.querySelectorAll('.CaixaDeTextoDoBalao');
+            const instituicao = inputs[0].value.trim();
+            const roomOwner = inputs[1].value.trim();
+
+            if (!instituicao || !roomOwner) {
+                alert("Preencha todos os campos.");
+                return;
+            }
+
+            socket.emit('create-room', { instituicao, roomOwner });
+        });
+
+        socket.on('room-created', ({ success, codigo, room }) => {
+            if (success) {
+                localStorage.setItem('codigoSala', String(codigo));
+                localStorage.setItem('nomeUsuario', room.roomOwner);
+                localStorage.setItem('roomOwner', room.roomOwner);
+
+                socket.emit('join-room', { codigo, nome: room.roomOwner });
+            }
+        });
+
+        socket.on('room-joined', (data) => {
+            if (data.success) {
+                window.location.href = '/public/partida/lobby.html';
+            } else {
+                alert("Erro ao entrar na sala: " + data.message);
+            }
+        });
+    </script>
+</body>
+
+</html>
