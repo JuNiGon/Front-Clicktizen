@@ -27,36 +27,43 @@
         </header>
 
         <section class="containerJogadores">
-            <div class="containerGrupo">
-                <p>1° GRUPO</p>
-                <div id="grupo-1" class="containerGrupo-membros"></div>
-                <button class="adicionarAlunoBtn" data-grupo="1">Adicionar aluno</button>
-            </div>
-            <div class="containerGrupo">
-                <p>2° GRUPO</p>
-                <div id="grupo-2" class="containerGrupo-membros"></div>
-                <button class="adicionarAlunoBtn" data-grupo="2">Adicionar aluno</button>
-            </div>
-            <div class="containerGrupo">
-                <p>3° GRUPO</p>
-                <div id="grupo-3" class="containerGrupo-membros"></div>
-                <button class="adicionarAlunoBtn" data-grupo="3">Adicionar aluno</button>
-            </div>
-            <div class="containerGrupo">
-                <p>4° GRUPO</p>
-                <div id="grupo-4" class="containerGrupo-membros"></div>
-                <button class="adicionarAlunoBtn" data-grupo="4">Adicionar aluno</button>
-            </div>
-            <div class="containerGrupo">
-                <p>5° GRUPO</p>
-                <div id="grupo-5" class="containerGrupo-membros"></div>
-                <button class="adicionarAlunoBtn" data-grupo="5">Adicionar aluno</button>
+            <div class="gruposScroll">
+                <div class="containerGrupo">
+                    <p>1° GRUPO</p>
+                    <div id="grupo-1" class="containerGrupo-membros"></div>
+                    <button class="adicionarAlunoBtn" data-grupo="1">Adicionar aluno</button>
+                </div>
+                <div class="containerGrupo">
+                    <p>2° GRUPO</p>
+                    <div id="grupo-2" class="containerGrupo-membros"></div>
+                    <button class="adicionarAlunoBtn" data-grupo="2">Adicionar aluno</button>
+                </div>
+                <div class="containerGrupo">
+                    <p>3° GRUPO</p>
+                    <div id="grupo-3" class="containerGrupo-membros"></div>
+                    <button class="adicionarAlunoBtn" data-grupo="3">Adicionar aluno</button>
+                </div>
+                <div class="containerGrupo">
+                    <p>4° GRUPO</p>
+                    <div id="grupo-4" class="containerGrupo-membros"></div>
+                    <button class="adicionarAlunoBtn" data-grupo="4">Adicionar aluno</button>
+                </div>
+                <div class="containerGrupo">
+                    <p>5° GRUPO</p>
+                    <div id="grupo-5" class="containerGrupo-membros"></div>
+                    <button class="adicionarAlunoBtn" data-grupo="5">Adicionar aluno</button>
+                </div>
             </div>
         </section>
 
         <div class="botoesIniciar">
-            <button id="btnIniciar" class="BotaoInicial">Iniciar Partida</button>
+            <button id="btnIniciar" class="BotaoInicial">
+                <span id="textoBotaoIniciar">Iniciar Partida</span>
+                <span id="spinnerBotaoIniciar" class="spinner-border spinner-border-sm d-none ms-2" role="status"
+                    aria-hidden="true"></span>
+            </button>
         </div>
+
     </div>
 
     <footer class="RodapeComLogoCentral without-logo">
@@ -131,6 +138,13 @@
                             return;
                         }
 
+                        // Ativa loading
+                        const texto = document.getElementById('textoBotaoIniciar');
+                        const spinner = document.getElementById('spinnerBotaoIniciar');
+                        btnIniciar.disabled = true;
+                        texto.textContent = "Iniciando...";
+                        spinner.classList.remove('d-none');
+
                         localStorage.setItem('isLider', 'true');
 
                         const jogadores = [];
@@ -154,7 +168,6 @@
                             jogadores
                         });
                     });
-
                 } else {
                     btnIniciar.style.display = 'none';
                 }

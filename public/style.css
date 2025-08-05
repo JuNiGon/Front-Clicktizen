@@ -12,7 +12,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Chau Philomene One', sans-serif;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .pagina-inicial {
@@ -23,7 +23,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .containerPrincipal {
@@ -32,7 +32,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
 
 .LogoDoJogo img {
@@ -145,7 +145,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .LogoDoJogo-apresentacao {
@@ -410,6 +410,8 @@ body {
 }
 
 .RodapeComLogoCentral {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -829,7 +831,7 @@ footer {
     min-height: 100dvh;
     width: 100%;
     justify-content: space-between;
-    overflow: hidden;
+    /* overflow: hidden; */
     /* padding-bottom: 60px; */
 }
 
@@ -867,7 +869,6 @@ footer {
     font-size: 16px;
     color: white;
 
-    /* Truncar texto longo */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -890,7 +891,6 @@ footer {
     font-weight: bold;
     color: #073a6a;
 
-    /* Truncar texto */
     max-width: 160px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -992,34 +992,75 @@ footer {
     margin-bottom: 60px;
 }
 
-@media screen and (orientation: landscape) and (max-height: 500px) {
+.gruposScroll {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 12px;
+    /* padding: 10px; */
+    scroll-behavior: smooth;
+}
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    .cabecalho {
+        flex-direction: column;
+        align-items: center;
+    }
 
     .containerDadoLider,
     .containerDadoID,
     .containerDadoTemas {
-        min-width: 280px;
-        padding: 10px;
+        width: 90%;
+        max-width: 350px;
+        margin-bottom: 8px;
     }
+
 
     .containerGrupo {
-        width: 150px;
-        height: 200px;
-        font-size: 12px;
+        width: 90%;
+        max-width: 320px;
+        height: auto;
+        min-height: 250px;
     }
 
-    .containerGrupo>p {
-        font-size: 16px;
+    .containerJogadores {
+        width: 100%;
+        overflow-x: auto;
     }
 
-    .containerGrupo-membros>p {
-        font-size: 12px;
+    .gruposScroll {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        padding: 10px;
+        scroll-behavior: smooth;
+        width: max-content;
     }
 
-    .adicionarAlunoBtn {
-        font-size: 12px;
-        padding: 4px;
+    .botoesIniciar {
+        margin-bottom: 60px;
     }
+
+    .BotaoInicial {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+
+    /* .RodapeComLogoCentral.without-logo {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        gap: 12px;
+    }
+
+    .grupo-esquerdo {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+    } */
 }
+
 
 /* ------------------------------- */
 /* --------PARTIDA---------------- */
@@ -1053,13 +1094,10 @@ footer {
     text-align: center;
     width: 720px;
     min-height: 108px;
-    /* tamanho mínimo */
     padding: 20px;
-    /* dá espaço interno */
     border-radius: 50px;
     background-color: #ffffff;
     box-sizing: border-box;
-    /* garante que padding não ultrapasse o tamanho */
 }
 
 
@@ -1083,6 +1121,8 @@ footer {
 } */
 
 .containerBotaoFeedBack {
+    position: relative;
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1110,8 +1150,9 @@ footer {
         1px 1px 0 #000;
 }
 
-.BotaoInicial:hover {
+.BotaoInicialNew:hover {
     background-color: #c29803cc;
+    transform: scale(1.05);
 }
 
 #botoesResposta {
@@ -1136,9 +1177,7 @@ footer {
     color: white;
     width: 922px;
     min-height: 132px;
-    /* tamanho mínimo */
     padding: 20px;
-    /* espaço interno */
     border-radius: 40px;
     font-size: 20px;
     font-family: 'Chau Philomene One', sans-serif;
@@ -1149,7 +1188,6 @@ footer {
         1px 1px 0 #000;
     box-sizing: border-box;
     white-space: pre-wrap;
-    /* mantém quebras de linha no texto */
 }
 
 @media screen and (orientation: landscape) and (max-height: 500px) {
@@ -1160,7 +1198,7 @@ footer {
     }
 
     .containerPergunta {
-        /* width: 90%; */
+        width: 90%;
         min-height: 100px;
         padding: 10px;
         border-radius: 30px;
@@ -1187,6 +1225,65 @@ footer {
     }
 }
 
+@media screen and (max-width: 600px) and (orientation: portrait) {
+    .containerTempo {
+        width: 60%;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .containerPergunta {
+        width: 90%;
+        min-height: 80px;
+        padding: 15px;
+        border-radius: 25px;
+    }
+
+    #perguntaTexto {
+        font-size: 16px;
+    }
+
+    .BotaoInicialNew {
+        height: 70px;
+        /* width: 100%; */
+        font-size: 22px;
+        padding: 10px 15px;
+        border-radius: 20px;
+    }
+
+    #botoesResposta {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #feedback {
+        width: 90%;
+        font-size: 16px;
+        min-height: 100px;
+        padding: 15px;
+        border-radius: 20px;
+        word-break: break-word;
+    }
+
+    .containerBotaoFeedBack {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .RodapeComLogoCentral {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .RodapeComLogoCentral img {
+        max-width: 80px;
+        height: auto;
+    }
+}
+
+
 /* ---------------------------------- */
 /* ------------Finalistas------------- */
 
@@ -1194,11 +1291,13 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* Isso empurra o pódio para o fim */
     align-items: center;
     width: 100%;
-    height: 100%;
+    flex: 1;
+    /* padding: 20px 0; */
+    box-sizing: border-box;
 }
-
 
 .faixaFinalistas {
     background: #da251d;
@@ -1248,7 +1347,6 @@ footer {
     text-align: center;
 }
 
-/* Cores específicas para destaque */
 .ouro {
     color: #ffcc00;
 }
@@ -1265,7 +1363,8 @@ footer {
 .segundoLugar,
 .terceiroLugar {
     width: 220px;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .primeiroLugar {
@@ -1281,4 +1380,103 @@ footer {
 .terceiroLugar {
     height: 121px;
     background-color: #0a76b8;
+}
+
+/* Responsividade para telas menores */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    .faixaFinalistas {
+        width: 50%;
+        height: 100px;
+        padding: 5px 20px;
+    }
+
+    .faixaFinalistas h1 {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .podio {
+        flex-direction: row;
+        /* <-- deixa lado a lado */
+        justify-content: center;
+        /* <-- centraliza */
+        align-items: flex-end;
+        gap: 20px;
+        flex-wrap: wrap;
+        /* caso precise quebrar */
+    }
+
+    .primeiroLugar,
+    .segundoLugar,
+    .terceiroLugar {
+        width: 100px;
+    }
+
+    .primeiroLugar {
+        height: 180px;
+    }
+
+    .segundoLugar {
+        height: 140px;
+    }
+
+    .terceiroLugar {
+        height: 100px;
+    }
+
+    .nomeGrupo {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .RodapeComLogoCentral {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .RodapeComLogoCentral img {
+        max-width: 80px;
+        height: auto;
+    }
+}
+
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .faixaFinalistas {
+        height: 80px;
+        padding: 5px 10px;
+    }
+
+    .faixaFinalistas h1 {
+        font-size: 28px;
+    }
+
+    .podio {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .primeiroLugar,
+    .segundoLugar,
+    .terceiroLugar {
+        width: 100px;
+    }
+
+    .primeiroLugar {
+        height: 140px;
+    }
+
+    .segundoLugar {
+        height: 100px;
+    }
+
+    .terceiroLugar {
+        height: 80px;
+    }
+
+    .nomeGrupo {
+        font-size: 14px;
+    }
 }
