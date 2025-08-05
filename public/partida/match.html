@@ -88,11 +88,11 @@
 
                 feedbackDiv.innerText = '';
                 podeResponder = true;
-                startTimer(10);
+                startTimer(20);
             });
 
             socket.on('feedback', data => {
-                let segundos = 5;
+                let segundos = 10;
                 const feedbackDiv = document.getElementById('feedback');
                 const botoes = document.getElementById('botoesResposta');
 
