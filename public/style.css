@@ -802,7 +802,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: clamp(300px, 80vw, 500px);
+    width: clamp(300px, 80vw, 360px);
     z-index: -1;
 }
 
