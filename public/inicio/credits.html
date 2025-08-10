@@ -10,63 +10,71 @@
 </head>
 
 <body class="pagina-creditos">
-    <div class="GradeSuperior">
-        <div class="BarraSuperiorPrincipal">
-            <button data-nome="BotaoInicio"><a href="/Apresentacao.html"
-                    style="text-decoration: none; color: #fff;">INICIO</a></button>
-            <button data-nome="BotaoRank"><a href="" style="text-decoration: none; color: #fff;">RANK</a></button>
-            <button data-nome="BotaoAjuda"><a href="/Regras-do-jogo.html"
-                    style="text-decoration: none; color: #fff;">AJUDA</a></button>
-            <button data-nome="BotaoSobre"><a href="/Creditos.html"
-                    style="text-decoration: none; color: #fff;">SOBRE</a></button>
+    <div class="containerPrincipal">
+        <div class="GradeSuperior">
+            <div class="DegradeSuperior"></div>
+            <div class="BarraSuperiorPrincipal">
+                <a href="/public/inicio/presentation.html" class="botao-link" data-nome="BotaoInicio">INICIO</a>
+                <a href="/public/404.html" class="botao-link" data-nome="BotaoRank">RANK</a>
+                <a href="/public/inicio/rules.html" class="botao-link" data-nome="BotaoAjuda">AJUDA</a>
+                <a href="/public/inicio/credits.html" class="botao-link" data-nome="BotaoSobre">SOBRE</a>
+            </div>
         </div>
-        <div class="DegradeSuperior"></div>
-    </div>
 
-
-    <div class="BalaoDeCredito">
-        <div class="conteudo">
-            <p>
-                Clicktizen é um jogo digital de caráter lúdico e educativo, desenvolvido por discentes da Faculdade de
-                Direito de Alagoas (FDA/UFAL), com o propósito de democratizar o acesso ao conhecimento jurídico entre
-                adolescentes e jovens.
-                <br>
-                Idealizado por Guilherme Daniel, Kauã Cunha, Kurt Bruno, Luiz Fernando e Yuri Mattos, sob a orientação
-                da Professora Doutora Juliana de Oliveira J. Dantas, o projeto nasceu da inquietação acadêmica em tornar
-                o Direito mais acessível, interativo e alinhado com as realidades sociais contemporâneas.
-                <br>
-                A iniciativa também contou com a colaboração de Julia Gonçalves e Wesley Cardozo no desenvolvimento, e
-                de Elisama Gomes na concepção visual e design do jogo.
-                <br>
-                Através de uma mecânica de perguntas e respostas, com interface atrativa e linguagem simples, o
-                Clicktizen promove o engajamento dos jogadores com temas relevantes como cidadania digital,
-                cyberbullying, discurso de ódio, ética e responsabilidade social.
-                <br>
-                Mais do que um jogo, o Clicktizen é uma ferramenta de educação cidadã, que alia tecnologia, inclusão e
-                inovação pedagógica. Seu desenvolvimento está ancorado em princípios de extensão universitária, diálogo
-                comunitário e valorização do saber jurídico como instrumento de transformação social.
-                <br>
-                O projeto reafirma o compromisso da FDA/UFAL com a formação crítica e criativa de seus estudantes, além
-                de seu papel ativo na construção de uma sociedade mais consciente, participativa e justa.
-            </p>
+        <div class="BalaoDeCredito">
+            <div class="conteudo">
+                <p>
+                    Clicktizen é um jogo digital de caráter lúdico e educativo, desenvolvido por discentes da Faculdade
+                    de
+                    Direito de Alagoas (FDA/UFAL), com o propósito de democratizar o acesso ao conhecimento jurídico
+                    entre
+                    adolescentes e jovens.
+                    <br>
+                    Idealizado por Guilherme Daniel, Kauã Cunha, Kurt Bruno, Luiz Fernando e Yuri Mattos, sob a
+                    orientação
+                    da Professora Doutora Juliana de Oliveira J. Dantas, o projeto nasceu da inquietação acadêmica em
+                    tornar
+                    o Direito mais acessível, interativo e alinhado com as realidades sociais contemporâneas.
+                    <br>
+                    A iniciativa também contou com a colaboração de Julia Gonçalves e Wesley Cardozo no desenvolvimento,
+                    e
+                    de Elisama Gomes na concepção visual e design do jogo.
+                    <br>
+                    Através de uma mecânica de perguntas e respostas, com interface atrativa e linguagem simples, o
+                    Clicktizen promove o engajamento dos jogadores com temas relevantes como cidadania digital,
+                    cyberbullying, discurso de ódio, ética e responsabilidade social.
+                    <br>
+                    Mais do que um jogo, o Clicktizen é uma ferramenta de educação cidadã, que alia tecnologia, inclusão
+                    e
+                    inovação pedagógica. Seu desenvolvimento está ancorado em princípios de extensão universitária,
+                    diálogo
+                    comunitário e valorização do saber jurídico como instrumento de transformação social.
+                    <br>
+                    O projeto reafirma o compromisso da FDA/UFAL com a formação crítica e criativa de seus estudantes,
+                    além
+                    de seu papel ativo na construção de uma sociedade mais consciente, participativa e justa.
+                </p>
+            </div>
         </div>
+
+        <div class="PersonagemCreditos">
+            <img src="/public/imagens/personagem_creditos.png" alt="Personagem dos créditos">
+        </div>
+
+        <footer class="LogoDosApoiadoresRodape">
+            <div class="LinhaEsquerdaRodape"></div>
+            <div class="containerLogos">
+                <img src="/public/imagens/LogoDaUfal.png" alt="Logo da UFAL">
+                <img src="/public/imagens/LogoOds.png" alt="Logo ODS">
+                <img src="/public/imagens/Logo FDA.png" alt="Logo da FDA">
+                <img src="/public/imagens/CidadaniaDigital.png" alt="Cidadania digital">
+                <img src="/public/imagens/BandeiraAlagoas.png" alt="Bandeira de Alagoas">
+            </div>
+            <div class="LinhaDireitaRodape"></div>
+        </footer>
     </div>
-
-    <div class="PersonagemCreditos">
-        <img src="/public/imagens/personagem_creditos.png" alt="Personagem dos créditos">
-    </div>
-
-
-    <div id="footer-container"></div>
-
     <script src="orientation-check.js"></script>
-    <script>
-        fetch('components/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            });
-    </script>
+
 </body>
 
 </html>
