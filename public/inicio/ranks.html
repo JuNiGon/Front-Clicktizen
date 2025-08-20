@@ -21,32 +21,37 @@
             </div>
         </div>
 
-        <div class="classificacao-container">
-            <div class="classificacao">
-                <div class="posicao">1º</div>
-                <p><span class="classificacao-font">Nome da Escola</span> - Nome do docente</p>
-            </div>
-            <div class="classificacao">
-                <div class="posicao">2º</div>
-                <p><span class="classificacao-font">Nome da Escola</span> - Nome do docente</p>
-            </div>
-            <div class="classificacao">
-                <div class="posicao">3º</div>
-                <p><span class="classificacao-font">Nome da Escola</span> - Nome do docente</p>
-            </div>
-            <div class="classificacao">
-                <div class="posicao">4º</div>
-                <p><span class="classificacao-font">Nome da Escola</span> - Nome do docente</p>
-            </div>
-            <div class="classificacao">
-                <div class="posicao">5º</div>
-                <p><span class="classificacao-font">Nome da Escola</span> - Nome do docente</p>
-            </div>
-        </div>
+        <div class="classificacao-container"></div>
 
     </div>
     <!-- <div id="footer-container"></div> -->
     <script src="orientation-check.js"></script>
+    <script>
+        async function carregarRanking() {
+            try {
+                const res = await fetch("http://localhost:3000/ranks/ranking/geral");
+                const ranking = await res.json();
+
+                const container = document.querySelector(".classificacao-container");
+                container.innerHTML = "";
+
+                ranking.slice(0, 5).forEach((item, index) => {
+                    container.innerHTML += `
+          <div class="classificacao">
+            <div class="posicao">${index + 1}º</div>
+            <p><span class="classificacao-font">${item.escola}</span> - ${item.docente} (${item.pontuacao} pts)</p>
+          </div>
+        `;
+                });
+            } catch (err) {
+                console.error("Erro ao carregar ranking:", err);
+            }
+        }
+
+        carregarRanking();
+    </script>
+
+
 </body>
 
 </html>

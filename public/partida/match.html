@@ -49,7 +49,7 @@
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous"></script>
 
     <script>
-        const socket = io('https://nest-core-4sif.onrender.com');
+        const socket = io('http://localhost:3000');
 
         const temaSelecionado = localStorage.getItem('temaSelecionado');
         const nomeUsuarioAtual = localStorage.getItem('nomeUsuario');
@@ -126,8 +126,23 @@
             socket.on('fim-do-jogo', data => {
                 console.log('🎉 Jogo encerrado! Salvando ranking...');
                 localStorage.setItem('rankingFinal', JSON.stringify(data.ranking));
+
+                fetch("http://localhost:3000/ranks/save", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        codigoSala: codigoSala,
+                        ranking: data.ranking
+                    })
+                }).then(res => res.json())
+                    .then(resp => console.log("✅ Ranking salvo:", resp))
+                    .catch(err => console.error("❌ Erro ao salvar ranking:", err));
+
                 window.location.href = '/public/partida/finalists.html';
             });
+
 
             socket.on('aguardando-outros', () => {
                 aguardandoOutros = true;
