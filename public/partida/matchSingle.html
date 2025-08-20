@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jogo Solo</title>
+    <link rel="stylesheet" href="/public/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body class="corpo">
+    <div class="containerJogo">
+        <div class="containerTempo">
+            <span id="tempoRestante">Tempo: 10s</span>
+        </div>
+        <div class="containerPergunta">
+            <h3 id="perguntaTexto">Carregando pergunta...</h3>
+        </div>
+    </div>
+
+    <div class="containerBotaoFeedBack">
+        <div id="botoesResposta">
+            <button class="BotaoInicialNew" id="btnFato">FATO</button>
+            <button class="BotaoInicialNew" id="btnFake">FAKE</button>
+        </div>
+        <div id="feedback" class="oculto" style="font-weight: bold;"></div>
+    </div>
+
+    <footer class="RodapeComLogoCentral without-logo">
+        <div class="grupo-esquerdo">
+            <a class="containerLogoMenu" href="/public/inicio/presentation.html">
+                <img src="/public/imagens/LogoMenu.png" alt="Logo do menu">
+            </a>
+            <a class="containerAjuda" href="/public/404.html">
+                <img src="/public/imagens/LogoAjuda.png" alt="Logo de ajuda">
+            </a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        const socket = io('http://localhost:3000');
+
+        const temaSelecionado = localStorage.getItem('temaSelecionado');
+        const nomeUsuarioAtual = localStorage.getItem('nomeUsuario');
+        let codigoSala = null;
+        let podeResponder = true;
+        let timerInterval;
+
+        const btnFato = document.getElementById('btnFato');
+        const btnFake = document.getElementById('btnFake');
+        const feedbackDiv = document.getElementById('feedback');
+        const botoesDiv = document.getElementById('botoesResposta');
+        const perguntaTexto = document.getElementById('perguntaTexto');
+        const tempoDiv = document.getElementById('tempoRestante');
+
+        btnFato.addEventListener('click', () => responder('Fato'));
+        btnFake.addEventListener('click', () => responder('Fake'));
+
+        // Conecta ao servidor e inicia o jogo solo
+        socket.on('connect', () => {
+            console.log('Conectado ao servidor com ID:', socket.id);
+            socket.emit('start-game-solo', {
+                nome: nomeUsuarioAtual,
+                tema: temaSelecionado
+            });
+        });
+
+        // Recebe código da sala e confirma início do jogo
+        socket.on('game-start-solo', data => {
+            codigoSala = data.codigo; // ⚡ importante
+            console.log('🎮 Jogo solo iniciado no tema:', data.tema, 'Código:', codigoSala);
+        });
+
+        // Recebe nova pergunta
+        socket.on('nova-pergunta', data => {
+            clearInterval(timerInterval);
+            perguntaTexto.innerText = data.texto;
+            feedbackDiv.classList.add('oculto');
+            botoesDiv.classList.remove('oculto');
+            podeResponder = true;
+
+            // opcional: mostra temporizador do jogo se quiser
+            tempoDiv.innerText = `Tempo: 20s`;
+        });
+
+        // Recebe feedback da resposta
+        socket.on('feedback', data => {
+            botoesDiv.classList.add('oculto');
+            feedbackDiv.classList.remove('oculto');
+            feedbackDiv.style.backgroundColor = data.correta ? '#276523' : '#da251d';
+            feedbackDiv.innerText = data.correta
+                ? `✅ Correto! ${data.justificativa}`
+                : `❌ Incorreto! ${data.justificativa}`;
+
+            // começa contagem de 10 segundos da justificativa
+            let tempoJustificativa = 10;
+            tempoDiv.innerText = `Próxima pergunta em: ${tempoJustificativa}s`;
+
+            timerInterval = setInterval(() => {
+                tempoJustificativa--;
+                tempoDiv.innerText = `Próxima pergunta em: ${tempoJustificativa}s`;
+
+                if (tempoJustificativa <= 0) {
+                    clearInterval(timerInterval);
+                    feedbackDiv.classList.add('oculto');
+                }
+            }, 1000);
+        });
+
+        // Fim do jogo
+        socket.on('fim-do-jogo', data => {
+            perguntaTexto.innerText = `🎉 Fim do jogo! Pontuação: ${data.pontuacao}`;
+            botoesDiv.classList.add('oculto');
+            feedbackDiv.classList.add('oculto');
+            tempoDiv.innerText = '';
+        });
+
+        function responder(resposta) {
+            if (!podeResponder) return;
+            podeResponder = false;
+
+            botoesDiv.classList.add('oculto');
+
+            // envia resposta para backend
+            socket.emit('responder-solo', {
+                nome: nomeUsuarioAtual,
+                resposta,
+                codigo: codigoSala
+            });
+        }
+    </script>
+</body>
+
+</html>

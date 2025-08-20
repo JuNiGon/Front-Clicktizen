@@ -47,29 +47,30 @@
     <script src="orientation-check.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <script>
-        console.log('🔌 Conectando socket...');
-        const socket = io('https://nest-core-4sif.onrender.com');
-
-        socket.on('connect', () => {
-            console.log('✅ Socket conectado:', socket.id);
-        });
-
-        const ranking = JSON.parse(localStorage.getItem('rankingFinal') || '[]');
-
         const ouro = document.querySelector('.nomeGrupo.ouro');
         const prata = document.querySelector('.nomeGrupo.prata');
         const bronze = document.querySelector('.nomeGrupo.bronze');
 
-        if (ranking[0]) ouro.textContent = `${ranking[0].grupo} - ${ranking[0].pontuacao} pts`;
-        if (ranking[1]) prata.textContent = `${ranking[1].grupo} - ${ranking[1].pontuacao} pts`;
-        if (ranking[2]) bronze.textContent = `${ranking[2].grupo} - ${ranking[2].pontuacao} pts`;
+        const codigoSala = localStorage.getItem('codigoSala');
 
-        console.log('🎖 Ouro:', ouro.textContent);
-        console.log('🥈 Prata:', prata.textContent);
-        console.log('🥉 Bronze:', bronze.textContent);
+        async function carregarFinalistas() {
+            try {
+                const res = await fetch(`http://localhost:3000/ranks/ranking/${codigoSala}`);
+                const ranking = await res.json();
 
+                if (ranking[0]) ouro.textContent = ` ${ranking[0].grupo} - ${ranking[0].pontuacao} pts`;
+                if (ranking[1]) prata.textContent = `${ranking[1].grupo} - ${ranking[1].pontuacao} pts`;
+                if (ranking[2]) bronze.textContent = `${ranking[2].grupo} - ${ranking[2].pontuacao} pts`;
 
+                console.log("🏆 Finalistas:", ranking);
+            } catch (err) {
+                console.error("❌ Erro ao carregar finalistas:", err);
+            }
+        }
+
+        carregarFinalistas();
     </script>
+
 
 
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranks das escolas</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+
+<body class="pagina-ranks">
+    <div class="">
+        <div class="GradeSuperior">
+            <div class="DegradeSuperior"></div>
+            <div class="BarraSuperiorPrincipal">
+                <a href="/public/inicio/presentation.html" class="botao-link" data-nome="BotaoInicio">INICIO</a>
+                <a href="/public/inicio/ranks.html" class="botao-link" data-nome="BotaoRank">RANK</a>
+                <a href="/public/inicio/rules.html" class="botao-link" data-nome="BotaoAjuda">AJUDA</a>
+                <a href="/public/inicio/credits.html" class="botao-link" data-nome="BotaoSobre">SOBRE</a>
+            </div>
+        </div>
+
+        <div class="classificacao-container"></div>
+
+    </div>
+    <!-- <div id="footer-container"></div> -->
+    <script src="orientation-check.js"></script>
+    <script>
+        async function carregarRanking() {
+            try {
+                const res = await fetch("http://localhost:3000/ranks/ranking/geral");
+                const ranking = await res.json();
+
+                const container = document.querySelector(".classificacao-container");
+                container.innerHTML = "";
+
+                ranking.slice(0, 5).forEach((item, index) => {
+                    container.innerHTML += `
+          <div class="classificacao">
+            <div class="posicao">${index + 1}º</div>
+            <p><span class="classificacao-font">${item.escola}</span> - ${item.docente} (${item.pontuacao} pts)</p>
+          </div>
+        `;
+                });
+            } catch (err) {
+                console.error("Erro ao carregar ranking:", err);
+            }
+        }
+
+        carregarRanking();
+    </script>
+
+
+</body>
+
+</html>
