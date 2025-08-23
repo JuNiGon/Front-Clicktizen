@@ -55,7 +55,7 @@
 
         async function carregarFinalistas() {
             try {
-                const res = await fetch(`http://localhost:3000/ranks/ranking/${codigoSala}`);
+                const res = await fetch(`https://nest-core-4sif.onrender.com/ranks/ranking/${codigoSala}`);
                 const ranking = await res.json();
 
                 if (ranking[0]) ouro.textContent = ` ${ranking[0].grupo} - ${ranking[0].pontuacao} pts`;
