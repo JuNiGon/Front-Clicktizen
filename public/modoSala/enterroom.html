@@ -78,7 +78,7 @@
         codigoSala.addEventListener('keydown', entrarSala);
         apelido.addEventListener('keydown', entrarSala);
 
-        const socket = io('http://localhost:3000');
+        const socket = io('https://nest-core-4sif.onrender.com');
 
         botaoEntrarSala.addEventListener('click', () => {
             const codigo = codigoSala.value.trim();

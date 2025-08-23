@@ -29,7 +29,7 @@
     <script>
         async function carregarRanking() {
             try {
-                const res = await fetch("http://localhost:3000/ranks/ranking/geral");
+                const res = await fetch("https://nest-core-4sif.onrender.com/ranks/ranking/geral");
                 const ranking = await res.json();
 
                 const container = document.querySelector(".classificacao-container");
