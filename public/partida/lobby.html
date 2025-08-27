@@ -25,10 +25,6 @@
                 </select>
             </div>
         </header>
-        <!-- <div>
-            <button id="btnSairSala" class="btn btn-danger">Sair da sala</button>
-
-        </div> -->
 
         <section class="containerJogadores">
             <div class="gruposScroll">
@@ -118,6 +114,7 @@
         </div>
     </div>
 
+
     <!-- Modal de adicionar aluno -->
     <div class="modal fade" id="modalAdicionarAluno" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -176,11 +173,14 @@
 
                     selectTemas.addEventListener('change', () => {
                         const tema = selectTemas.value;
-                        socket.emit('tema-selecionado', { codigo: codigoSalaGlobal, tema });
-                    });
+                        socket.emit('tema-selecionado', {
+                            codigo: codigoSalaGlobal,
+                            tema
+                        });
+                    })
 
                     btnIniciar.addEventListener('click', () => {
-                        const temaSelecionado = selectTemas.value;
+                        const temaSelecionado = document.getElementById('selectTemas').value;
 
                         if (!temaSelecionado || temaSelecionado === "Selecione um tema") {
                             alert("Selecione um tema antes de iniciar a partida.");
@@ -198,14 +198,19 @@
                         const jogadores = [];
                         for (let i = 1; i <= 5; i++) {
                             const grupo = document.getElementById(`grupo-${i}`);
-                            const nomes = Array.from(grupo.querySelectorAll('p')).map(p => ({
-                                nome: p.innerText,
-                                grupo: i
-                            }));
+                            const nomes = Array.from(grupo.querySelectorAll('p'))
+                                .filter(p => p.dataset.real === "true")
+                                .map(p => ({
+                                    nome: p.innerText,
+                                    grupo: i
+                                }));
                             jogadores.push(...nomes);
                         }
 
-                        jogadores.push({ nome: nomeUsuarioAtual, grupo: 0 });
+                        jogadores.push({
+                            nome: nomeUsuarioAtual,
+                            grupo: 0
+                        });
 
                         socket.emit('start-game', {
                             codigo: codigoSalaGlobal,
@@ -232,7 +237,7 @@
             } else {
                 containerTemas.innerHTML = `<strong>Tema:</strong> <span>${tema}</span>`;
             }
-        });
+        })
 
         function adicionarAlunoNoGrupo(containerGrupo, nome) {
             if (![...containerGrupo.children].some(p => p.innerText === nome)) {
@@ -243,6 +248,13 @@
         }
 
         socket.on('user-joined', ({ users, alunosExtras }) => {
+            // for (let i = 1; i <= 5; i++) {
+            //     document.getElementById(`grupo-${i}`).innerHTML = '';
+            // }
+
+            // const liderDaSala = localStorage.getItem('roomOwner');
+            // const participantes = users.filter(nome => nome !== liderDaSala);
+
             const liderDaSala = localStorage.getItem('roomOwner');
 
             for (let i = 1; i <= 5; i++) {
@@ -258,10 +270,12 @@
                 if (grupo) {
                     const p = document.createElement('p');
                     p.innerText = nome;
-                    p.dataset.real = "true";
+                    p.dataset.real = "true"; // NOVO
                     grupo.appendChild(p);
                 }
             });
+
+            // ----------- NOVO
 
             if (alunosExtras) {
                 for (const [grupoNum, nomes] of Object.entries(alunosExtras)) {
@@ -271,15 +285,17 @@
                             const p = document.createElement('p');
                             p.innerText = nome;
                             containerGrupo.appendChild(p);
-                        });
+                        })
                     }
                 }
             }
 
             atualizarBotoesAdicionar();
+
+            // -------------
         });
 
-        socket.on('aluno-adicionado', ({ grupo, nome }) => {
+        socket.on('aluno-adicionado', ({ nome, grupo }) => {
             const containerGrupo = document.getElementById(`grupo-${grupo}`);
             if (containerGrupo && ![...containerGrupo.children].some(p => p.innerText === nome)) {
                 const p = document.createElement('p');
@@ -289,15 +305,14 @@
             atualizarBotoesAdicionar();
         });
 
-
         socket.on('alunos-extras', (extras) => {
             for (const [grupo, nomes] of Object.entries(extras)) {
                 const containerGrupo = document.getElementById(`grupo-${grupo}`);
                 if (containerGrupo) {
-                    nomes.forEach(nome => adicionarAlunoNoGrupo(containerGrupo, nome));
+                    nomes.forEach(nome => { adicionarAlunoNoGrupo(containerGrupo, nome) });
                 }
             }
-        });
+        })
 
         socket.on('game-start', (data) => {
             localStorage.setItem('temaSelecionado', data.tema);
@@ -309,13 +324,6 @@
             localStorage.setItem('jogadores', JSON.stringify(data.jogadores));
             localStorage.setItem('pontuacaoPorGrupo', JSON.stringify(data.pontuacao));
             window.location.href = '/public/partida/dashboard-lider.html';
-        });
-
-        window.addEventListener("beforeunload", () => {
-            socket.emit("leave-room", {
-                codigo: codigoSalaGlobal,
-                nome: nomeUsuarioAtual
-            });
         });
 
         let grupoSelecionadoId = null;
@@ -332,6 +340,18 @@
         document.getElementById('btnSalvarAluno').addEventListener('click', () => {
             const nome = document.getElementById('inputNomeAluno').value.trim();
             if (nome && grupoSelecionadoId) {
+                // const grupo = document.getElementById(`grupo-${grupoSelecionadoId}`);
+                // const membrosAtuais = grupo.querySelectorAll('p').length;
+
+                // if (membrosAtuais >= 5) {
+                //     alert("Este grupo já atingiu o limite de 5 participantes.");
+                //     return;
+                // }
+
+                // const p = document.createElement('p');
+                // p.innerText = nome;
+                // grupo.appendChild(p);
+                // modal.hide();
                 socket.emit('adicionar-aluno', {
                     codigo: codigoSalaGlobal,
                     grupo: Number(grupoSelecionadoId),
@@ -342,21 +362,6 @@
                 alert("Digite um nome válido.");
             }
         });
-
-        document.getElementById("btnSairSala").addEventListener("click", () => {
-            socket.emit("leave-room", {
-                codigo: codigoSalaGlobal,
-                nome: nomeUsuarioAtual
-            });
-
-            localStorage.removeItem("codigoSala");
-            localStorage.removeItem("roomOwner");
-            localStorage.removeItem("isLider");
-
-            window.location.href = "/public/inicio/presentation.html";
-        });
-
-
 
         async function buscarTemas() {
             try {
@@ -381,11 +386,10 @@
                 const grupoId = btn.getAttribute('data-grupo');
                 const container = document.getElementById(`grupo-${grupoId}`);
 
-                const temUsuarioReal = [...container.querySelectorAll('p')].some(p => p.dataset.real === "true");
-                btn.disabled = !temUsuarioReal;
+                const temaUsuarioReal = [...container.children].some(p => p.dataset.real === "true");
+                btn.disabled = !temaUsuarioReal;
             });
         }
-
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {

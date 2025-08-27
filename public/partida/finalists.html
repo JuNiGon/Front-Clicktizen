@@ -73,17 +73,19 @@
         async function carregarFinalistas() {
             try {
                 const res = await fetch(`https://nest-core-4sif.onrender.com/ranks/ranking/${codigoSala}`);
-                const ranking = await res.json();
+                let ranking = await res.json();
+
+                // Filtrar para não mostrar "Grupo 0"
+                ranking = ranking.filter(r => r.grupo !== 'Grupo 0');
 
                 if (ranking[0]) ouro.textContent = ` ${ranking[0].grupo} - ${ranking[0].pontuacao} pts`;
                 if (ranking[1]) prata.textContent = `${ranking[1].grupo} - ${ranking[1].pontuacao} pts`;
                 if (ranking[2]) bronze.textContent = `${ranking[2].grupo} - ${ranking[2].pontuacao} pts`;
-
-                console.log("🏆 Finalistas:", ranking);
             } catch (err) {
                 console.error("❌ Erro ao carregar finalistas:", err);
             }
         }
+
 
         carregarFinalistas();
     </script>
