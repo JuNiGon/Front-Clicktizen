@@ -75,7 +75,6 @@
                 const res = await fetch(`https://nest-core-4sif.onrender.com/ranks/ranking/${codigoSala}`);
                 let ranking = await res.json();
 
-                // Filtrar para não mostrar "Grupo 0"
                 ranking = ranking.filter(r => r.grupo !== 'Grupo 0');
 
                 if (ranking[0]) ouro.textContent = ` ${ranking[0].grupo} - ${ranking[0].pontuacao} pts`;
@@ -106,17 +105,6 @@
             });
         });
     </script>
-
-
-
-
-    <!-- <footer class="RodapeComLogo">
-        <div>
-            <img src="/public/imagens/LogoMenu.png" alt="Logo do menu">
-            <img src="/public/imagens/LogoAjuda.png" alt="Logo de ajuda">
-        </div>
-        <img src="/public/imagens/LogoDoJogo.png" alt="Logo do jogo">
-    </footer> -->
 </body>
 
 </html>
