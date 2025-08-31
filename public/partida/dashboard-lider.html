@@ -77,7 +77,7 @@
 
         const ulJogadores = document.getElementById('jogadores');
         jogadores
-            .filter(j => j.grupo !== 0) // ignora líder
+            .filter(j => j.grupo !== 0)
             .forEach(j => {
                 const li = document.createElement('li');
                 li.classList.add('jogador');
@@ -85,9 +85,7 @@
                 ulJogadores.appendChild(li);
             });
 
-        // Atualizar pontuação em tempo real
         socket.on('atualizar-pontuacao', (data) => {
-            // Atualiza pontuação dos grupos
             const ul = document.getElementById('pontuacaoPorGrupo');
             ul.innerHTML = '';
             for (const grupo in data.pontuacao) {
@@ -99,7 +97,6 @@
                 }
             }
 
-            // Atualiza pontuação individual dos jogadores
             if (data.jogadores) {
                 localStorage.setItem('jogadores', JSON.stringify(data.jogadores));
                 const ulJogadores = document.getElementById('jogadores');
