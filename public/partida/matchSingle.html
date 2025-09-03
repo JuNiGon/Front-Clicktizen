@@ -12,7 +12,7 @@
 <body class="corpo">
     <div class="containerJogo">
         <div class="containerTempo">
-            <span id="tempoRestante">Tempo: 10s</span>
+            <span id="tempoRestante">Tempo: 20s</span>
         </div>
         <div class="containerPergunta">
             <h3 id="perguntaTexto">Carregando pergunta...</h3>
@@ -46,8 +46,10 @@
         const temaSelecionado = localStorage.getItem('temaSelecionado');
         const nomeUsuarioAtual = localStorage.getItem('nomeUsuario');
         let codigoSala = null;
+
         let podeResponder = true;
         let timerInterval;
+        let aguardandoOutros = false;
 
         const btnFato = document.getElementById('btnFato');
         const btnFake = document.getElementById('btnFake');
@@ -59,77 +61,111 @@
         btnFato.addEventListener('click', () => responder('Fato'));
         btnFake.addEventListener('click', () => responder('Fake'));
 
-        // Conecta ao servidor e inicia o jogo solo
         socket.on('connect', () => {
-            console.log('Conectado ao servidor com ID:', socket.id);
-            socket.emit('start-game-solo', {
-                nome: nomeUsuarioAtual,
+            console.log('Conectado com ID:', socket.id);
+            socket.emit('start-solo', {
+                nome: 'guest',
                 tema: temaSelecionado
             });
         });
 
-        // Recebe código da sala e confirma início do jogo
-        socket.on('game-start-solo', data => {
-            codigoSala = data.codigo; // ⚡ importante
-            console.log('🎮 Jogo solo iniciado no tema:', data.tema, 'Código:', codigoSala);
+        socket.on('solo-started', data => {
+            codigoSala = data.codigo;
+            console.log('🎮 Solo iniciado no tema:', data.tema, 'Código:', codigoSala);
         });
 
-        // Recebe nova pergunta
         socket.on('nova-pergunta', data => {
             clearInterval(timerInterval);
             perguntaTexto.innerText = data.texto;
+
             feedbackDiv.classList.add('oculto');
             botoesDiv.classList.remove('oculto');
-            podeResponder = true;
+            feedbackDiv.style.backgroundColor = 'transparent';
+            feedbackDiv.innerText = '';
 
-            // opcional: mostra temporizador do jogo se quiser
-            tempoDiv.innerText = `Tempo: 20s`;
+            podeResponder = true;
+            startTimerPergunta(20);
         });
 
-        // Recebe feedback da resposta
         socket.on('feedback', data => {
+            clearInterval(timerInterval);
+
             botoesDiv.classList.add('oculto');
             feedbackDiv.classList.remove('oculto');
+
+            let segundos = 10;
             feedbackDiv.style.backgroundColor = data.correta ? '#276523' : '#da251d';
             feedbackDiv.innerText = data.correta
-                ? `✅ Correto! ${data.justificativa}`
-                : `❌ Incorreto! ${data.justificativa}`;
-
-            // começa contagem de 10 segundos da justificativa
-            let tempoJustificativa = 10;
-            tempoDiv.innerText = `Próxima pergunta em: ${tempoJustificativa}s`;
+                ? `✅ Correto! ${data.justificativa}\nPróxima em ${segundos}s`
+                : `❌ Incorreto! ${data.justificativa}\nPróxima em ${segundos}s`;
 
             timerInterval = setInterval(() => {
-                tempoJustificativa--;
-                tempoDiv.innerText = `Próxima pergunta em: ${tempoJustificativa}s`;
+                segundos--;
+                feedbackDiv.innerText = data.correta
+                    ? `✅ Correto! ${data.justificativa}\nPróxima em ${segundos}s`
+                    : `❌ Incorreto! ${data.justificativa}\nPróxima em ${segundos}s`;
 
-                if (tempoJustificativa <= 0) {
+                if (segundos <= 0) {
                     clearInterval(timerInterval);
-                    feedbackDiv.classList.add('oculto');
                 }
             }, 1000);
         });
 
-        // Fim do jogo
-        socket.on('fim-do-jogo', data => {
-            perguntaTexto.innerText = `🎉 Fim do jogo! Pontuação: ${data.pontuacao}`;
-            botoesDiv.classList.add('oculto');
-            feedbackDiv.classList.add('oculto');
-            tempoDiv.innerText = '';
+        socket.on('fim-do-jogo-solo', data => {
+            localStorage.setItem('resultadoSolo', JSON.stringify(data));
+            window.location.href = '/public/partida/finalistSolo.html';
         });
 
         function responder(resposta) {
             if (!podeResponder) return;
+
             podeResponder = false;
-
             botoesDiv.classList.add('oculto');
+            feedbackDiv.classList.remove('oculto');
 
-            // envia resposta para backend
             socket.emit('responder-solo', {
-                nome: nomeUsuarioAtual,
-                resposta,
-                codigo: codigoSala
+                codigo: codigoSala,
+                resposta
             });
+        }
+
+        function startTimerPergunta(segundos) {
+            let tempo = segundos;
+            tempoDiv.innerText = `Tempo: ${tempo}s`;
+            feedbackDiv.innerText = `Tempo restante: ${tempo}s`;
+            aguardandoOutros = false;
+
+            clearInterval(timerInterval);
+
+            timerInterval = setInterval(() => {
+                tempo--;
+                tempoDiv.innerText = `Tempo: ${tempo}s`;
+
+                if (tempo <= 0) {
+                    clearInterval(timerInterval);
+
+                    if (podeResponder) {
+                        podeResponder = false;
+                        socket.emit('responder-solo', {
+                            codigo: codigoSala,
+                            resposta: ''
+                        });
+                    }
+
+                    let segundosFeedback = 10;
+                    feedbackDiv.style.backgroundColor = '#da251d';
+                    feedbackDiv.innerText = `⏳ Tempo esgotado!\nPróxima em ${segundosFeedback}s`;
+
+                    timerInterval = setInterval(() => {
+                        segundosFeedback--;
+                        feedbackDiv.innerText = `⏳ Tempo esgotado!\nPróxima em ${segundosFeedback}s`;
+                        if (segundosFeedback <= 0) clearInterval(timerInterval);
+                    }, 1000);
+
+                } else {
+                    feedbackDiv.innerText = `Tempo restante: ${tempo}s`;
+                }
+            }, 1000);
         }
     </script>
 </body>

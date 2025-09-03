@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado Solo</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="corpo">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;"
+        class="container text-center mt-5">
+        <h1>🎉 Resultado do Solo 🎉</h1>
+        <!-- <h2 id="usuarioNome"></h2> -->
+        <p id="acertos"></p>
+        <p id="pontuacao"></p>
+        <button class="BotaoInicial" onclick="voltarInicio()">Voltar ao Início</button>
+    </div>
+
+    <script>
+        const resultado = JSON.parse(localStorage.getItem('resultadoSolo'));
+
+        if (resultado) {
+            // document.getElementById('usuarioNome').innerText = `Jogador: ${resultado.nome}`;
+            document.getElementById('acertos').innerText = `Acertos: ${resultado.acertos} de 10`;
+            document.getElementById('pontuacao').innerText = `Pontuação: ${resultado.pontuacao}`;
+        }
+
+        function voltarInicio() {
+            localStorage.removeItem('resultadoSolo');
+            localStorage.removeItem('temaSelecionado');
+            window.location.href = '/public/inicio/presentation.html';
+        }
+    </script>
+</body>
+
+</html>

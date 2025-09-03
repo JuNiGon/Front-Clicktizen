@@ -82,13 +82,13 @@
             btn.disabled = true;
             spinner.classList.remove('d-none');
 
-            socket.emit('start-game-solo', {
-                nome: nomeUsuarioAtual,
+            socket.emit('start-solo', {
+                nome: 'guest',
                 tema: temaSelecionado
             });
         });
 
-        socket.on('game-start-solo', (data) => {
+        socket.on('solo-started', (data) => {
             localStorage.setItem('temaSelecionado', data.tema);
             window.location.href = '/public/partida/matchSingle.html';
         });
