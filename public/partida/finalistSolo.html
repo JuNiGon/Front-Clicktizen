@@ -13,7 +13,6 @@
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;"
         class="container text-center mt-5">
         <h1>🎉 Resultado do Solo 🎉</h1>
-        <!-- <h2 id="usuarioNome"></h2> -->
         <p id="acertos"></p>
         <p id="pontuacao"></p>
         <button class="BotaoInicial" onclick="voltarInicio()">Voltar ao Início</button>
@@ -23,7 +22,6 @@
         const resultado = JSON.parse(localStorage.getItem('resultadoSolo'));
 
         if (resultado) {
-            // document.getElementById('usuarioNome').innerText = `Jogador: ${resultado.nome}`;
             document.getElementById('acertos').innerText = `Acertos: ${resultado.acertos} de 10`;
             document.getElementById('pontuacao').innerText = `Pontuação: ${resultado.pontuacao}`;
         }

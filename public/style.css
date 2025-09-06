@@ -750,6 +750,51 @@ body {
     justify-content: center;
 }
 
+@media (max-width: 600px) and (orientation: portrait) {
+    .classificacao-container {
+        height: 90vh;
+    }
+
+    .classificacao>p {
+        font-size: 16px;
+    }
+
+    .classificacao {
+        width: 90%;
+        margin-left: 20px;
+        padding: 10px 15px;
+    }
+
+    .posicao {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+        left: -20px;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .classificacao-container {
+        height: 90vh;
+        gap: 30px;
+    }
+
+    .classificacao>p {
+        font-size: 16px;
+    }
+
+    .classificacao {
+        width: 90%;
+        padding: 10px 15px;
+    }
+
+    .posicao {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+        left: -20px;
+    }
+}
 
 /*--------REGRAS DO JOGO--------*/
 .pagina-regras-do-jogo {
@@ -897,7 +942,7 @@ body {
     }
 
     .PersonagemCreditos {
-        width: 300px;
+        display: none;
     }
 }
 
