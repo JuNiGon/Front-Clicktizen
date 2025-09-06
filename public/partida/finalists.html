@@ -61,6 +61,7 @@
     </div>
 
     <script src="orientation-check.js"></script>
+    <script src="/public/js/config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <script>
@@ -72,7 +73,7 @@
 
         async function carregarFinalistas() {
             try {
-                const res = await fetch(`https://nest-core-4sif.onrender.com/ranks/ranking/${codigoSala}`);
+                const res = await fetch(`${window.APP_CONFIG.SOCKET_URL}/ranks/ranking/${codigoSala}`);
                 let ranking = await res.json();
 
                 ranking = ranking.filter(r => r.grupo !== 'Grupo 0');

@@ -70,6 +70,7 @@
     </div>
 
     <script src="orientation-check.js"></script>
+    <script src="/public/js/config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"
         integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+"
@@ -96,7 +97,7 @@
         instituicao.addEventListener('keydown', criarSalaComTecla);
         nome.addEventListener('keydown', criarSalaComTecla);
 
-        const socket = io('https://nest-core-4sif.onrender.com');
+        const socket = io(window.APP_CONFIG.SOCKET_URL);
 
         botaoCriarSala.addEventListener('click', () => {
             const instituicaoValue = instituicao.value.trim();
