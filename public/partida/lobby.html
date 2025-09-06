@@ -80,43 +80,6 @@
         <!-- <img src="/public/imagens/LogoDoJogo.png" alt="Logo do jogo" class="logo-central"> -->
     </footer>
 
-    <!-- Modal de Confirmação de Saída -->
-    <div class="modal fade" id="confirmExitModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirmação</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    Você tem certeza que deseja sair da partida?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="confirmExitBtn">Sair</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Ajuda -->
-    <div class="modal fade" id="ajudaModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ajuda do Jogo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body" id="conteudoAjuda">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- Modal de adicionar aluno -->
     <div class="modal fade" id="modalAdicionarAluno" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -136,7 +99,6 @@
         </div>
     </div>
 
-    <script src="orientation-check.js"></script>
     <script src="/public/js/config.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"
         integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous">
@@ -146,6 +108,8 @@
 
     <script type="module">
         import { buscarTemas } from '/public/js/buscarTemas.js';
+        import { carregarModais } from '/public/js/modals.js';
+        document.addEventListener('DOMContentLoaded', () => { carregarModais() });
 
         const socket = io(window.APP_CONFIG.SOCKET_URL);
 
@@ -360,41 +324,6 @@
                 btn.disabled = !temaUsuarioReal;
             });
         }
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const ajudaBtn = document.querySelector(".containerAjuda");
-            const ajudaModal = new bootstrap.Modal(document.getElementById("ajudaModal"));
-
-            ajudaBtn.addEventListener("click", async (e) => {
-                e.preventDefault();
-
-                const resp = await fetch("/public/components/ajuda.html");
-                const html = await resp.text();
-
-                document.getElementById("conteudoAjuda").innerHTML = html;
-
-                ajudaModal.show();
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const containerLogoMenu = document.querySelector('.containerLogoMenu');
-            const confirmExitBtn = document.getElementById('confirmExitBtn');
-            let targetHref = '';
-
-            containerLogoMenu.addEventListener('click', (e) => {
-                e.preventDefault();
-                targetHref = containerLogoMenu.getAttribute('href');
-                const modal = new bootstrap.Modal(document.getElementById('confirmExitModal'));
-                modal.show();
-            });
-
-            confirmExitBtn.addEventListener('click', () => {
-                window.location.href = targetHref;
-            });
-        });
-
     </script>
 </body>
 

@@ -52,30 +52,16 @@
         <img src="/public/imagens/LogoDoJogo.png" alt="Logo do jogo" class="logo-central">
     </footer>
 
-    <div class="modal fade" id="ajudaModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ajuda do Jogo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body" id="conteudoAjuda">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="orientation-check.js"></script>
     <script src="/public/js/config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"
         integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous">
         </script>
 
-    <script>
+    <script type="module">
+        import { carregarModais } from '/public/js/modals.js';
+        document.addEventListener('DOMContentLoaded', () => { carregarModais() });
+
         const codigoSala = document.getElementById('inCodigo');
         const apelido = document.getElementById('inApelido');
         const botaoEntrarSala = document.querySelector('.BotaoEntrarEmUmaSala-EntrarEmUmaSala button');
@@ -132,23 +118,6 @@
             textoBotao.textContent = "ENTRAR EM UMA SALA";
             spinnerBotao.classList.add('d-none');
         }
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const ajudaBtn = document.querySelector(".containerAjuda");
-            const ajudaModal = new bootstrap.Modal(document.getElementById("ajudaModal"));
-
-            ajudaBtn.addEventListener("click", async (e) => {
-                e.preventDefault();
-
-                const resp = await fetch("/public/components/ajuda.html");
-                const html = await resp.text();
-
-                document.getElementById("conteudoAjuda").innerHTML = html;
-
-                ajudaModal.show();
-            });
-        });
     </script>
 </body>
 
