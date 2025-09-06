@@ -38,10 +38,27 @@
         </div>
     </footer>
 
+    <div class="modal fade" id="ajudaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajuda do Jogo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body" id="conteudoAjuda">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous"></script>
+    <script src="/public/js/config.js"></script>
 
     <script>
-        const socket = io('https://nest-core-4sif.onrender.com');
+        const socket = io(window.APP_CONFIG.SOCKET_URL);
 
         const temaSelecionado = localStorage.getItem('temaSelecionado');
         const nomeUsuarioAtual = localStorage.getItem('nomeUsuario');
@@ -167,6 +184,23 @@
                 }
             }, 1000);
         }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const ajudaBtn = document.querySelector(".containerAjuda");
+            const ajudaModal = new bootstrap.Modal(document.getElementById("ajudaModal"));
+
+            ajudaBtn.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const resp = await fetch("/public/components/ajuda.html");
+                const html = await resp.text();
+
+                document.getElementById("conteudoAjuda").innerHTML = html;
+
+                ajudaModal.show();
+            });
+        });
     </script>
 </body>
 

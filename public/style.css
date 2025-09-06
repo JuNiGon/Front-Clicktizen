@@ -312,7 +312,7 @@ body {
     border-color: transparent transparent transparent #ffffff;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     .PersonagemDoJogo-apresentacao {
         display: none;
         /* left: 10%;

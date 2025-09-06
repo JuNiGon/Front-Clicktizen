@@ -52,9 +52,10 @@
     <ul id="jogadores"></ul>
 
     <script src="orientation-check.js"></script>
+    <script src="/public/js/config.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <script>
-        const socket = io('https://nest-core-4sif.onrender.com');
+        const socket = io(window.APP_CONFIG.SOCKET_URL);
         const codigoSala = localStorage.getItem('codigoSala');
         const nomeUsuario = localStorage.getItem('nomeUsuario') || 'monitor';
 
