@@ -31,27 +31,32 @@
         <section class="containerJogadores">
             <div class="gruposScroll">
                 <div class="containerGrupo">
-                    <p>1° GRUPO</p>
+                    <input type="text" id="nome-grupo-1" placeholder="Nome do grupo 1" maxlength="20" data-grupo="1"
+                        readonly>
                     <div id="grupo-1" class="containerGrupo-membros"></div>
                     <button class="adicionarAlunoBtn" data-grupo="1">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <p>2° GRUPO</p>
+                    <input type="text" id="nome-grupo-2" placeholder="Nome do grupo 2" maxlength="20" data-grupo="2"
+                        readonly>
                     <div id="grupo-2" class="containerGrupo-membros"></div>
                     <button class="adicionarAlunoBtn" data-grupo="2">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <p>3° GRUPO</p>
+                    <input type="text" id="nome-grupo-3" placeholder="Nome do grupo 3" maxlength="20" data-grupo="3"
+                        readonly>
                     <div id="grupo-3" class="containerGrupo-membros"></div>
                     <button class="adicionarAlunoBtn" data-grupo="3">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <p>4° GRUPO</p>
+                    <input type="text" id="nome-grupo-4" placeholder="Nome do grupo 4" maxlength="20" data-grupo="4"
+                        readonly>
                     <div id="grupo-4" class="containerGrupo-membros"></div>
                     <button class="adicionarAlunoBtn" data-grupo="4">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <p>5° GRUPO</p>
+                    <input type="text" id="nome-grupo-5" placeholder="Nome do grupo 5" maxlength="20" data-grupo="5"
+                        readonly>
                     <div id="grupo-5" class="containerGrupo-membros"></div>
                     <button class="adicionarAlunoBtn" data-grupo="5">Adicionar aluno</button>
                 </div>
@@ -89,7 +94,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" id="inputNomeAluno" class="form-control" placeholder="Digite o nome do aluno" />
+                    <input type="text" id="inputNomeAluno" class="form-control" placeholder="Digite o nome do aluno"
+                        maxlength="14" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="btnSalvarAluno" class="btn btn-success">Salvar</button>
@@ -98,6 +104,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de renomear grupo -->
+    <div class="modal fade" id="modalRenomearGrupo" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Renomear Grupo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="inputNomeGrupo" class="form-control" placeholder="Digite o nome do grupo"
+                        maxlength="20">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnSalvarNomeGrupo" class="btn btn-primary">Salvar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="/public/js/config.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"
@@ -115,6 +142,8 @@
 
         const codigoSalaGlobal = localStorage.getItem('codigoSala');
         const nomeUsuarioAtual = localStorage.getItem('nomeUsuario');
+        const nomeUsuarioFake = document.getElementById('inputNomeAluno');
+        const botaoCriarUsuario = document.getElementById('btnSalvarAluno');
 
         if (!codigoSalaGlobal || !nomeUsuarioAtual) {
             alert("Informações da sala não encontradas.");
@@ -124,6 +153,19 @@
                 nome: nomeUsuarioAtual
             });
         }
+
+        function criarSalaComTecla(event) {
+            if (event.key === 'Enter') {
+                if (nomeUsuarioFake.value.trim() === '') {
+                    alert("Por favor, preencha todos os campos.");
+                    return false;
+                } else {
+                    botaoCriarUsuario.click();
+                }
+            }
+        }
+
+        nomeUsuarioFake.addEventListener('keydown', criarSalaComTecla);
 
         socket.on('room-joined', (data) => {
             if (data.success) {
@@ -135,6 +177,14 @@
                 const btnIniciar = document.getElementById('btnIniciar');
                 const selectTemas = document.getElementById('selectTemas');
                 const containerTemas = document.querySelector('.containerDadoTemas');
+
+                const nomesGrupos = data.nomesGrupos || {};
+                for (let i = 1; i <= 5; i++) {
+                    const inputGrupo = document.getElementById(`nome-grupo-${i}`);
+                    if (inputGrupo) {
+                        inputGrupo.value = nomesGrupos[i] || `Grupo ${i}`;
+                    }
+                }
 
                 if (data.room.roomOwner === nomeUsuarioAtual) {
                     btnIniciar.style.display = 'inline-block';
@@ -165,27 +215,29 @@
                         localStorage.setItem('isLider', 'true');
 
                         const jogadores = [];
+                        const nomesGrupos = {};
                         for (let i = 1; i <= 5; i++) {
+                            const inputGrupo = document.getElementById(`nome-grupo-${i}`);
+                            nomesGrupos[i] = inputGrupo ? inputGrupo.value.trim() || `Grupo ${i}` : `Grupo ${i}`;
+
                             const grupo = document.getElementById(`grupo-${i}`);
-                            const nomes = Array.from(grupo.querySelectorAll('p'))
-                                .filter(p => p.dataset.real === "true")
-                                .map(p => ({
-                                    nome: p.innerText,
-                                    grupo: i
-                                }));
-                            jogadores.push(...nomes);
+                            if (grupo) {
+                                const nomes = Array.from(grupo.querySelectorAll('p'))
+                                    .filter(p => p.dataset.real === "true")
+                                    .map(p => ({ nome: p.innerText, grupo: i }));
+                                jogadores.push(...nomes);
+                            }
                         }
 
-                        jogadores.push({
-                            nome: nomeUsuarioAtual,
-                            grupo: 0
-                        });
+                        jogadores.push({ nome: nomeUsuarioAtual, grupo: 0 });
 
                         socket.emit('start-game', {
                             codigo: codigoSalaGlobal,
                             tema: temaSelecionado,
-                            jogadores
+                            jogadores,
+                            nomesGrupos
                         });
+
                     });
                 } else {
                     btnIniciar.style.display = 'none';
@@ -320,10 +372,50 @@
                 const grupoId = btn.getAttribute('data-grupo');
                 const container = document.getElementById(`grupo-${grupoId}`);
 
-                const temaUsuarioReal = [...container.children].some(p => p.dataset.real === "true");
-                btn.disabled = !temaUsuarioReal;
+                const temUsuarioReal = [...container.children].some(p => p.dataset.real === "true");
+
+                const qtdExtras = [...container.children].filter(p => !p.dataset.real).length;
+
+                btn.disabled = !temUsuarioReal || qtdExtras >= 4;
             });
         }
+
+        let grupoRenomearId = null;
+        const modalRenomear = new bootstrap.Modal(document.getElementById('modalRenomearGrupo'));
+
+        document.querySelectorAll('[id^="nome-grupo-"]').forEach(input => {
+            input.addEventListener('click', () => {
+                grupoRenomearId = input.getAttribute('data-grupo');
+                const nomeAtual = input.value;
+                document.getElementById('inputNomeGrupo').value = nomeAtual;
+                modalRenomear.show();
+            });
+        });
+
+
+        document.getElementById('btnSalvarNomeGrupo').addEventListener('click', () => {
+            const novoNome = document.getElementById('inputNomeGrupo').value.trim();
+            if (!novoNome || !grupoRenomearId) return alert("Digite um nome válido.");
+
+            // Atualiza localmente
+            const inputGrupo = document.getElementById(`nome-grupo-${grupoRenomearId}`);
+            inputGrupo.value = novoNome;
+
+            // Envia para o back
+            socket.emit('renomear-grupo', {
+                codigo: codigoSalaGlobal,
+                grupo: Number(grupoRenomearId),
+                novoNome
+            });
+
+            modalRenomear.hide();
+        });
+
+        socket.on('grupo-renomeado', ({ grupo, nome }) => {
+            const inputGrupo = document.getElementById(`nome-grupo-${grupo}`);
+            if (inputGrupo) inputGrupo.value = nome;
+        });
+
     </script>
 </body>
 
