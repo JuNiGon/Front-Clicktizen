@@ -15,14 +15,12 @@
         <div class="containerTempo">
             <span id="tempoRestante">Tempo: 10s</span>
         </div>
-        <div class="containerPergunta">
-            <h3 id="perguntaTexto">Carregando pergunta...</h3>
+        <div style="background-color: #fff; border-radius: 50px;">
+            <div id="indicadorPerguntas" class="indicador"></div>
+            <div class="containerPergunta">
+                <h3 id="perguntaTexto">Carregando pergunta...</h3>
+            </div>
         </div>
-
-        <!-- <div class="containerImagem">
-
-        </div> -->
-
     </div>
     <div class="containerBotaoFeedBack">
         <div id="botoesResposta">
@@ -78,8 +76,37 @@
         });
 
         function initSocketListeners() {
+            function initIndicador(total = 10, primeiroAtivo = 0) {
+                criarIndicador(total, primeiroAtivo);
+            }
+
+            function criarIndicador(total, primeiroAtivo = 0) {
+                const container = document.getElementById('indicadorPerguntas');
+                container.innerHTML = '';
+                for (let i = 0; i < total; i++) {
+                    const ponto = document.createElement('span');
+                    ponto.classList.add(i === primeiroAtivo ? 'ativo' : 'inativo');
+                    container.appendChild(ponto);
+                }
+            }
+
+            function atualizarIndicador(indice) {
+                const container = document.getElementById('indicadorPerguntas');
+                const pontos = container.querySelectorAll('span');
+                pontos.forEach((ponto, i) => {
+                    ponto.classList.remove('ativo', 'inativo');
+                    ponto.classList.add(i === indice ? 'ativo' : 'inativo');
+                });
+            }
+
+            initIndicador(10, 0);
+
             socket.on('nova-pergunta', data => {
-                console.log('🧠 Nova pergunta recebida:', data.texto);
+                const total = data.total || 10;
+                const indice = (data.numero && data.numero > 0) ? data.numero - 1 : 0;
+
+                atualizarIndicador(indice);
+
                 clearInterval(timerInterval);
                 document.getElementById('perguntaTexto').innerText = data.texto;
 
@@ -89,8 +116,8 @@
                 feedbackDiv.classList.add('oculto');
                 botoes.classList.remove('oculto');
                 feedbackDiv.style.backgroundColor = 'transparent';
-
                 feedbackDiv.innerText = '';
+
                 podeResponder = true;
                 startTimer(20);
             });
@@ -134,14 +161,12 @@
                 window.location.href = '/public/partida/finalists.html';
             });
 
-
             socket.on('aguardando-outros', () => {
                 aguardandoOutros = true;
             });
         }
 
         initSocketListeners();
-
 
         function responder(resposta) {
             if (!podeResponder) return;
@@ -160,7 +185,6 @@
                 resposta
             });
         }
-
 
         function startTimer(segundos) {
             let tempo = segundos;
@@ -201,7 +225,6 @@
                 }
             }, 1000);
         }
-
     </script>
 </body>
 

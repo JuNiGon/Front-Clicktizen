@@ -34,10 +34,6 @@
             font-weight: bold;
         }
 
-        .grupo {
-            color: #2e86de;
-        }
-
         .jogador {
             color: #28a745;
         }
@@ -45,9 +41,6 @@
 </head>
 
 <body>
-    <h2>Pontuação dos Grupos</h2>
-    <ul id="pontuacaoPorGrupo"></ul>
-
     <h2>Jogadores</h2>
     <ul id="jogadores"></ul>
 
@@ -62,20 +55,9 @@
             socket.emit('join-room', { codigo: Number(codigoSala), nome: nomeUsuario });
         }
 
-        const pontuacao = JSON.parse(localStorage.getItem('pontuacaoPorGrupo') || '{}');
         const jogadores = JSON.parse(localStorage.getItem('jogadores') || '[]');
-
-        const ulGrupos = document.getElementById('pontuacaoPorGrupo');
-        for (const grupo in pontuacao) {
-            if (grupo !== "0") {
-                const li = document.createElement('li');
-                li.classList.add('grupo');
-                li.textContent = `Grupo ${grupo}: ${pontuacao[grupo]} pontos`;
-                ulGrupos.appendChild(li);
-            }
-        }
-
         const ulJogadores = document.getElementById('jogadores');
+
         jogadores
             .filter(j => j.grupo !== 0)
             .forEach(j => {
@@ -86,20 +68,8 @@
             });
 
         socket.on('atualizar-pontuacao', (data) => {
-            const ul = document.getElementById('pontuacaoPorGrupo');
-            ul.innerHTML = '';
-            for (const grupo in data.pontuacao) {
-                if (grupo !== "0") {
-                    const li = document.createElement('li');
-                    li.classList.add('grupo');
-                    li.textContent = `Grupo ${grupo}: ${data.pontuacao[grupo]} pontos`;
-                    ul.appendChild(li);
-                }
-            }
-
             if (data.jogadores) {
                 localStorage.setItem('jogadores', JSON.stringify(data.jogadores));
-                const ulJogadores = document.getElementById('jogadores');
                 ulJogadores.innerHTML = '';
                 data.jogadores
                     .filter(j => j.grupo !== 0)
@@ -112,7 +82,7 @@
             }
         });
 
-        socket.on('fim-do-jogo', data => {
+        socket.on('fim-do-jogo', () => {
             alert('O jogo acabou! Obrigado por jogar 🎉');
             window.location.href = '/public/partida/finalists.html';
         });
