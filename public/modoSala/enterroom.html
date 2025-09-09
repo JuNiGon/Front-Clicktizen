@@ -108,7 +108,8 @@
                 localStorage.setItem('roomOwner', data.room.roomOwner);
                 window.location.href = '/public/partida/lobby.html';
             } else {
-                alert("Erro ao entrar na sala: " + data.message);
+                alert(data.message);
+                return;
                 resetarBotao();
             }
         });

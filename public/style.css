@@ -1108,15 +1108,26 @@ footer {
 } */
 
 .nomeGrupoInput {
-    border: none;
-    text-align: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #073a6a;
+    /* border-radius: 8px; */
     background-color: transparent;
-    padding: 8px;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
     color: #073a6a;
     margin: 0 0 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 6px 12px;
+}
+
+.nomeGrupoInput:hover {
+    background-color: #d0e4fb;
+    border-color: #055293;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .containerGrupo-membros {
@@ -1130,11 +1141,33 @@ footer {
     border-radius: 4px;
 }
 
-.containerGrupo-membros>p {
+.containerGrupo-membros p {
     font-size: 14px;
     color: #ffdb3a;
     text-align: center;
     margin: 0;
+}
+
+.btn-dropdown-aluno {
+    background-color: #073a6a !important;
+    border-color: #073a6a !important;
+    color: #fff !important;
+}
+
+.btn-dropdown-aluno:hover {
+    background-color: #052e53 !important;
+    border-color: #073a6a !important;
+    color: #fff !important;
+}
+
+.dropdown-item.text:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: #f8d7da;
+    color: #721c24;
 }
 
 .adicionarAlunoBtn {

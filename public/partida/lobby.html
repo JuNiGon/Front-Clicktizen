@@ -31,32 +31,32 @@
         <section class="containerJogadores">
             <div class="gruposScroll">
                 <div class="containerGrupo">
-                    <input type="text" id="nome-grupo-1" placeholder="Nome do grupo 1" maxlength="20" data-grupo="1"
-                        readonly>
+                    <input class="nomeGrupoInput" type="text" id="nome-grupo-1" placeholder="Nome do grupo 1"
+                        maxlength="20" data-grupo="1" readonly>
                     <div id="grupo-1" class="containerGrupo-membros"></div>
                     <button class="adicionarAlunoBtn" data-grupo="1">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <input type="text" id="nome-grupo-2" placeholder="Nome do grupo 2" maxlength="20" data-grupo="2"
-                        readonly>
+                    <input class="nomeGrupoInput" type="text" id="nome-grupo-2" placeholder="Nome do grupo 2"
+                        maxlength="20" data-grupo="2" readonly>
                     <div id="grupo-2" class="containerGrupo-membros"></div>
                     <button class="adicionarAlunoBtn" data-grupo="2">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <input type="text" id="nome-grupo-3" placeholder="Nome do grupo 3" maxlength="20" data-grupo="3"
-                        readonly>
+                    <input class="nomeGrupoInput" type="text" id="nome-grupo-3" placeholder="Nome do grupo 3"
+                        maxlength="20" data-grupo="3" readonly>
                     <div id="grupo-3" class="containerGrupo-membros"></div>
                     <button class="adicionarAlunoBtn" data-grupo="3">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <input type="text" id="nome-grupo-4" placeholder="Nome do grupo 4" maxlength="20" data-grupo="4"
-                        readonly>
+                    <input class="nomeGrupoInput" type="text" id="nome-grupo-4" placeholder="Nome do grupo 4"
+                        maxlength="20" data-grupo="4" readonly>
                     <div id="grupo-4" class="containerGrupo-membros"></div>
                     <button class="adicionarAlunoBtn" data-grupo="4">Adicionar aluno</button>
                 </div>
                 <div class="containerGrupo">
-                    <input type="text" id="nome-grupo-5" placeholder="Nome do grupo 5" maxlength="20" data-grupo="5"
-                        readonly>
+                    <input class="nomeGrupoInput" type="text" id="nome-grupo-5" placeholder="Nome do grupo 5"
+                        maxlength="20" data-grupo="5" readonly>
                     <div id="grupo-5" class="containerGrupo-membros"></div>
                     <button class="adicionarAlunoBtn" data-grupo="5">Adicionar aluno</button>
                 </div>
@@ -124,6 +124,28 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de renomear aluno -->
+    <div class="modal fade" id="modalRenomearAluno" tabindex="-1" aria-labelledby="modalRenomearAlunoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Renomear Aluno</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="inputNomeAlunoRenomear" class="form-control" placeholder="Digite o novo nome"
+                        maxlength="14">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnSalvarNomeAluno" class="btn btn-primary">Salvar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <script src="/public/js/config.js"></script>
@@ -260,14 +282,6 @@
             }
         })
 
-        function adicionarAlunoNoGrupo(containerGrupo, nome) {
-            if (![...containerGrupo.children].some(p => p.innerText === nome)) {
-                const p = document.createElement('p');
-                p.innerText = nome;
-                containerGrupo.appendChild(p);
-            }
-        }
-
         socket.on('user-joined', ({ users, alunosExtras }) => {
             const liderDaSala = localStorage.getItem('roomOwner');
 
@@ -289,44 +303,138 @@
                 }
             });
 
-            // ----------- NOVO
-
             if (alunosExtras) {
                 for (const [grupoNum, nomes] of Object.entries(alunosExtras)) {
                     const containerGrupo = document.getElementById(`grupo-${grupoNum}`);
                     if (containerGrupo) {
                         nomes.forEach(nome => {
-                            const p = document.createElement('p');
-                            p.innerText = nome;
-                            containerGrupo.appendChild(p);
+                            criarAlunoFake(nome, grupoNum);
                         })
                     }
                 }
             }
 
             atualizarBotoesAdicionar();
-
-            // -------------
         });
 
-        socket.on('aluno-adicionado', ({ nome, grupo }) => {
+        let alunoEditando = { grupo: null, antigoNome: null, elemento: null };
+        const modalRenomearAluno = new bootstrap.Modal(document.getElementById('modalRenomearAluno'));
+        const inputNomeAlunoRenomear = document.getElementById('inputNomeAlunoRenomear');
+        const btnSalvarNomeAluno = document.getElementById('btnSalvarNomeAluno');
+
+        function criarAlunoFake(nome, grupo) {
             const containerGrupo = document.getElementById(`grupo-${grupo}`);
-            if (containerGrupo && ![...containerGrupo.children].some(p => p.innerText === nome)) {
-                const p = document.createElement('p');
-                p.innerText = nome;
-                containerGrupo.appendChild(p);
+            if (!containerGrupo) return;
+
+            const div = document.createElement('div');
+            div.classList.add('aluno-fake', 'd-flex', 'align-items-center', 'gap-2');
+
+            const p = document.createElement('p');
+            p.innerText = nome;
+            p.classList.add("aluno-nome", "mb-0", "flex-grow-1");
+            div.appendChild(p);
+
+            const dropdown = document.createElement('div');
+            dropdown.classList.add('dropdown');
+
+            const toggle = document.createElement('button');
+            toggle.classList.add('btn', 'btn-sm', 'btn-light', 'dropdown-toggle', 'btn-dropdown-aluno');
+            toggle.setAttribute('type', 'button');
+            toggle.setAttribute('data-bs-toggle', 'dropdown');
+            toggle.setAttribute('aria-expanded', 'false');
+            dropdown.appendChild(toggle);
+
+            const menu = document.createElement('ul');
+            menu.classList.add('dropdown-menu');
+
+            const liEditar = document.createElement('li');
+            const btnEditar = document.createElement('a');
+            btnEditar.classList.add('dropdown-item', 'text');
+            btnEditar.innerText = "Editar";
+            btnEditar.style.cursor = 'pointer';
+            btnEditar.addEventListener('click', () => {
+                alunoEditando = { grupo, antigoNome: p.innerText, elemento: p };
+                inputNomeAlunoRenomear.value = p.innerText;
+                modalRenomearAluno.show();
+            });
+            liEditar.appendChild(btnEditar);
+            menu.appendChild(liEditar);
+
+            // Item Excluir
+            const liExcluir = document.createElement('li');
+            const btnExcluir = document.createElement('a');
+            btnExcluir.classList.add('dropdown-item', 'text-danger');
+            btnExcluir.innerText = "Excluir";
+            btnExcluir.style.cursor = 'pointer';
+            btnExcluir.addEventListener('click', () => {
+                const nomeAtual = p.innerText;
+                div.remove();
+
+                socket.emit("remover-aluno", {
+                    codigo: codigoSalaGlobal,
+                    grupo,
+                    nome: nomeAtual
+                });
+
+                atualizarBotoesAdicionar();
+            });
+            liExcluir.appendChild(btnExcluir);
+            menu.appendChild(liExcluir);
+
+            dropdown.appendChild(menu);
+            div.appendChild(dropdown);
+
+            containerGrupo.appendChild(div);
+        }
+
+        btnSalvarNomeAluno.addEventListener('click', () => {
+            const novoNome = inputNomeAlunoRenomear.value.trim();
+            if (!novoNome || !alunoEditando.grupo) {
+                alert("Digite um nome válido.");
+                return;
             }
+
+            const { grupo, antigoNome, elemento } = alunoEditando;
+
+            elemento.innerText = novoNome;
+
+            socket.emit("editar-aluno", {
+                codigo: codigoSalaGlobal,
+                grupo,
+                antigoNome,
+                novoNome
+            });
+
+            modalRenomearAluno.hide();
+        });
+
+        socket.on("aluno-editado", ({ grupo, antigoNome, novoNome }) => {
+            const container = document.getElementById(`grupo-${grupo}`);
+            if (!container) return;
+
+            const aluno = [...container.querySelectorAll('.aluno-fake span')]
+                .find(span => span.innerText === antigoNome);
+
+            if (aluno) aluno.innerText = novoNome;
+        });
+
+        socket.on("aluno-removido", ({ grupo, nome }) => {
+            const container = document.getElementById(`grupo-${grupo}`);
+            if (!container) return;
+
+            [...container.querySelectorAll('.aluno-fake')].forEach(div => {
+                if (div.querySelector('span').innerText === nome) {
+                    div.remove();
+                }
+            });
+
             atualizarBotoesAdicionar();
         });
 
-        socket.on('alunos-extras', (extras) => {
-            for (const [grupo, nomes] of Object.entries(extras)) {
-                const containerGrupo = document.getElementById(`grupo-${grupo}`);
-                if (containerGrupo) {
-                    nomes.forEach(nome => { adicionarAlunoNoGrupo(containerGrupo, nome) });
-                }
-            }
-        })
+        socket.on('aluno-adicionado', ({ nome, grupo }) => {
+            criarAlunoFake(nome, grupo);
+            atualizarBotoesAdicionar();
+        });
 
         socket.on('game-start', (data) => {
             localStorage.setItem('temaSelecionado', data.tema);
@@ -337,6 +445,7 @@
         socket.on('game-monitor', (data) => {
             localStorage.setItem('jogadores', JSON.stringify(data.jogadores));
             localStorage.setItem('pontuacaoPorGrupo', JSON.stringify(data.pontuacao));
+            localStorage.setItem('nomesGrupos', JSON.stringify(data.nomesGrupos || {}));
             window.location.href = '/public/partida/dashboard-lider.html';
         });
 
@@ -397,11 +506,9 @@
             const novoNome = document.getElementById('inputNomeGrupo').value.trim();
             if (!novoNome || !grupoRenomearId) return alert("Digite um nome válido.");
 
-            // Atualiza localmente
             const inputGrupo = document.getElementById(`nome-grupo-${grupoRenomearId}`);
             inputGrupo.value = novoNome;
 
-            // Envia para o back
             socket.emit('renomear-grupo', {
                 codigo: codigoSalaGlobal,
                 grupo: Number(grupoRenomearId),
@@ -415,7 +522,6 @@
             const inputGrupo = document.getElementById(`nome-grupo-${grupo}`);
             if (inputGrupo) inputGrupo.value = nome;
         });
-
     </script>
 </body>
 
