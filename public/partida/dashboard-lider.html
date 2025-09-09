@@ -56,6 +56,7 @@
         }
 
         const jogadores = JSON.parse(localStorage.getItem('jogadores') || '[]');
+        const nomesGrupos = JSON.parse(localStorage.getItem('nomesGrupos') || '{}');
         const ulJogadores = document.getElementById('jogadores');
 
         jogadores
@@ -63,7 +64,8 @@
             .forEach(j => {
                 const li = document.createElement('li');
                 li.classList.add('jogador');
-                li.textContent = `${j.nome} (Grupo ${j.grupo}) - ${j.pontuacao || 0} pts`;
+                const nomeGrupo = nomesGrupos[j.grupo] || `Grupo ${j.grupo}`;
+                li.textContent = `${j.nome} (${nomeGrupo}) - ${j.pontuacao || 0} pts`;
                 ulJogadores.appendChild(li);
             });
 
@@ -76,11 +78,13 @@
                     .forEach(j => {
                         const li = document.createElement('li');
                         li.classList.add('jogador');
-                        li.textContent = `${j.nome} (Grupo ${j.grupo}) - ${j.pontuacao || 0} pts`;
+                        const nomeGrupo = nomesGrupos[j.grupo] || `Grupo ${j.grupo}`;
+                        li.textContent = `${j.nome} (${nomeGrupo}) - ${j.pontuacao || 0} pts`;
                         ulJogadores.appendChild(li);
                     });
             }
         });
+
 
         socket.on('fim-do-jogo', () => {
             alert('O jogo acabou! Obrigado por jogar 🎉');
