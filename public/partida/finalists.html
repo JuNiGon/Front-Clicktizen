@@ -71,8 +71,15 @@
             }
         }
 
-
         carregarFinalistas();
+
+        window.addEventListener('beforeunload', () => {
+            localStorage.removeItem('rankingFinal');
+            localStorage.removeItem('codigoSala');
+            localStorage.removeItem('temaSelecionado');
+            sessionStorage.clear();
+        });
+
     </script>
 </body>
 

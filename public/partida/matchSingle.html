@@ -14,8 +14,11 @@
         <div class="containerTempo">
             <span id="tempoRestante">Tempo: 20s</span>
         </div>
-        <div class="containerPergunta">
-            <h3 id="perguntaTexto">Carregando pergunta...</h3>
+        <div style="background-color: #fff; border-radius: 50px;">
+            <div id="indicadorPerguntas" class="indicador"></div>
+            <div class="containerPergunta">
+                <h3 id="perguntaTexto">Carregando pergunta...</h3>
+            </div>
         </div>
     </div>
 
@@ -50,7 +53,7 @@
 
         const temaSelecionado = localStorage.getItem('temaSelecionado');
         const nomeUsuarioAtual = localStorage.getItem('nomeUsuario');
-        let codigoSala = null;
+        const codigoSala = sessionStorage.getItem('codigoSala');
 
         let podeResponder = true;
         let timerInterval;
@@ -66,28 +69,57 @@
         btnFato.addEventListener('click', () => responder('Fato'));
         btnFake.addEventListener('click', () => responder('Fake'));
 
-        socket.on('connect', () => {
-            console.log('Conectado com ID:', socket.id);
-            socket.emit('start-solo', {
-                nome: 'guest',
-                tema: temaSelecionado
-            });
+        socket.emit('join-solo', {
+            codigo: codigoSala,
+            nome: nomeUsuarioAtual || 'guest',
+            tema: temaSelecionado
         });
 
         socket.on('solo-started', data => {
             codigoSala = data.codigo;
-            console.log('🎮 Solo iniciado no tema:', data.tema, 'Código:', codigoSala);
+        });
+
+        function initIndicador(total = 10, primeiroAtivo = 0) {
+            criarIndicador(total, primeiroAtivo);
+        }
+
+        function criarIndicador(total, primeiroAtivo = 0) {
+            const container = document.getElementById('indicadorPerguntas');
+            container.innerHTML = '';
+            for (let i = 0; i < total; i++) {
+                const ponto = document.createElement('span');
+                ponto.classList.add(i === primeiroAtivo ? 'ativo' : 'inativo');
+                container.appendChild(ponto);
+            }
+        }
+
+        function atualizarIndicador(indice) {
+            const container = document.getElementById('indicadorPerguntas');
+            const pontos = container.querySelectorAll('span');
+            pontos.forEach((ponto, i) => {
+                ponto.classList.remove('ativo', 'inativo');
+                ponto.classList.add(i === indice ? 'ativo' : 'inativo');
+            });
+        }
+
+        initIndicador(10, 0);
+
+        socket.on('solo-indicador', data => {
+            codigoSala = data.codigo;
+
+            const indice = data.totalPerguntas > 0 ? data.totalPerguntas - 1 : 0;
+            initIndicador(10, indice);
         });
 
         socket.on('nova-pergunta', data => {
-            clearInterval(timerInterval);
-            perguntaTexto.innerText = data.texto;
+            const indice = data.numero > 0 ? data.numero - 1 : 0;
+            atualizarIndicador(indice);
 
+            perguntaTexto.innerText = data.texto;
             feedbackDiv.classList.add('oculto');
             botoesDiv.classList.remove('oculto');
             feedbackDiv.style.backgroundColor = 'transparent';
             feedbackDiv.innerText = '';
-
             podeResponder = true;
             startTimerPergunta(20);
         });

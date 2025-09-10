@@ -155,7 +155,6 @@
             });
 
             socket.on('fim-do-jogo', data => {
-                console.log('🎉 Jogo encerrado! Salvando ranking...');
                 localStorage.setItem('rankingFinal', JSON.stringify(data.ranking));
 
                 window.location.href = '/public/partida/finalists.html';

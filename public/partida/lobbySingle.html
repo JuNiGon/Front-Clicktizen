@@ -79,8 +79,10 @@
 
         socket.on('solo-started', (data) => {
             localStorage.setItem('temaSelecionado', data.tema);
+            sessionStorage.setItem('codigoSala', data.codigo);
             window.location.href = '/public/partida/matchSingle.html';
         });
+
     </script>
 </body>
 
