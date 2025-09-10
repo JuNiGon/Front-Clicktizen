@@ -408,27 +408,20 @@
             modalRenomearAluno.hide();
         });
 
-        socket.on("aluno-editado", ({ grupo, antigoNome, novoNome }) => {
+        socket.on('aluno-editado', ({ grupo, antigoNome, novoNome }) => {
             const container = document.getElementById(`grupo-${grupo}`);
             if (!container) return;
 
-            const aluno = [...container.querySelectorAll('.aluno-fake span')]
-                .find(span => span.innerText === antigoNome);
-
+            const aluno = [...container.querySelectorAll('p')].find(p => p.innerText === antigoNome);
             if (aluno) aluno.innerText = novoNome;
         });
 
-        socket.on("aluno-removido", ({ grupo, nome }) => {
+        socket.on('aluno-removido', ({ grupo, nome }) => {
             const container = document.getElementById(`grupo-${grupo}`);
             if (!container) return;
 
-            [...container.querySelectorAll('.aluno-fake')].forEach(div => {
-                if (div.querySelector('span').innerText === nome) {
-                    div.remove();
-                }
-            });
-
-            atualizarBotoesAdicionar();
+            const alunoDiv = [...container.children].find(div => div.innerText.includes(nome));
+            if (alunoDiv) alunoDiv.remove();
         });
 
         socket.on('aluno-adicionado', ({ nome, grupo }) => {
@@ -522,6 +515,22 @@
             const inputGrupo = document.getElementById(`nome-grupo-${grupo}`);
             if (inputGrupo) inputGrupo.value = nome;
         });
+
+        const inputNomeGrupo = document.getElementById('inputNomeGrupo');
+        const btnSalvarNomeGrupo = document.getElementById('btnSalvarNomeGrupo');
+
+        inputNomeGrupo.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                btnSalvarNomeGrupo.click();
+            }
+        });
+
+        inputNomeAlunoRenomear.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                btnSalvarNomeAluno.click();
+            }
+        });
+
     </script>
 </body>
 

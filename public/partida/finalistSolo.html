@@ -28,6 +28,7 @@
 
         function voltarInicio() {
             localStorage.removeItem('resultadoSolo');
+            sessionStorage.removeItem('codigoSala');
             localStorage.removeItem('temaSelecionado');
             window.location.href = '/public/inicio/presentation.html';
         }
